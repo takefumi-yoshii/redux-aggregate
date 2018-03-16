@@ -1,11 +1,11 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
 import { Store } from '../store'
-import { Model, actions } from '../models/counter'
+import { Model, creators } from '../models/counter'
 
 // ______________________________________________________
 
-interface CounterComponentProps extends actions {
+interface CounterComponentProps extends creators {
   model: Model
 }
 export function CounterComponent({
@@ -30,14 +30,14 @@ export function CounterComponent({
 // ______________________________________________________
 
 interface ConnectedComponentProps {
-  actions: actions
+  creators: creators
   modelName: string
 }
-interface ConnectedProps extends actions {
+interface ConnectedProps extends creators {
   model: Model
 }
-export function ConnectedComponent({ actions, modelName }: ConnectedComponentProps) {
-  const Component = connect(state => ({ model: state[modelName] }), actions)(
+export function ConnectedComponent({ modelName, creators }: ConnectedComponentProps) {
+  const Component = connect(state => ({ model: state[modelName] }), creators)(
     (props: ConnectedProps) => {
       return (
         <CounterComponent

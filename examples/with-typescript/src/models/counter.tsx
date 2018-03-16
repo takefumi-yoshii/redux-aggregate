@@ -17,6 +17,7 @@ export interface actions {
   setNestedValue?(name: string): void
 }
 export interface Model extends state, computed {}
+export interface creators extends actions {}
 type This = ThisType<Model>
 
 // ______________________________________________________

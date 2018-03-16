@@ -5,11 +5,11 @@ import { ConnectedComponent } from './counter'
 
 // ______________________________________________________
 
-function CounterProvider({ store, actions, modelName }) {
+function CounterProvider({ store, creators, modelName }) {
   return (
     <Provider store={store}>
       <ConnectedComponent
-        actions={actions}
+        creators={creators}
         modelName={modelName}
       />
     </Provider>
@@ -23,7 +23,7 @@ export class RootView extends Component {
       <div>
         <CounterProvider
           store={store}
-          actions={counter.creators}
+          creators={counter.creators}
           modelName={'counter'}
         />
       </div>
