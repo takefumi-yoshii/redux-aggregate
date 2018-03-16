@@ -1,4 +1,5 @@
 import { connect } from 'preact-redux'
+
 // ______________________________________________________
 
 export function CounterComponent({ model, increment, decrement, setNestedValue }) {

@@ -2,6 +2,7 @@ import { Component } from 'preact'
 import { Provider } from 'preact-redux'
 import { counter } from '../store'
 import { ConnectedComponent } from './counter'
+
 // ______________________________________________________
 
 function CounterProvider({ store, actions, modelName }) {

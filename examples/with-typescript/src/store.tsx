@@ -4,6 +4,7 @@ import { createAggregate, reduceAggregate } from 'redux-aggregate'
 import { domain } from './models/counter'
 import { Model as CounterModel } from './models/counter'
 import { Store as ReduxStore } from 'redux'
+
 // ______________________________________________________
 
 export function defineStore(reducer) {

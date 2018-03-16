@@ -5,7 +5,7 @@
 export interface state {
   name?: string
   count?: number
-  a?: { i?: { u?: string | number } }
+  a?: { b?: { c?: string | number } }
 }
 export interface computed {
   getCount(): number
@@ -26,7 +26,7 @@ type This = ThisType<Model>
 export const state: state = {
   name: '',
   count: 0,
-  a: { i: { u: 'e' } }
+  a: { b: { c: 'c' } }
 }
 
 export const computed: This & computed = {
@@ -45,8 +45,8 @@ export const actions: This & actions = {
   decrement(): void {
     this.count--
   },
-  setNestedValue(name: string): void {
-    this.a.i.u = name
+  setNestedValue(value: string): void {
+    this.a.b.c = value
   }
 }
 

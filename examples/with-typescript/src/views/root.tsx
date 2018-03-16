@@ -3,6 +3,7 @@ import { Provider, connect } from 'preact-redux'
 import { Store, counter1, counter2, counter3 } from '../store'
 import { Model, actions } from '../models/counter'
 import { ConnectedComponent } from './counter'
+
 // ______________________________________________________
 
 interface CounterProviderProps {

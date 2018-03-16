@@ -2,6 +2,7 @@ import { h } from 'preact'
 import { connect } from 'preact-redux'
 import { Store } from '../store'
 import { Model, actions } from '../models/counter'
+
 // ______________________________________________________
 
 interface CounterComponentProps extends actions {
@@ -18,10 +19,10 @@ export function CounterComponent({
       <h1>{model.name}</h1>
       <p>count = {model.count}</p>
       <p>expo2 = {model.expo2()}</p>
-      <p>a.i.u = {model.a.i.u}</p>
+      <p>a.b.c = {model.a.b.c}</p>
       <button onClick={increment}>increment</button>
       <button onClick={decrement}>decrement</button>
-      <button onClick={() => setNestedValue('wao')}>setname</button>
+      <button onClick={() => setNestedValue('immutable change')}>setNestedValue</button>
     </div>
   )
 }

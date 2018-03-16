@@ -2,6 +2,7 @@ import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createAggregate, reduceAggregate } from 'redux-aggregate'
 import { domain } from './models/counter'
+
 // ______________________________________________________
 
 function defineStore(reducer) {
