@@ -15,7 +15,7 @@ export function CounterComponent({ model, increment, decrement, setNestedValue }
 
 // ______________________________________________________
 
-export function ConnectedComponent({ store, actions, modelName }) {
+export function ConnectedComponent({ actions, modelName }) {
   const Component = connect(state => ({ model: state[modelName] }), actions)(
     ({ model, increment, decrement }) => {
       return (

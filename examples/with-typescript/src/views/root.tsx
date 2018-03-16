@@ -14,7 +14,6 @@ function CounterProvider({ store, actions, modelName }: CounterProviderProps) {
   return (
     <Provider store={store}>
       <ConnectedComponent
-        store={store}
         actions={actions}
         modelName={modelName}
       />

@@ -29,18 +29,13 @@ export function CounterComponent({
 // ______________________________________________________
 
 interface ConnectedComponentProps {
-  store: Store
   actions: actions
   modelName: string
 }
 interface ConnectedProps extends actions {
   model: Model
 }
-export function ConnectedComponent({
-  store,
-  actions,
-  modelName
-}: ConnectedComponentProps) {
+export function ConnectedComponent({ actions, modelName }: ConnectedComponentProps) {
   const Component = connect(state => ({ model: state[modelName] }), actions)(
     (props: ConnectedProps) => {
       return (
