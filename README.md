@@ -39,7 +39,7 @@ const domain = { state, actions, computed }
 const { types, creators, reducer } = createAggregate('counter/', domain)
 ```
 
-![image.png](https://qiita-image-store.s3.amazonaws.com/0/59071/103057ca-c4e0-36b0-6ab9-1bef577387e8.png)
+![image.png](https://user-images.githubusercontent.com/22139818/37502814-59e06558-2918-11e8-93b8-3033f729fbf5.png)
 
 Processing equivalent to `Reducer` is done with `actions`.
 This processed with [immer](https://github.com/mweststrate/immer) and
