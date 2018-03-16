@@ -11,7 +11,7 @@ export interface computed {
 export interface actions {
   [s: string]: (p?: any) => void
 }
-export interface Model<I> extends state, computed, actions {}
+export interface Model<I> extends state, computed {}
 export type Modeler<I> = <I>(i: object) => Model<I>
 export interface types {
   [s: string]: string
@@ -37,54 +37,43 @@ export interface Aggregate {
 
 // ______________________________________________________
 
-function createActions(constants: string[], namespace: string) {
+function createActions(ctx: string, __fnnames__: string[]) {
   const types: types = {}
   const creators: creators = {}
-  constants.map(row => {
-    const type = `${namespace}${row}`
+  __fnnames__.map(row => {
+    const type = `${ctx}${row}`
     types[row] = type
-    creators[row] = payload => {
-      return { type, payload }
-    }
+    creators[row] = payload => ({ type, payload })
   })
   return { types, creators }
 }
 
-function createReducer(constants: string[], namespace: string) {
+function createReducer(__actions__: actions) {
   return function <I>(initialModel: Modeler<I>): Reducer<Modeler<I>> {
     return (model = initialModel, action: AnyAction): Modeler<I> => {
-      if (typeof model[action.type] === 'function') {
-        const payload = action.payload || {}
-        return immer(model, draft => {
-          draft[action.type](payload)
-        })
-      }
-      return model
+      if (typeof __actions__[action.type] !== 'function') return model
+      const payload = action.payload || {}
+      return immer(model, draft => {
+        __actions__[action.type].bind(draft)(payload)
+      })
     }
   }
 }
 
 // ______________________________________________________
 
-export function createAggregate(namespace: string, domain: Domain): Aggregate {
+export function createAggregate(ctx: string, domain: Domain): Aggregate {
   const { state, computed, actions } = domain
-  const constants: string[] = []
-  const renamedActions = {}
+  const __actions__: actions = {}
+  const __fnnames__: string[] = []
   Object.keys(actions).forEach(key => {
-    renamedActions[`${namespace}${key}`] = actions[key]
-    constants.push(key)
+    __actions__[`${ctx}${key}`] = actions[key]
+    __fnnames__.push(key)
   })
-  const { types, creators } = createActions(constants, namespace)
-  const reducer = createReducer(constants, namespace)
-  function modeler <I>(injects): Modeler<I> {
-    return (<any>Object).assign({}, state, injects, computed, renamedActions)
-  }
-  return {
-    types,
-    creators,
-    reducer,
-    modeler
-  }
+  const { types, creators } = createActions(ctx, __fnnames__)
+  const reducer = createReducer(__actions__)
+  const modeler = <I>(injects): Modeler<I> => (<any>Object).assign({}, state, injects, computed)
+  return { types, creators, reducer, modeler }
 }
 
 export function reduceAggregate<D, I>(aggregate: Aggregate, injects?: object): Reducer<Model<I>> {

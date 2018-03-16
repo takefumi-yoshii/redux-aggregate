@@ -10,7 +10,7 @@ export interface computed {
 export interface actions {
   [s: string]: (p?: any) => void
 }
-export interface Model<I> extends state, computed, actions {}
+export interface Model<I> extends state, computed {}
 export type Modeler<I> = <I>(i: object) => Model<I>
 export interface types {
   [s: string]: string
