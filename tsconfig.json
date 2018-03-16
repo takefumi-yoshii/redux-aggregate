@@ -8,8 +8,7 @@
     "sourceMap": true,
     "lib": [
       "dom",
-      "es2015",
-      "es2017"
+      "es2015"
     ]
   }
 }
