@@ -3,11 +3,19 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "typings": "src/index.d.ts",
-  "author": "takefymi-yoshii",
-  "license": "MIT",
   "scripts": {
     "build": "tsc src/index.ts --outDir ./dist"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/takefumi-yoshii/redux-aggregate.git"
+  },
+  "author": "takefumi-yoshii",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/takefumi-yoshii/redux-aggregate/issues"
+  },
+  "homepage": "https://github.com/takefumi-yoshii/redux-aggregate#readme",
   "dependencies": {
     "immer": "1.1.1",
     "redux": "3.7.2"
