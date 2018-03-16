@@ -1,6 +1,6 @@
 {
   "name": "redux-aggregate",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "typings": "src/index.d.ts",
   "author": "takefymi-yoshii",
