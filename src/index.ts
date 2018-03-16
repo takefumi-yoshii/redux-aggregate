@@ -1,12 +1,13 @@
 import immer from 'immer'
 import { Reducer, AnyAction } from 'redux'
+
 // ______________________________________________________
 
 export interface state {
   [s: string]: any
 }
 export interface computed {
-  [s: string]: Function
+  [s: string]: (p?: any) => any
 }
 export interface actions {
   [s: string]: (p?: any) => void
@@ -24,9 +25,9 @@ export interface createActions {
   creators: creators
 }
 export interface Domain {
-  state: any
-  computed?: any
-  actions?: any
+  state?: state
+  computed?: computed
+  actions?: actions
 }
 export interface Aggregate {
   types: types
@@ -37,10 +38,10 @@ export interface Aggregate {
 
 // ______________________________________________________
 
-function createActions(ctx: string, __fnnames__: string[]) {
+function createActions(ctx: string, __fnns__: string[]) {
   const types: types = {}
   const creators: creators = {}
-  __fnnames__.map(row => {
+  __fnns__.map(row => {
     const type = `${ctx}${row}`
     types[row] = type
     creators[row] = payload => ({ type, payload })
@@ -48,13 +49,13 @@ function createActions(ctx: string, __fnnames__: string[]) {
   return { types, creators }
 }
 
-function createReducer(__actions__: actions) {
+function createReducer(__acts__: actions) {
   return function <I>(initialModel: Modeler<I>): Reducer<Modeler<I>> {
     return (model = initialModel, action: AnyAction): Modeler<I> => {
-      if (typeof __actions__[action.type] !== 'function') return model
+      if (typeof __acts__[action.type] !== 'function') return model
       const payload = action.payload || {}
       return immer(model, draft => {
-        __actions__[action.type].bind(draft)(payload)
+        __acts__[action.type].bind(draft)(payload)
       })
     }
   }
@@ -64,14 +65,14 @@ function createReducer(__actions__: actions) {
 
 export function createAggregate(ctx: string, domain: Domain): Aggregate {
   const { state, computed, actions } = domain
-  const __actions__: actions = {}
-  const __fnnames__: string[] = []
+  const __acts__: actions = {}
+  const __fnns__: string[] = []
   Object.keys(actions).forEach(key => {
-    __actions__[`${ctx}${key}`] = actions[key]
-    __fnnames__.push(key)
+    __acts__[`${ctx}${key}`] = actions[key]
+    __fnns__.push(key)
   })
-  const { types, creators } = createActions(ctx, __fnnames__)
-  const reducer = createReducer(__actions__)
+  const { types, creators } = createActions(ctx, __fnns__)
+  const reducer = createReducer(__acts__)
   const modeler = <I>(injects): Modeler<I> => (<any>Object).assign({}, state, injects, computed)
   return { types, creators, reducer, modeler }
 }

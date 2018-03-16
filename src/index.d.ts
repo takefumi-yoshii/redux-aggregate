@@ -5,7 +5,7 @@ export interface state {
   [s: string]: any
 }
 export interface computed {
-  [s: string]: Function
+  [s: string]: (p?: any) => any
 }
 export interface actions {
   [s: string]: (p?: any) => void
@@ -23,9 +23,9 @@ export interface createActions {
   creators: creators
 }
 export interface Domain {
-  state: any
-  computed?: any
-  actions?: any
+  state?: state
+  computed?: computed
+  actions?: actions
 }
 export interface Aggregate {
   types: types
