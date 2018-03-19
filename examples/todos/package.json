@@ -1,6 +1,6 @@
 {
-  "name": "with-typescript",
-  "version": "1.0.1",
+  "name": "todos",
+  "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server --mode=development"
   },
