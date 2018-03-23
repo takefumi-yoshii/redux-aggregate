@@ -28,7 +28,7 @@ type This = ThisType<Model>
 
 // ______________________________________________________
 //
-// @ Domain
+// @ Counter Domain
 
 export const state: state = {
   name: '',
@@ -62,6 +62,11 @@ Create different instances with same aggregate.
 Even if the definition files are the same, it change the target state as another action by changing the specified namespace.
 
 ```javascript
+import { createAggregate, reduceAggregate } from 'redux-aggregate'
+import { domain } from './models/counter'
+import { Model as CounterModel } from './models/counter'
+import { Store as ReduxStore } from 'redux'
+
 export interface AggregateRoot {
   counter1?: CounterModel
   counter2?: CounterModel

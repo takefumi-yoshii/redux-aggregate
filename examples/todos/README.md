@@ -6,7 +6,7 @@ Nested state also has behavior.
 ```javascript
 // ______________________________________________________
 //
-// @ types
+// @ TodoModel types
 
 export interface state {
   value: string
@@ -20,7 +20,7 @@ type This = ThisType<Model>
 
 // ______________________________________________________
 //
-// @ Domain
+// @ TodoModel
 
 export const state: state = {
   value: '',
@@ -47,6 +47,10 @@ By manipulating this factory method you can get the behavior of an abstracted ch
 
 ```javascript
 import { Model as TodoModel } from './todo'
+
+// ______________________________________________________
+//
+// @ Todos Domain
 
 export const actions: This & actions = {
   addTodo(): void {
