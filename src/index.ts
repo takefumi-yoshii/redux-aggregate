@@ -52,8 +52,8 @@ function createActions(ctx: string, __fnns__: string[]) {
 function createReducer(__acts__: actions) {
   return function <I>(initialModel: Modeler<I>): Reducer<Modeler<I>> {
     return (model = initialModel, action: AnyAction): Modeler<I> => {
-      if (typeof __acts__[action.type] !== 'function') return model
-      const payload = action.payload || {}
+      const { type, payload } = action
+      if (typeof __acts__[type] !== 'function') return model
       return immer(model, draft => {
         __acts__[action.type].bind(draft)(payload)
       })
