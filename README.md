@@ -29,13 +29,13 @@ Basic understanding of Redux and boilerplate are necessary.
 Here we are creating them with `createAggregate`.
 `Aggregate` contains "ActionTypes / ActionCreators / Reducer".
 The first argument is a namespace.With this, ActionType won't conflict.
-The second argument is a DomainObject including "state / actions / computed".
+The second argument is a DomainObject including "state / actions / computed(optional)".
 
 ```javascript
 import { createAggregate } from 'redux-aggregate'
-import { state, actions, computed } from 'path/to/domain'
+import { state, actions } from 'path/to/domain'
 
-const domain = { state, actions, computed }
+const domain = { state, actions }
 const { types, creators, reducer } = createAggregate('counter/', domain)
 ```
 
