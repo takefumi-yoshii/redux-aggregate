@@ -9,7 +9,7 @@
     "preact-compat": "3.18.0",
     "preact-redux": "2.0.3",
     "redux": "3.7.2",
-    "redux-aggregate": "0.0.2",
+    "redux-aggregate": "0.0.4",
     "redux-devtools-extension": "2.13.2",
     "redux-thunk": "2.2.0"
   },
