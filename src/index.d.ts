@@ -10,8 +10,8 @@ export interface computed {
 export interface actions {
   [s: string]: (p?: any) => void
 }
-export interface Model<I> extends state, computed {}
-export type Modeler<I> = <I>(i: object) => Model<I>
+export interface Model extends state, computed {}
+export type Modeler<I> = <I>(i: I) => Model & I
 export interface types {
   [s: string]: string
 }
@@ -24,16 +24,16 @@ export interface createActions {
 }
 export interface Domain {
   state?: state
-  computed?: computed
-  actions?: actions
+  computed?: ThisType<Model> & computed
+  actions?: ThisType<Model> & actions
 }
 export interface Aggregate {
   types: types
   creators: creators
-  reducer: <I>(modeler: Modeler<I>) => Reducer<Model<I>>
+  reducer: <I>(modeler: Modeler<I>) => Reducer<Model & I>
   modeler: <I>(i: object) => Modeler<I>
 }
 
-export function createAggregate(namespace: string, domain: Domain): Aggregate 
+export function createAggregate<C, D>(ctx: C, domain: D): Aggregate 
 
-export function reduceAggregate<D, I>(aggregate: Aggregate, injects?: object): Reducer<Model<I>> 
+export function reduceAggregate<A, I>(aggregate: A, injects?: I): Reducer<Modeler<I>> 
