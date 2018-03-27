@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "typings": "src/index.d.ts",
   "scripts": {
+    "prepublish": "npm run build",
     "build": "tsc src/index.ts --outDir ./dist"
   },
   "repository": {
