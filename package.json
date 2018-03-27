@@ -1,10 +1,11 @@
 {
   "name": "redux-aggregate",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "The helper module making Redux more usable.",
   "main": "dist/index.js",
   "typings": "src/index.d.ts",
   "scripts": {
+    "prepublish": "npm run build",
     "build": "tsc src/index.ts --outDir ./dist"
   },
   "repository": {
