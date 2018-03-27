@@ -1,39 +1,46 @@
-import immer from 'immer'
-import { Reducer, AnyAction } from 'redux'
+import { Reducer } from 'redux'
 
-export interface state {
+// ______________________________________________________
+
+interface state {
   [s: string]: any
 }
-export interface computed {
+interface computed {
   [s: string]: (p?: any) => any
 }
-export interface actions {
-  [s: string]: (p?: any) => void
+interface actions {
+  [s: string]: <P>(payload?: P) => ({ type: string, payload: P })
 }
-export interface Model<I> extends state, computed {}
-export type Modeler<I> = <I>(i: object) => Model<I>
-export interface types {
-  [s: string]: string
+interface Model extends state, computed {}
+
+// ______________________________________________________
+
+type Modeler<I> = <I>(i: I) => Model & I
+
+type types<T> = {
+  [P in keyof T]: string
 }
-export interface creators {
-  [s: string]: <P>(p?: P) => void
+type creators<T> = {
+  [P in keyof T]?: T[P]
 }
-export interface createActions {
-  types: types
-  creators: creators
-}
-export interface Domain {
+type Domain = {
   state?: state
-  computed?: computed
-  actions?: actions
+  computed?: ThisType<Model> & computed
+  actions?: ThisType<Model> & actions
 }
-export interface Aggregate {
-  types: types
-  creators: creators
-  reducer: <I>(modeler: Modeler<I>) => Reducer<Model<I>>
-  modeler: <I>(i: object) => Modeler<I>
+type Aggregate<D extends Domain> = {
+  types: types<D['actions']>
+  creators: creators<D['actions']>
+  reducer: <I>(modeler: Modeler<I>) => Reducer<Model>
+  modeler: <I>(injects: I) => Modeler<I>
 }
 
-export function createAggregate(namespace: string, domain: Domain): Aggregate 
+// ______________________________________________________
 
-export function reduceAggregate<D, I>(aggregate: Aggregate, injects?: object): Reducer<Model<I>> 
+declare function createActions<C, F>(ctx: C, __fnnames__: F): { types: types<F>, creators: creators<F> }
+declare function createReducer<A>(__actions__: A)
+
+// ______________________________________________________
+
+export function createAggregate<C, D>(ctx: C, domain: D): Aggregate<D>
+export function reduceAggregate<A, I>(aggregate: A, injects?: I): Reducer<Modeler<I>> 

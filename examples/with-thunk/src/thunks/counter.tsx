@@ -7,14 +7,14 @@ function wait () {
 }
 
 export function toggleAutoIncrement () {
+  const { toggleAutoIncrement, increment } = counter.creators
   return async (dispatch, getState) => {
-    dispatch(counter.creators.toggleAutoIncrement())
+    dispatch(toggleAutoIncrement())
     while (true) {
       await wait()
-      const state = getState()
-      const { autoIncrement, count } = state.counter
+      const { autoIncrement } = getState().counter
       if (!autoIncrement) break
-      dispatch(counter.creators.increment())
+      dispatch(increment())
     }
   }
 }
