@@ -39,8 +39,9 @@ export const computed: This & computed = {
 
 export const actions: This & actions = {
   addTodo(): void {
-    if (this.input === null) return
-    const todo = TodoModel({ value: this.input, date: new Date() })
+    const value = this.getInputValue()
+    if (value === '') return
+    const todo = TodoModel({ value, date: new Date() })
     this.items.push(todo)
     this.input = ''
   },
