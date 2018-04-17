@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "removeComments": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "lib": [
+      "es5",
+      "dom",
+      "es2015"
+    ]
+  },
+  "include": [
+    "./src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

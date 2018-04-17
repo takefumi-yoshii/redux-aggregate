@@ -1,20 +1,21 @@
-import { Model as TodoModel } from './todo'
-
 // ______________________________________________________
 //
 // @ types
 
 export interface state {
   name?: string
-  input: string | number
-  items?: TodoModel[]
+  count?: number
+  todoCount?: number
 }
 export interface computed {
-  getInputValue(): string
+  getCount(): number
+  expo2(): number
+  getCountSum(): number
 }
 export interface actions {
-  addTodo?(): void
-  setInputValue?(value: string | number): void
+  increment?(): void
+  decrement?(): void
+  setTodoCount?(value: number): void
 }
 export interface Model extends state, computed {}
 export interface creators extends actions {}
@@ -26,27 +27,32 @@ type This = ThisType<Model>
 
 export const state: state = {
   name: '',
-  input: null,
-  items: []
+  count: 0,
+  todoCount: 0
 }
 
 export const computed: This & computed = {
-  getInputValue(): string {
-    if (this.input === null) return ''
-    return `${this.input}`
+  getCount(): number {
+    return this.count
+  },
+  expo2(): number {
+    return this.count ** 2
+  },
+  getCountSum(): number {
+    return this.count + this.todoCount
   }
 }
 
 export const actions: This & actions = {
-  addTodo(): void {
-    const value = this.getInputValue()
-    if (value === '') return
-    const todo = TodoModel({ value, date: new Date() })
-    this.items.push(todo)
-    this.input = ''
+  increment(): void {
+    this.count++
   },
-  setInputValue(value: string | number): void {
-    this.input = value
+  decrement(): void {
+    this.count--
+  },
+  setTodoCount(value: number): void {
+    console.log(value)
+    this.todoCount = value
   }
 }
 

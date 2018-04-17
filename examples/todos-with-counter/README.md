@@ -1,3 +1,14 @@
+## Topics of this Example
+
+This example shows design pattern of choreography.  
+The [redux-mitt](https://www.npmjs.com/package/redux-mitt) is simple middleware to subscribe actions.
+
+
+```javascript
+// ______________________________________________________
+//
+// @ Todos Service
+
 import { Store, todos, counter } from '../store'
 
 function mapTodosCountToCounter(store) {
@@ -14,3 +25,4 @@ function mapTodosCountToCounter(store) {
 export function runService(store: Store) {
   mapTodosCountToCounter(store)
 }
+```

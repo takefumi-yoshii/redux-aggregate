@@ -2,19 +2,21 @@ import { Store as ReduxStore } from 'redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createAggregate, reduceAggregate } from 'redux-aggregate'
-import { mittMiddleware } from 'redux-mitt'
+import { createEpicMiddleware } from 'redux-observable'
 import { domain as CounterDomain } from './models/counter'
 import { domain as TodosDomain } from './models/todos'
 import { Model as CounterModel } from './models/counter'
 import { Model as TodosModel } from './models/todos'
-import { runService } from './services/counter'
+import { rootEpic} from './services/counter'
 
 // ______________________________________________________
+
+const epicMiddleware = createEpicMiddleware(rootEpic);
 
 export function defineStore(reducer) {
   return createStore(
     combineReducers(reducer),
-    composeWithDevTools(mittMiddleware())
+    composeWithDevTools(applyMiddleware(epicMiddleware))
   )
 }
 
@@ -36,4 +38,4 @@ export const Store = defineStore({
   counter: reduceAggregate(counter, { name: 'COUNTER' }),
   todos: reduceAggregate(todos, { name: 'TODOS' })
 })
-runService(Store)
+Store.dispatch({ type: 'PING' });

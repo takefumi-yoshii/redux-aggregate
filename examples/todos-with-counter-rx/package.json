@@ -1,5 +1,5 @@
 {
-  "name": "with-thunk",
+  "name": "todos-with-counter",
   "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server --mode=development"
@@ -11,7 +11,8 @@
     "redux": "3.7.2",
     "redux-aggregate": "0.0.7",
     "redux-devtools-extension": "2.13.2",
-    "redux-thunk": "2.2.0"
+    "redux-observable": "^0.18.0",
+    "rxjs": "^5.5.10"
   },
   "devDependencies": {
     "@types/node": "9.4.6",

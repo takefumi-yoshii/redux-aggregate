@@ -11,8 +11,7 @@
     "redux": "3.7.2",
     "redux-aggregate": "0.0.7",
     "redux-devtools-extension": "2.13.2",
-    "redux-mitt": "2.1.2",
-    "redux-thunk": "2.2.0"
+    "redux-mitt": "2.1.2"
   },
   "devDependencies": {
     "@types/node": "9.4.6",
