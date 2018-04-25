@@ -13,7 +13,7 @@ export function TodosComponent({
   setInputValue,
   addTodo
 }: TodosComponentProps) {
-  const items = model.todos.map(todo => {
+  const items = model.items.map(todo => {
     return (
       <div>
         <p>{todo.getDateLabel()}</p>
