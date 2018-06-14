@@ -1,53 +1,64 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
-import { Store } from '../store'
-import { Model, creators } from '../models/counter'
+import { StoreState, Counter1, Counter2, Counter3 } from '../store'
+import { P, Q, S } from '../models/counter'
 
 // ______________________________________________________
+//
+// @ Components
 
-interface CounterComponentProps extends creators {
-  model: Model
+interface Props {
+  name: string
+  count: number
+  expo2: number
+  abc: string
+  increment: () => void
+  decrement: () => void
+  setNestedValue: (p: P['setNestedValue']) => void
 }
-export function CounterComponent({
-  model,
+export function Component({
+  name,
+  count,
+  expo2,
+  abc,
   increment,
   decrement,
-  setNestedValue
-}: CounterComponentProps) {
+  setNestedValue,
+}: Props) {
   return (
     <div>
-      <h1>{model.name}</h1>
-      <p>count = {model.count}</p>
-      <p>expo2 = {model.expo2()}</p>
-      <p>a.b.c = {model.a.b.c}</p>
-      <button onClick={increment}>increment</button>
-      <button onClick={decrement}>decrement</button>
+      <h1>{name}</h1>
+      <p>count = {count}</p>
+      <p>expo2 = {expo2}</p>
+      <p>a.b.c = {abc}</p>
+      <button onClick={() => increment()}>increment</button>
+      <button onClick={() => decrement()}>decrement</button>
       <button onClick={() => setNestedValue('immutable change')}>setNestedValue</button>
     </div>
   )
 }
 
 // ______________________________________________________
+//
+// @ Containers
 
-interface ConnectedComponentProps {
-  creators: creators
-  modelName: string
-}
-interface ConnectedProps extends creators {
-  model: Model
-}
-export function ConnectedComponent({ modelName, creators }: ConnectedComponentProps) {
-  const Component = connect(state => ({ model: state[modelName] }), creators)(
-    (props: ConnectedProps) => {
-      return (
-        <CounterComponent
-          model={props.model}
-          increment={props.increment}
-          decrement={props.decrement}
-          setNestedValue={props.setNestedValue}
-        />
-      )
-    }
-  )
-  return <Component />
-}
+const mapState = (s: S) => ({
+  name: s.name,
+  count: s.count,
+  expo2: Q.expo2(s),
+  abc: s.a.b.c
+})
+export const CounterContainer1 = connect(
+  (s: StoreState) => mapState(s.counter1),
+  { ...Counter1.creators }
+)(props => <Component {...props} />)
+
+export const CounterContainer2 = connect(
+  (s: StoreState) => mapState(s.counter2),
+  { ...Counter2.creators }
+)(props => <Component {...props} />)
+
+export const CounterContainer3 = connect(
+  (s: StoreState) => mapState(s.counter3),
+  { ...Counter3.creators }
+)(props => <Component {...props} />)
