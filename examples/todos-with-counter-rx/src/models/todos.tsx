@@ -1,53 +1,51 @@
-import { Model as TodoModel } from './todo'
+import { S as TodoS, Model as TodoModel } from './todo'
 
 // ______________________________________________________
 //
-// @ types
+// @ State
 
-export interface state {
-  name?: string
+export interface S {
+  name: string
   input: string | number
-  items?: TodoModel[]
+  items: TodoS[]
 }
-export interface computed {
-  getInputValue(): string
-}
-export interface actions {
-  addTodo?(): void
-  setInputValue?(value: string | number): void
-}
-export interface Model extends state, computed {}
-export interface creators extends actions {}
-type This = ThisType<Model>
-
-// ______________________________________________________
-//
-// @ Domain
-
-export const state: state = {
+export const S: S = {
   name: '',
   input: null,
   items: []
 }
 
-export const computed: This & computed = {
-  getInputValue(): string {
-    if (this.input === null) return ''
-    return `${this.input}`
-  }
+// ______________________________________________________
+//
+// @ Queries
+
+function getInputValue(state: S): string {
+  if (state.input === null) return ''
+  return `${state.input}`
+}
+export const Q = {
+  getInputValue
 }
 
-export const actions: This & actions = {
-  addTodo(): void {
-    const value = this.getInputValue()
-    if (value === '') return
-    const todo = TodoModel({ value, date: new Date() })
-    this.items.push(todo)
-    this.input = ''
-  },
-  setInputValue(value: string | number): void {
-    this.input = value
-  }
-}
+// ______________________________________________________
+//
+// @ Mutations
 
-export const domain = { state, computed, actions }
+export interface P {
+  setInputValue: string | number
+}
+function addTodo(state: S): S {
+  const value = Q.getInputValue(state)
+  if (value === '') return
+  const todo = TodoModel({ value, date: new Date() })
+  const items = [...state.items]
+  items.push(todo)
+  return { ...state, items, input: '' }
+}
+function setInputValue(state: S, value: P['setInputValue']): S {
+  return { ...state, input: value }
+}
+export const M = {
+  addTodo,
+  setInputValue
+}

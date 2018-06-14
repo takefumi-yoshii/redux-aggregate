@@ -1,7 +1,7 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
 import { StoreState, Counter } from '../store'
-import { S, Q } from '../models/counter'
+import { Q } from '../models/counter'
 // ______________________________________________________
 
 interface Props {

@@ -1,11 +1,11 @@
 import 'rxjs'
-import { Store, todos, counter } from '../store'
+import { Counter, Todos } from '../store'
 import { combineEpics } from 'redux-observable'
 
 function mapTodosCountToCounter(action$, store) {
-  const { setTodoCount } = counter.creators
+  const { setTodoCount } = Counter.creators
   return action$
-    .ofType(todos.types.addTodo)
+    .ofType(Todos.types.addTodo)
     .map(action => {
       const length = store.getState().todos.items.length
       return setTodoCount(length)
