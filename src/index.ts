@@ -1,47 +1,38 @@
-import immer from 'immer'
+import { Reducer } from 'redux'
 
-// ______________________________________________________
+export type Types<M> = {
+  [S in keyof M]: string
+}
+export type Creators<M> = {
+  [S in keyof M]: <P>(payload?: P) => any
+}
+export interface Aggregate<M> {
+  types: Types<M>
+  creators: Creators<M>
+  reducerFactory: <S>(state: S) => Reducer<S>
+}
 
-function createActions(ctx, __fnnames__) {
+export function createAggregate<M, N>(mutations: M, namespace: N): Aggregate<M> {
   const types = {}
   const creators = {}
-  Object.keys(__fnnames__).forEach(row => {
-    const type = `${ctx}${row}`
+  const functions = {}
+  Object.keys(mutations).forEach(row => {
+    const type = `${namespace}${row}`
     types[row] = type
     creators[row] = payload => ({ type, payload })
+    functions[type] = mutations[row]
   })
-  return { types, creators }
-}
-
-function createReducer(__actions__) {
-  return function (initialModel) {
-    return (model = initialModel, action) => {
-      if (typeof __actions__[action.type] !== 'function') return model
+  function reducerFactory<S>(initialState: S): Reducer<S> {
+    return (state = initialState, action) => {
+      const fn = functions[action.type]
+      if (typeof fn !== 'function') return state
       const payload = action.payload || {}
-      return immer(model, draft => {
-        __actions__[action.type].bind(draft)(payload)
-      })
+      return fn(state, payload)
     }
   }
-}
-
-// ______________________________________________________
-
-export function createAggregate(ctx, domain) {
-  const { state, computed, actions } = domain
-  const __actions__ = {}
-  const __fnnames__ = {}
-  Object.keys(actions).forEach(key => {
-    __actions__[`${ctx}${key}`] = actions[key]
-    __fnnames__[key] = key
-  })
-  const { types, creators } = createActions(ctx, __fnnames__)
-  const reducer = createReducer(__actions__)
-  const modeler = injects => (<any>Object).assign({}, state, injects, computed)
-  return { types, creators, reducer, modeler }
-}
-
-export function reduceAggregate(aggregate, injects) {
-  const { reducer, modeler } = aggregate
-  return reducer(modeler(injects))
+  return {
+    types: (types as Types<M>),
+    creators: (creators as Creators<M>),
+    reducerFactory
+  }
 }
