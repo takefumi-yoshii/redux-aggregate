@@ -1,56 +1,55 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
-import { Store } from '../store'
-import { Model, creators } from '../models/counter'
-import { toggleAutoIncrement } from '../thunks/counter'
-
+import { StoreState, Counter } from '../store'
+import { Q } from '../models/counter'
+import { startAutoIncrement } from '../thunks/counter'
 // ______________________________________________________
 
-interface CounterComponentProps extends creators {
-  model: Model
+interface Props {
+  name: string
+  count: number
+  expo2: number
+  autoIncrementBtnLabel: string
+  increment: () => void
+  decrement: () => void
+  startAutoIncrement: () => void
 }
-export function CounterComponent({
-  model,
+export function Component({
+  name,
+  count,
+  expo2,
+  autoIncrementBtnLabel,
   increment,
   decrement,
-  toggleAutoIncrement
-}: CounterComponentProps) {
+  startAutoIncrement
+}: Props) {
   return (
     <div>
-      <h1>{model.name}</h1>
-      <p>count = {model.count}</p>
-      <p>expo2 = {model.expo2()}</p>
-      <button onClick={increment}>increment</button>
-      <button onClick={decrement}>decrement</button>
-      <button onClick={() => toggleAutoIncrement()}>
-        {model.getAutoIncrementBtnLabel()}
+      <h1>{name}</h1>
+      <p>count = {count}</p>
+      <p>expo2 = {expo2}</p>
+      <button onClick={() => increment()}>increment</button>
+      <button onClick={() => decrement()}>decrement</button>
+      <button onClick={() => startAutoIncrement()}>
+        {autoIncrementBtnLabel}
       </button>
     </div>
   )
 }
 
 // ______________________________________________________
+//
+// @ Containers
 
-interface ConnectedComponentProps {
-  creators: creators
-  modelName: string
-}
-interface ConnectedProps extends creators {
-  model: Model
-}
-export function ConnectedComponent({ modelName, creators }: ConnectedComponentProps) {
-  const dispathActions = { ...creators, toggleAutoIncrement }
-  const Component = connect(state => ({ model: state[modelName] }), dispathActions)(
-    (props: ConnectedProps) => {
-      return (
-        <CounterComponent
-          model={props.model}
-          increment={props.increment}
-          decrement={props.decrement}
-          toggleAutoIncrement={props.toggleAutoIncrement}
-        />
-      )
-    }
-  )
-  return <Component />
-}
+export const CounterContainer = connect(
+  (s: StoreState) => ({
+    name: s.counter.name,
+    count: s.counter.count,
+    expo2: Q.expo2(s.counter),
+    autoIncrementBtnLabel: Q.getAutoIncrementBtnLabel(s.counter)
+  }),
+  {
+    ...Counter.creators,
+    startAutoIncrement
+  }
+)(props => <Component {...props} />)

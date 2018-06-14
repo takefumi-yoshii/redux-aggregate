@@ -1,4 +1,4 @@
-import { counter } from '../store'
+import { Counter } from '../store'
 
 function wait () {
   return new Promise(resolve => {
@@ -6,8 +6,8 @@ function wait () {
   })
 }
 
-export function toggleAutoIncrement () {
-  const { toggleAutoIncrement, increment } = counter.creators
+export function startAutoIncrement () {
+  const { toggleAutoIncrement, increment } = Counter.creators
   return async (dispatch, getState) => {
     dispatch(toggleAutoIncrement())
     while (true) {
@@ -18,4 +18,3 @@ export function toggleAutoIncrement () {
     }
   }
 }
-
