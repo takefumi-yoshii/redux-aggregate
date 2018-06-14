@@ -1,8 +1,16 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, Store } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createAggregate } from 'redux-aggregate'
 import { S as TodosS, M as TodosM } from './models/todos'
-import { Store as ReduxStore } from 'redux'
+
+// ______________________________________________________
+
+export function defineStore(reducer): Store<StoreState> {
+  return createStore(
+    combineReducers(reducer),
+    composeWithDevTools()
+  )
+}
 
 // ______________________________________________________
 
@@ -13,12 +21,3 @@ export const Todos = createAggregate(TodosM, 'todos/')
 export const store = defineStore({
   todos: Todos.reducerFactory({ ...TodosS, name: 'TODOS' })
 })
-
-// ______________________________________________________
-
-export function defineStore(reducer): ReduxStore<StoreState> {
-  return createStore(
-    combineReducers(reducer),
-    composeWithDevTools()
-  )
-}

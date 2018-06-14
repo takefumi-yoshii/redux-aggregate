@@ -1,17 +1,14 @@
-import { Store as ReduxStore } from 'redux'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, Store } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createAggregate, reduceAggregate } from 'redux-aggregate'
+import { createAggregate, } from 'redux-aggregate'
 import { mittMiddleware } from 'redux-mitt'
-import { domain as CounterDomain } from './models/counter'
-import { domain as TodosDomain } from './models/todos'
-import { Model as CounterModel } from './models/counter'
-import { Model as TodosModel } from './models/todos'
 import { runService } from './services/counter'
+import { S as CounterS, M as CounterM } from './models/counter'
+import { S as TodosS, M as TodosM } from './models/todos'
 
 // ______________________________________________________
 
-export function defineStore(reducer) {
+export function defineStore(reducer): Store<StoreState> {
   return createStore(
     combineReducers(reducer),
     composeWithDevTools(mittMiddleware())
@@ -20,20 +17,14 @@ export function defineStore(reducer) {
 
 // ______________________________________________________
 
-export interface AggregateRoot {
-  counter?: CounterModel
-  todos?: TodosModel
+export interface StoreState {
+  counter: CounterS
+  todos: TodosS
 }
-export interface Store extends ReduxStore<AggregateRoot> {
-  // subscribeAction?: (type: string, action: ({ type: string, payload: any }) => void) => Function
-}
-export const counter = createAggregate('counter/', CounterDomain)
-export const todos = createAggregate('todos/', TodosDomain)
-
-// ______________________________________________________
-
-export const Store = defineStore({
-  counter: reduceAggregate(counter, { name: 'COUNTER' }),
-  todos: reduceAggregate(todos, { name: 'TODOS' })
+export const Counter = createAggregate(CounterM, 'counter/')
+export const Todos = createAggregate(TodosM, 'todos/')
+export const store = defineStore({
+  counter: Counter.reducerFactory({ ...CounterS, name: 'COUNTER' }),
+  todos: Todos.reducerFactory({ ...TodosS, name: 'TODOS' })
 })
-runService(Store)
+runService(store)
