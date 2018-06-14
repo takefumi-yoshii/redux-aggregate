@@ -1,7 +1,7 @@
 import { render } from 'preact'
-import { RootView } from './views/root'
+import { AppProvider } from './views/root'
 import { store } from './store'
 
 // ______________________________________________________
 
-render(<RootView store={store} />, document.getElementById('app'))
+render(<AppProvider store={store} />, document.getElementById('app'))

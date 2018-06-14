@@ -1,17 +1,20 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, Store } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createAggregate, reduceAggregate } from 'redux-aggregate'
-import { domain } from './models/counter'
+import { createAggregate } from 'redux-aggregate'
+import { S as CounterS, M as CounterM } from './models/counter'
 
 // ______________________________________________________
 
-function defineStore(reducer) {
+export function defineStore(reducer) {
   return createStore(
     combineReducers(reducer),
     composeWithDevTools()
   )
 }
-export const counter = createAggregate('counter/', domain)
+
+// ______________________________________________________
+
+export const Counter = createAggregate(CounterM, 'counter/')
 export const store = defineStore({
-  counter: reduceAggregate(counter, { name: 'COUNTER' })
+  counter: Counter.reducerFactory({ ...CounterS, name: 'COUNTER' }),
 })

@@ -1,9 +1,47 @@
-export const state = { count: 0 }
-export const computed = {
-  expo2() { return this.count ** 2 }
+// ______________________________________________________
+//
+// @ State
+
+export const S = {
+  name: '',
+  count: 0,
+  todoCount: 0
 }
-export const actions = {
-  increment() { this.count++ },
-  decrement() { this.count-- }
+
+// ______________________________________________________
+//
+// @ Queries
+
+function getCount(state) {
+  return state.count
 }
-export const domain = { state, computed, actions }
+function expo2(state) {
+  return state.count ** 2
+}
+function getCountSum(state) {
+  return state.count + state.todoCount
+}
+export const Q = {
+  getCount,
+  expo2,
+  getCountSum
+}
+
+// ______________________________________________________
+//
+// @ Mutations
+
+function increment(state) {
+  return { ...state, count: state.count + 1 }
+}
+function decrement(state) {
+  return { ...state, count: state.count - 1 }
+}
+function setTodoCount(state, todoCount) {
+  return { ...state, todoCount }
+}
+export const M = {
+  increment,
+  decrement,
+  setTodoCount
+}
