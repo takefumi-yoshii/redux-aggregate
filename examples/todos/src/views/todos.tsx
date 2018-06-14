@@ -1,65 +1,60 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
-import { Store } from '../store'
-import { Model, creators } from '../models/todos'
+import { StoreState, Todos } from '../store'
+import { Q, P } from '../models/todos'
+import { S as TodoS, Q as TodoQ } from '../models/todo'
 
 // ______________________________________________________
+//
+// @ Components
 
-interface TodosComponentProps extends creators {
-  model: Model
+interface TodosComponentProps {
+  name: string
+  items: TodoS[],
+  inputValue: string
+  addTodo: () => void
+  setInputValue: (p: P['setInputValue']) => void
 }
-export function TodosComponent({
-  model,
-  setInputValue,
-  addTodo
+function Component({
+  name,
+  items,
+  inputValue,
+  addTodo,
+  setInputValue
 }: TodosComponentProps) {
-  const items = model.items.map(todo => {
-    return (
-      <div>
-        <p>{todo.getDateLabel()}</p>
-        <p>{todo.value}</p>
-      </div>
-    )
-  })
   return (
     <div>
-      <h1>{model.name}</h1>
+      <h1>{name}</h1>
       <form onSubmit={e => {
         e.preventDefault()
         addTodo()
       }}>
         <input
           type='text'
-          value={model.getInputValue()}
+          value={inputValue}
           onChange={(e: any) => setInputValue(e.target.value)}
         />
         <button>addTodo</button>
       </form>
-      {items}
+      {items.map(todo =>
+        <div>
+          <p>{TodoQ.getDateLabel(todo)}</p>
+          <p>{todo.value}</p>
+        </div>
+      )}
     </div>
   )
 }
 
 // ______________________________________________________
+//
+// @ Containers
 
-interface ConnectedComponentProps {
-  creators: creators
-  modelName: string
-}
-interface ConnectedProps extends creators {
-  model: Model
-}
-export function ConnectedComponent({ modelName, creators }: ConnectedComponentProps) {
-  const Component = connect(state => ({ model: state[modelName] }), creators)(
-    (props: ConnectedProps) => {
-      return (
-        <TodosComponent
-          model={props.model}
-          addTodo={props.addTodo}
-          setInputValue={props.setInputValue}
-        />
-      )
-    }
-  )
-  return <Component />
-}
+export const TodosContainer = connect(
+  (s: StoreState) => ({
+    name: s.todos.name,
+    items: s.todos.items,
+    inputValue: Q.getInputValue(s.todos)
+  }),
+  { ...Todos.creators }
+)(props => <Component {...props} />)

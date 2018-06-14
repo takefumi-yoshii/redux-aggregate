@@ -1,40 +1,17 @@
 import { h, Component } from 'preact'
-import { Provider, connect } from 'preact-redux'
-import { Store, todos } from '../store'
-import { Model, creators } from '../models/todos'
-import { ConnectedComponent } from './todos'
+import { Store } from 'redux'
+import { Provider} from 'preact-redux'
+import { StoreState } from '../store'
+import { TodosContainer } from './todos'
 
 // ______________________________________________________
 
-interface TodosProviderProps {
-  store: Store
-  creators: creators
-  modelName: string
-}
-function TodosProvider({ store, creators, modelName }: TodosProviderProps) {
-  return (
-    <Provider store={store}>
-      <ConnectedComponent
-        creators={creators}
-        modelName={modelName}
-      />
-    </Provider>
-  )
-}
-
-// ______________________________________________________
-
-export class RootView extends Component<{ store: Store }, null> {
+export class AppProvider extends Component<{ store: Store<StoreState> }, null> {
   render() {
-    const { store } = this.props
     return (
-      <div>
-        <TodosProvider
-          store={store}
-          creators={todos.creators}
-          modelName={'todos'}
-        />
-      </div>
+      <Provider store={this.props.store}>
+        <TodosContainer />
+      </Provider>
     )
   }
 }
