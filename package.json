@@ -1,6 +1,6 @@
 {
   "name": "redux-aggregate",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "The helper module making Redux more usable.",
   "main": "dist/index.js",
   "typings": "src/index.ts",
@@ -33,7 +33,11 @@
     "typescript-eslint-parser": "14.0.0"
   },
   "jest": {
-    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
     "transform": {
       "^.+\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
     },
