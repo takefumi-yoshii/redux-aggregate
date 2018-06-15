@@ -1,7 +1,6 @@
 ## Topics of this Example
 
 This example shows design pattern of choreography with rxjs.  
-This design has the same pattern as `todos-with-counter`.
 
 ```javascript
 // ______________________________________________________

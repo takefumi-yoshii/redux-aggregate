@@ -1,5 +1,5 @@
 {
-  "name": "todos-with-counter",
+  "name": "with-rx",
   "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server --mode=development",
