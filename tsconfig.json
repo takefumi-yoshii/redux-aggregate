@@ -6,9 +6,14 @@
     "noImplicitAny": false,
     "removeComments": true,
     "sourceMap": true,
+    "jsx": "react",
+    "jsxFactory": "h",
     "lib": [
       "dom",
       "es2015"
+    ],
+    "types": [
+      "jest"
     ]
   }
 }
