@@ -12,7 +12,14 @@ export interface Aggregate<M> {
   reducerFactory: <S>(state: S) => Reducer<S>
 }
 
-export function createAggregate<M, N>(mutations: M, namespace: N): Aggregate<M> {
+const namespaced = {}
+
+export function createAggregate<M>(mutations: M, namespace: string): Aggregate<M> {
+  if (namespaced[namespace] !== undefined) {
+    throw new Error(`redux-aggregate: conflict namespace -> ${namespace}`)
+  } else {
+    namespaced[namespace] = namespace
+  }
   const types = {}
   const creators = {}
   const functions = {}
