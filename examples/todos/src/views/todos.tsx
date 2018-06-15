@@ -8,27 +8,27 @@ import { TodoModel, TodoQR } from '../models/todo'
 //
 // @ Components
 
-const Component = (props: {
+const Component = (p: {
   name: string
   items: TodoModel[],
   inputValue: string
   addTodo: () => void
-  setInputValue: (p: TodosPL['setInputValue']) => void
+  setInputValue: (pl: TodosPL['setInputValue']) => void
 }) =>
   <div>
-    <h1>{props.name}</h1>
+    <h1>{p.name}</h1>
     <form onSubmit={e => {
       e.preventDefault()
-      props.addTodo()
+      p.addTodo()
     }}>
       <input
         type='text'
-        value={props.inputValue}
-        onChange={(e: any) => props.setInputValue(e.target.value)}
+        value={p.inputValue}
+        onChange={(e: any) => p.setInputValue(e.target.value)}
       />
       <button>addTodo</button>
     </form>
-    {props.items.map(todo =>
+    {p.items.map(todo =>
       <div>
         <p>{TodoQR.getDateLabel(todo)}</p>
         <p>{todo.value}</p>

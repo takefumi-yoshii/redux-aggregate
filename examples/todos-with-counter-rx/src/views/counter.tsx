@@ -7,7 +7,7 @@ import { CounterQR } from '../models/counter'
 //
 // @ Components
 
-const Component = (props: {
+const Component = (p: {
   name: string
   count: number
   expo2: number
@@ -16,12 +16,12 @@ const Component = (props: {
   decrement: () => void
 }) =>
   <div>
-    <h1>{props.name}</h1>
-    <p>count = {props.count}</p>
-    <p>expo2 = {props.expo2}</p>
-    <p>counter.count + todos.count = {props.countSum}</p>
-    <button onClick={() => props.increment()}>increment</button>
-    <button onClick={() => props.decrement()}>decrement</button>
+    <h1>{p.name}</h1>
+    <p>count = {p.count}</p>
+    <p>expo2 = {p.expo2}</p>
+    <p>counter.count + todos.count = {p.countSum}</p>
+    <button onClick={() => p.increment()}>increment</button>
+    <button onClick={() => p.decrement()}>decrement</button>
   </div>
 
 // ______________________________________________________

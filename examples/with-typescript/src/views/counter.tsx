@@ -7,23 +7,23 @@ import { CounterPL, CounterQR, CounterST } from '../models/counter'
 //
 // @ Components
 
-const Component = (props: {
+const Component = (p: {
   name: string
   count: number
   expo2: number
   abc: string
   increment: () => void
   decrement: () => void
-  setNestedValue: (p: CounterPL['setNestedValue']) => void
+  setNestedValue: (pl: CounterPL['setNestedValue']) => void
 }) =>
   <div>
-    <h1>{props.name}</h1>
-    <p>count = {props.count}</p>
-    <p>expo2 = {props.expo2}</p>
-    <p>a.b.c = {props.abc}</p>
-    <button onClick={() => props.increment()}>increment</button>
-    <button onClick={() => props.decrement()}>decrement</button>
-    <button onClick={() => props.setNestedValue('immutable change')}>setNestedValue</button>
+    <h1>{p.name}</h1>
+    <p>count = {p.count}</p>
+    <p>expo2 = {p.expo2}</p>
+    <p>a.b.c = {p.abc}</p>
+    <button onClick={() => p.increment()}>increment</button>
+    <button onClick={() => p.decrement()}>decrement</button>
+    <button onClick={() => p.setNestedValue('immutable change')}>setNestedValue</button>
   </div>
 
 // ______________________________________________________
