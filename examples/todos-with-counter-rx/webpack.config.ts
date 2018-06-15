@@ -10,7 +10,7 @@ const DEST = path.join(__dirname, 'app')
 const module = {
   rules: [
     {
-      test: /\.tsx$/,
+      test: /\.(ts|tsx)$/,
       exclude: /node_modules/,
       use: [{ loader: 'ts-loader' }]
     }
@@ -20,7 +20,7 @@ const module = {
 // _____________
 
 const resolve = {
-  extensions: [ '.js', '.tsx' ],
+  extensions: [ '.js', '.ts', '.tsx' ],
   alias: {
     '~': `${SRC}`,
     'react': 'preact-compat',
