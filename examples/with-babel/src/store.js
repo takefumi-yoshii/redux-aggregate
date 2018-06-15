@@ -1,7 +1,7 @@
-import { createStore, combineReducers, Store } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createAggregate } from 'redux-aggregate'
-import { S as CounterS, M as CounterM } from './models/counter'
+import { S, M } from './models/counter'
 
 // ______________________________________________________
 
@@ -14,7 +14,7 @@ export function defineStore(reducer) {
 
 // ______________________________________________________
 
-export const Counter = createAggregate(CounterM, 'counter/')
+export const Counter = createAggregate(M, 'counter/')
 export const store = defineStore({
-  counter: Counter.reducerFactory({ ...CounterS, name: 'COUNTER' }),
+  counter: Counter.reducerFactory({ ...S, name: 'COUNTER' })
 })

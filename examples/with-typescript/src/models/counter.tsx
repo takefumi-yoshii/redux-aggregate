@@ -41,7 +41,7 @@ function increment(state: S): S {
 function decrement(state: S): S {
   return { ...state, count: state.count - 1 }
 }
-function setNestedValue(state: S, value: string): S {
+function setNestedValue(state: S, value: P['setNestedValue']): S {
   return {
     ...state, a: {
       ...state.a, b: {

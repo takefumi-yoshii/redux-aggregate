@@ -1,6 +1,6 @@
 // ______________________________________________________
 //
-// @ State
+// @ TodoModel State
 
 export interface S {
   value: string
@@ -13,7 +13,7 @@ export const S: S = {
 
 // ______________________________________________________
 //
-// @ Queries
+// @ TodoModel Queries
 
 function getDateLabel({ date }: S): string {
   const month = date.getMonth() + 1

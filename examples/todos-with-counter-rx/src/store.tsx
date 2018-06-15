@@ -31,5 +31,3 @@ export const store = defineStore({
   counter: Counter.reducerFactory({ ...CounterS, name: 'COUNTER' }),
   todos: Todos.reducerFactory({ ...TodosS, name: 'TODOS' })
 })
-
-store.dispatch({ type: 'PING' })

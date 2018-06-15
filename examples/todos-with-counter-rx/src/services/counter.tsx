@@ -11,11 +11,7 @@ function mapTodosCountToCounter(action$, store) {
       return setTodoCount(length)
     })
 }
-const pingEpic = action$ =>
-  action$.filter(action => action.type === 'PING')
-    .mapTo({ type: 'PONG' });
 
 export const rootEpic = combineEpics(
-  mapTodosCountToCounter,
-  pingEpic
+  mapTodosCountToCounter
 )

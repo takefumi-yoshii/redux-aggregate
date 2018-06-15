@@ -2,7 +2,7 @@ import { S as TodoS, Model as TodoModel } from './todo'
 
 // ______________________________________________________
 //
-// @ State
+// @ TodosModel State
 
 export interface S {
   name: string
@@ -17,7 +17,7 @@ export const S: S = {
 
 // ______________________________________________________
 //
-// @ Queries
+// @ TodosModel Queries
 
 function getInputValue(state: S): string {
   if (state.input === null) return ''
@@ -29,7 +29,7 @@ export const Q = {
 
 // ______________________________________________________
 //
-// @ Mutations
+// @ TodosModel Mutations
 
 export interface P {
   setInputValue: string | number
