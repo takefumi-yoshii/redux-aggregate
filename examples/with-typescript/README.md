@@ -8,12 +8,12 @@ It is effective for type definition by exporting interface definition of state a
 //
 // @ State
 
-export interface S {
+export interface CounterST {
   name: string
   count: number
   a: { b: { c: string } }
 }
-export const S: S = {
+export const CounterST: CounterST = {
   name: '',
   count: 0,
   a: { b: { c: 'c' } }
@@ -23,13 +23,13 @@ export const S: S = {
 //
 // @ Queries
 
-function getCount(state: S): number {
+function getCount(state: CounterST): number {
   return state.count
 }
-function expo2(state: S): number {
+function expo2(state: CounterST): number {
   return state.count ** 2
 }
-export const Q = {
+export const CounterQR = {
   getCount,
   expo2
 }
@@ -38,16 +38,16 @@ export const Q = {
 //
 // @ Mutations
 
-export interface P {
+export interface CounterPL {
   setNestedValue: string
 }
-function increment(state: S): S {
+function increment(state: CounterST): CounterST {
   return { ...state, count: state.count + 1 }
 }
-function decrement(state: S): S {
+function decrement(state: CounterST): CounterST {
   return { ...state, count: state.count - 1 }
 }
-function setNestedValue(state: S, value: P['setNestedValue']): S {
+function setNestedValue(state: CounterST, value: CounterPL['setNestedValue']): CounterST {
   return {
     ...state, a: {
       ...state.a, b: {
@@ -56,11 +56,12 @@ function setNestedValue(state: S, value: P['setNestedValue']): S {
     }
   }
 }
-export const M = {
+export const CounterMT = {
   increment,
   decrement,
   setNestedValue
 }
+
 ```
 
 Create different instances with same aggregate.
@@ -68,19 +69,19 @@ Even if the definition files are the same, it change the target state as another
 
 ```javascript
 import { createAggregate } from 'redux-aggregate'
-import { M, S } from './models/counter'
+import { CounterMT, CounterST } from './models/counter'
 
 export interface StoreState {
-  counter1: S
-  counter2: S
-  counter3: S
+  counter1: CounterST
+  counter2: CounterST
+  counter3: CounterST
 }
-export const Counter1 = createAggregate(M, 'counter1/')
-export const Counter2 = createAggregate(M, 'counter2/')
-export const Counter3 = createAggregate(M, 'counter3/')
+export const Counter1 = createAggregate(CounterMT, 'counter1/')
+export const Counter2 = createAggregate(CounterMT, 'counter2/')
+export const Counter3 = createAggregate(CounterMT, 'counter3/')
 export const store = defineStore({
-  counter1: Counter1.reducerFactory({ ...S, name: 'COUNTER_1' }),
-  counter2: Counter2.reducerFactory({ ...S, name: 'COUNTER_2', count: 10 }),
-  counter3: Counter3.reducerFactory({ ...S, name: 'COUNTER_3', count: 100 })
+  counter1: Counter1.reducerFactory({ ...CounterST, name: 'COUNTER_1' }),
+  counter2: Counter2.reducerFactory({ ...CounterST, name: 'COUNTER_2', count: 10 }),
+  counter3: Counter3.reducerFactory({ ...CounterST, name: 'COUNTER_3', count: 100 })
 })
 ```

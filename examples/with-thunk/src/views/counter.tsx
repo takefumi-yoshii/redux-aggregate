@@ -1,7 +1,7 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
 import { StoreState, Counter } from '../store'
-import { Q } from '../models/counter'
+import { CounterQR } from '../models/counter'
 import { startAutoIncrement } from '../thunks/counter'
 // ______________________________________________________
 
@@ -33,8 +33,8 @@ export const CounterContainer = connect(
   (s: StoreState) => ({
     name: s.counter.name,
     count: s.counter.count,
-    expo2: Q.expo2(s.counter),
-    autoIncrementBtnLabel: Q.getAutoIncrementBtnLabel(s.counter)
+    expo2: CounterQR.expo2(s.counter),
+    autoIncrementBtnLabel: CounterQR.getAutoIncrementBtnLabel(s.counter)
   }),
   {
     ...Counter.creators,

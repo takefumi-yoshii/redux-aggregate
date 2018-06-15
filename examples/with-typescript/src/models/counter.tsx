@@ -2,12 +2,12 @@
 //
 // @ State
 
-export interface S {
+export interface CounterST {
   name: string
   count: number
   a: { b: { c: string } }
 }
-export const S: S = {
+export const CounterST: CounterST = {
   name: '',
   count: 0,
   a: { b: { c: 'c' } }
@@ -17,13 +17,13 @@ export const S: S = {
 //
 // @ Queries
 
-function getCount(state: S): number {
+function getCount(state: CounterST): number {
   return state.count
 }
-function expo2(state: S): number {
+function expo2(state: CounterST): number {
   return state.count ** 2
 }
-export const Q = {
+export const CounterQR = {
   getCount,
   expo2
 }
@@ -32,16 +32,16 @@ export const Q = {
 //
 // @ Mutations
 
-export interface P {
+export interface CounterPL {
   setNestedValue: string
 }
-function increment(state: S): S {
+function increment(state: CounterST): CounterST {
   return { ...state, count: state.count + 1 }
 }
-function decrement(state: S): S {
+function decrement(state: CounterST): CounterST {
   return { ...state, count: state.count - 1 }
 }
-function setNestedValue(state: S, value: P['setNestedValue']): S {
+function setNestedValue(state: CounterST, value: CounterPL['setNestedValue']): CounterST {
   return {
     ...state, a: {
       ...state.a, b: {
@@ -50,7 +50,7 @@ function setNestedValue(state: S, value: P['setNestedValue']): S {
     }
   }
 }
-export const M = {
+export const CounterMT = {
   increment,
   decrement,
   setNestedValue

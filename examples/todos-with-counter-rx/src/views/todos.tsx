@@ -1,8 +1,8 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
 import { StoreState, Todos } from '../store'
-import { Q, P } from '../models/todos'
-import { S as TodoS, Q as TodoQ } from '../models/todo'
+import { TodosQR, TodosPL } from '../models/todos'
+import { TodoModel, TodoQR } from '../models/todo'
 
 // ______________________________________________________
 //
@@ -10,10 +10,10 @@ import { S as TodoS, Q as TodoQ } from '../models/todo'
 
 const Component = (props: {
   name: string
-  items: TodoS[],
+  items: TodoModel[],
   inputValue: string
   addTodo: () => void
-  setInputValue: (p: P['setInputValue']) => void
+  setInputValue: (p: TodosPL['setInputValue']) => void
 }) =>
   <div>
     <h1>{name}</h1>
@@ -30,7 +30,7 @@ const Component = (props: {
     </form>
     {props.items.map(todo =>
       <div>
-        <p>{TodoQ.getDateLabel(todo)}</p>
+        <p>{TodoQR.getDateLabel(todo)}</p>
         <p>{todo.value}</p>
       </div>
     )}
@@ -44,7 +44,7 @@ export const TodosContainer = connect(
   (s: StoreState) => ({
     name: s.todos.name,
     items: s.todos.items,
-    inputValue: Q.getInputValue(s.todos)
+    inputValue: TodosQR.getInputValue(s.todos)
   }),
   { ...Todos.creators }
 )(props => <Component {...props} />)

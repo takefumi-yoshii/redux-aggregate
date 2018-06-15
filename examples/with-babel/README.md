@@ -6,7 +6,7 @@ This sample is the simplest configuration. Create a store instance with store.js
 import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createAggregate } from 'redux-aggregate'
-import { S, M } from './models/counter'
+import { CounterST, CounterMT } from './models/counter'
 
 // ______________________________________________________
 
@@ -19,9 +19,9 @@ export function defineStore(reducer) {
 
 // ______________________________________________________
 
-export const Counter = createAggregate(M, 'counter/')
+export const Counter = createAggregate(CounterMT, 'counter/')
 export const store = defineStore({
-  counter: Counter.reducerFactory({ ...S, name: 'COUNTER' })
+  counter: Counter.reducerFactory({ ...CounterST, name: 'COUNTER' })
 })
 ```
 
@@ -32,7 +32,7 @@ The Aggregate generate from Mutations. Queries is optional, but by using it, it 
 //
 // @ State
 
-export const S = {
+export const CounterST = {
   name: '',
   count: 0
 }
@@ -44,7 +44,7 @@ export const S = {
 function expo2(state) {
   return state.count ** 2
 }
-export const Q = { expo2 }
+export const CounterQR = { expo2 }
 
 // ______________________________________________________
 //
@@ -56,6 +56,6 @@ function increment(state) {
 function decrement(state) {
   return { ...state, count: state.count - 1 }
 }
-export const M = { increment, decrement }
+export const CounterMT = { increment, decrement }
 
 ```

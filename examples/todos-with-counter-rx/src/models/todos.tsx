@@ -1,15 +1,15 @@
-import { S as TodoS, Model as TodoModel } from './todo'
+import { TodoModel } from './todo'
 
 // ______________________________________________________
 //
 // @ State
 
-export interface S {
+export interface TodosST {
   name: string
   input: string | number
-  items: TodoS[]
+  items: TodoModel[]
 }
-export const S: S = {
+export const TodosST: TodosST = {
   name: '',
   input: null,
   items: []
@@ -19,11 +19,11 @@ export const S: S = {
 //
 // @ Queries
 
-function getInputValue(state: S): string {
+function getInputValue(state: TodosST): string {
   if (state.input === null) return ''
   return `${state.input}`
 }
-export const Q = {
+export const TodosQR = {
   getInputValue
 }
 
@@ -31,21 +31,21 @@ export const Q = {
 //
 // @ Mutations
 
-export interface P {
+export interface TodosPL {
   setInputValue: string | number
 }
-function addTodo(state: S): S {
-  const value = Q.getInputValue(state)
+function addTodo(state: TodosST): TodosST {
+  const value = TodosQR.getInputValue(state)
   if (value === '') return
   const todo = TodoModel({ value, date: new Date() })
   const items = [...state.items]
   items.push(todo)
   return { ...state, items, input: '' }
 }
-function setInputValue(state: S, value: P['setInputValue']): S {
+function setInputValue(state: TodosST, value: TodosPL['setInputValue']): TodosST {
   return { ...state, input: value }
 }
-export const M = {
+export const TodosMT = {
   addTodo,
   setInputValue
 }

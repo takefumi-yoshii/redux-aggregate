@@ -2,12 +2,12 @@
 //
 // @ State
 
-export interface S {
+export interface CounterST {
   name: string
   count: number
   autoIncrement: boolean
 }
-export const S: S = {
+export const CounterST: CounterST = {
   name: '',
   count: 0,
   autoIncrement: false
@@ -17,16 +17,16 @@ export const S: S = {
 //
 // @ Queries
 
-function getCount(state: S): number {
+function getCount(state: CounterST): number {
   return state.count
 }
-function expo2(state: S): number {
+function expo2(state: CounterST): number {
   return state.count ** 2
 }
-function getAutoIncrementBtnLabel(state: S): string {
+function getAutoIncrementBtnLabel(state: CounterST): string {
   return state.autoIncrement ? 'stop' : 'start'
 }
-export const Q = {
+export const CounterQR = {
   getCount,
   expo2,
   getAutoIncrementBtnLabel
@@ -36,16 +36,16 @@ export const Q = {
 //
 // @ Mutations
 
-function increment(state: S): S {
+function increment(state: CounterST): CounterST {
   return { ...state, count: state.count + 1 }
 }
-function decrement(state: S): S {
+function decrement(state: CounterST): CounterST {
   return { ...state, count: state.count - 1 }
 }
-function toggleAutoIncrement(state: S): S {
+function toggleAutoIncrement(state: CounterST): CounterST {
   return { ...state, autoIncrement: !state.autoIncrement }
 }
-export const M = {
+export const CounterMT = {
   increment,
   decrement,
   toggleAutoIncrement

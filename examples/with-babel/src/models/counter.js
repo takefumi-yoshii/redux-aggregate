@@ -2,7 +2,7 @@
 //
 // @ State
 
-export const S = {
+export const CounterST = {
   name: '',
   count: 0
 }
@@ -14,7 +14,7 @@ export const S = {
 function expo2(state) {
   return state.count ** 2
 }
-export const Q = { expo2 }
+export const CounterQR = { expo2 }
 
 // ______________________________________________________
 //
@@ -26,4 +26,4 @@ function increment(state) {
 function decrement(state) {
   return { ...state, count: state.count - 1 }
 }
-export const M = { increment, decrement }
+export const CounterMT = { increment, decrement }

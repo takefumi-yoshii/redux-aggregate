@@ -1,7 +1,7 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
 import { StoreState, Counter1, Counter2, Counter3 } from '../store'
-import { P, Q, S } from '../models/counter'
+import { CounterPL, CounterQR, CounterST } from '../models/counter'
 
 // ______________________________________________________
 //
@@ -14,7 +14,7 @@ const Component = (props: {
   abc: string
   increment: () => void
   decrement: () => void
-  setNestedValue: (p: P['setNestedValue']) => void
+  setNestedValue: (p: CounterPL['setNestedValue']) => void
 }) =>
   <div>
     <h1>{props.name}</h1>
@@ -30,10 +30,10 @@ const Component = (props: {
 //
 // @ Containers
 
-const mapState = (s: S) => ({
+const mapState = (s: CounterST) => ({
   name: s.name,
   count: s.count,
-  expo2: Q.expo2(s),
+  expo2: CounterQR.expo2(s),
   abc: s.a.b.c
 })
 export const CounterContainer1 = connect(

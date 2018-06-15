@@ -3,8 +3,8 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { createEpicMiddleware } from 'redux-observable'
 import { createAggregate, } from 'redux-aggregate'
 import { rootEpic} from './services/counter'
-import { S as CounterS, M as CounterM } from './models/counter'
-import { S as TodosS, M as TodosM } from './models/todos'
+import { CounterST, CounterMT } from './models/counter'
+import { TodosST, TodosMT } from './models/todos'
 
 // ______________________________________________________
 
@@ -22,12 +22,12 @@ export function defineStore(reducer): Store<StoreState> {
 // ______________________________________________________
 
 export interface StoreState {
-  counter: CounterS
-  todos: TodosS
+  counter: CounterST
+  todos: TodosST
 }
-export const Counter = createAggregate(CounterM, 'counter/')
-export const Todos = createAggregate(TodosM, 'todos/')
+export const Counter = createAggregate(CounterMT, 'counter/')
+export const Todos = createAggregate(TodosMT, 'todos/')
 export const store = defineStore({
-  counter: Counter.reducerFactory({ ...CounterS, name: 'COUNTER' }),
-  todos: Todos.reducerFactory({ ...TodosS, name: 'TODOS' })
+  counter: Counter.reducerFactory({ ...CounterST, name: 'COUNTER' }),
+  todos: Todos.reducerFactory({ ...TodosST, name: 'TODOS' })
 })

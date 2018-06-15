@@ -8,11 +8,11 @@ Nested state also has behavior.
 //
 // @ TodoModel State
 
-export interface S {
+export interface TodoST {
   value: string
   date: Date
 }
-export const S: S = {
+export const TodoST: TodoST = {
   value: '',
   date: new Date()
 }
@@ -21,7 +21,7 @@ export const S: S = {
 //
 // @ TodoModel Queries
 
-function getDateLabel({ date }: S): string {
+function getDateLabel({ date }: TodoST): string {
   const month = date.getMonth() + 1
   const _date = date.getDate()
   const hour = date.getHours()
@@ -29,12 +29,11 @@ function getDateLabel({ date }: S): string {
   const second = date.getSeconds()
   return `${month}/${_date} ${hour}:${minute}:${second}`
 }
-export const Q = {
+export const TodoQR = {
   getDateLabel
 }
-
-export const Model = (injects: S): S => ({ ...S, ...injects })
-
+export interface TodoModel extends TodoST {}
+export const TodoModel = (injects: TodoST): TodoST => ({ ...TodoST, ...injects })
 ```
 
 It is important to be able to dependencies inject when creating instances.
@@ -47,8 +46,8 @@ import { Model as TodoModel } from './todo'
 //
 // @ TodosModel Mutations
 
-function addTodo(state: S): S {
-  const value = Q.getInputValue(state)
+function addTodo(state: TodosST): TodosST {
+  const value = TodosQR.getInputValue(state)
   if (value === '') return
   const todo = TodoModel({ value, date: new Date() })
   const items = [...state.items]

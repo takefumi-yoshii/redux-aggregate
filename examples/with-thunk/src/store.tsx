@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, Store } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createAggregate, } from 'redux-aggregate'
 import thunk from 'redux-thunk'
-import { S as CounterS, M as CounterM } from './models/counter'
+import { CounterST, CounterMT } from './models/counter'
 
 // ______________________________________________________
 
@@ -16,9 +16,9 @@ export function defineStore(reducer): Store<StoreState> {
 // ______________________________________________________
 
 export interface StoreState {
-  counter: CounterS
+  counter: CounterST
 }
-export const Counter = createAggregate(CounterM, 'counter/')
+export const Counter = createAggregate(CounterMT, 'counter/')
 export const store = defineStore({
-  counter: Counter.reducerFactory({ ...CounterS, name: 'COUNTER' })
+  counter: Counter.reducerFactory({ ...CounterST, name: 'COUNTER' })
 })
