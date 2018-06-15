@@ -6,7 +6,7 @@ import { CounterST, CounterMT } from './models/counter'
 
 // ______________________________________________________
 
-export function defineStore(reducer): Store<StoreState> {
+export function defineStore(reducer): Store<StoreST> {
   return createStore(
     combineReducers(reducer),
     composeWithDevTools(applyMiddleware(thunk))
@@ -15,7 +15,7 @@ export function defineStore(reducer): Store<StoreState> {
 
 // ______________________________________________________
 
-export interface StoreState {
+export interface StoreST {
   counter: CounterST
 }
 export const Counter = createAggregate(CounterMT, 'counter/')

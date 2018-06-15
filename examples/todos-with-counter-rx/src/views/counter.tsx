@@ -1,6 +1,6 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
-import { StoreState, Counter } from '../store'
+import { StoreST, Counter } from '../store'
 import { CounterQR } from '../models/counter'
 
 // ______________________________________________________
@@ -29,7 +29,7 @@ const Component = (p: {
 // @ Containers
 
 export const CounterContainer = connect(
-  (s: StoreState) => ({
+  (s: StoreST) => ({
     name: s.counter.name,
     count: s.counter.count,
     expo2: CounterQR.expo2(s.counter),

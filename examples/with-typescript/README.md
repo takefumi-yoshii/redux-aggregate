@@ -71,7 +71,7 @@ Even if the definition files are the same, it change the target state as another
 import { createAggregate } from 'redux-aggregate'
 import { CounterMT, CounterST } from './models/counter'
 
-export interface StoreState {
+export interface StoreST {
   counter1: CounterST
   counter2: CounterST
   counter3: CounterST

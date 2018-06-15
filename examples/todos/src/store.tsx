@@ -5,7 +5,7 @@ import { TodosST, TodosMT } from './models/todos'
 
 // ______________________________________________________
 
-export function defineStore(reducer): Store<StoreState> {
+export function defineStore(reducer): Store<StoreST> {
   return createStore(
     combineReducers(reducer),
     composeWithDevTools()
@@ -14,7 +14,7 @@ export function defineStore(reducer): Store<StoreState> {
 
 // ______________________________________________________
 
-export interface StoreState {
+export interface StoreST {
   todos: TodosST
 }
 export const Todos = createAggregate(TodosMT, 'todos/')

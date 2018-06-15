@@ -1,6 +1,6 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
-import { StoreState, Todos } from '../store'
+import { StoreST, Todos } from '../store'
 import { TodosQR, TodosPL } from '../models/todos'
 import { TodoModel, TodoQR } from '../models/todo'
 
@@ -41,7 +41,7 @@ const Component = (p: {
 // @ Containers
 
 export const TodosContainer = connect(
-  (s: StoreState) => ({
+  (s: StoreST) => ({
     name: s.todos.name,
     items: s.todos.items,
     inputValue: TodosQR.getInputValue(s.todos)

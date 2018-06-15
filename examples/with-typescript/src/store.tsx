@@ -5,7 +5,7 @@ import { CounterMT, CounterST } from './models/counter'
 
 // ______________________________________________________
 
-export function defineStore(reducer): Store<StoreState> {
+export function defineStore(reducer): Store<StoreST> {
   return createStore(
     combineReducers(reducer),
     composeWithDevTools()
@@ -14,7 +14,7 @@ export function defineStore(reducer): Store<StoreState> {
 
 // ______________________________________________________
 
-export interface StoreState {
+export interface StoreST {
   counter1: CounterST
   counter2: CounterST
   counter3: CounterST

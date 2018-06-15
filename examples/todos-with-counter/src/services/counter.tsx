@@ -1,7 +1,7 @@
 import { Store } from 'redux'
-import { StoreState, Counter, Todos } from '../store'
+import { StoreST, Counter, Todos } from '../store'
 
-function mapTodosCountToCounter(store: Store<StoreState>) {
+function mapTodosCountToCounter(store: Store<StoreST>) {
   const { setTodoCount } = Counter.creators
   return store.subscribeAction( // return unsubscriber
     Todos.types.addTodo,
@@ -12,6 +12,6 @@ function mapTodosCountToCounter(store: Store<StoreState>) {
   )
 }
 
-export function runService(store: Store<StoreState>) {
+export function runService(store: Store<StoreST>) {
   mapTodosCountToCounter(store)
 }

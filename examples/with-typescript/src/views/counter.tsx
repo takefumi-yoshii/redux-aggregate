@@ -1,6 +1,6 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
-import { StoreState, Counter1, Counter2, Counter3 } from '../store'
+import { StoreST, Counter1, Counter2, Counter3 } from '../store'
 import { CounterPL, CounterQR, CounterST } from '../models/counter'
 
 // ______________________________________________________
@@ -37,16 +37,16 @@ const mapState = (s: CounterST) => ({
   abc: s.a.b.c
 })
 export const CounterContainer1 = connect(
-  (s: StoreState) => mapState(s.counter1),
+  (s: StoreST) => mapState(s.counter1),
   { ...Counter1.creators }
 )(props => <Component {...props} />)
 
 export const CounterContainer2 = connect(
-  (s: StoreState) => mapState(s.counter2),
+  (s: StoreST) => mapState(s.counter2),
   { ...Counter2.creators }
 )(props => <Component {...props} />)
 
 export const CounterContainer3 = connect(
-  (s: StoreState) => mapState(s.counter3),
+  (s: StoreST) => mapState(s.counter3),
   { ...Counter3.creators }
 )(props => <Component {...props} />)

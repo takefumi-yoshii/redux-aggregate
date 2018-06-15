@@ -92,7 +92,7 @@ It is recommended to use it inside a container to raise the purity of the compon
 // @ Containers
 
 export const CounterContainer = connect(
-  (s: StoreState) => ({
+  (s: StoreST) => ({
     name: s.counter.name,
     count: s.counter.count,
     expo2: CounterQR.expo2(s.counter),
