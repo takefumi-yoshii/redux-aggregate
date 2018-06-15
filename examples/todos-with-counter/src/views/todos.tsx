@@ -8,43 +8,33 @@ import { S as TodoS, Q as TodoQ } from '../models/todo'
 //
 // @ Components
 
-interface Props {
+const Component = (props: {
   name: string
   items: TodoS[],
   inputValue: string
   addTodo: () => void
   setInputValue: (p: P['setInputValue']) => void
-}
-function Component({
-  name,
-  items,
-  inputValue,
-  addTodo,
-  setInputValue
-}: Props) {
-  return (
-    <div>
-      <h1>{name}</h1>
-      <form onSubmit={e => {
-        e.preventDefault()
-        addTodo()
-      }}>
-        <input
-          type='text'
-          value={inputValue}
-          onChange={(e: any) => setInputValue(e.target.value)}
-        />
-        <button>addTodo</button>
-      </form>
-      {items.map(todo =>
-        <div>
-          <p>{TodoQ.getDateLabel(todo)}</p>
-          <p>{todo.value}</p>
-        </div>
-      )}
-    </div>
-  )
-}
+}) =>
+  <div>
+    <h1>{props.name}</h1>
+    <form onSubmit={e => {
+      e.preventDefault()
+      props.addTodo()
+    }}>
+      <input
+        type='text'
+        value={props.inputValue}
+        onChange={(e: any) => props.setInputValue(e.target.value)}
+      />
+      <button>addTodo</button>
+    </form>
+    {props.items.map(todo =>
+      <div>
+        <p>{TodoQ.getDateLabel(todo)}</p>
+        <p>{todo.value}</p>
+      </div>
+    )}
+  </div>
 
 // ______________________________________________________
 //

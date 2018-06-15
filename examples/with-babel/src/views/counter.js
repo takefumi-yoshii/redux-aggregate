@@ -4,25 +4,22 @@ import { Q } from '../models/counter'
 
 // ______________________________________________________
 
-export function Component({
+const Component = ({
   name,
   count,
   expo2,
   countSum,
   increment,
   decrement
-}) {
-  return (
-    <div>
-      <h1>{name}</h1>
-      <p>count = {count}</p>
-      <p>expo2 = {expo2}</p>
-      <p>counter.count + todos.count = {countSum}</p>
-      <button onClick={() => increment()}>increment</button>
-      <button onClick={() => decrement()}>decrement</button>
-    </div>
-  )
-}
+}) =>
+  <div>
+    <h1>{name}</h1>
+    <p>count = {count}</p>
+    <p>expo2 = {expo2}</p>
+    <p>counter.count + todos.count = {countSum}</p>
+    <button onClick={() => increment()}>increment</button>
+    <button onClick={() => decrement()}>decrement</button>
+  </div>
 
 // ______________________________________________________
 //

@@ -4,33 +4,22 @@ import { StoreState, Counter } from '../store'
 import { Q } from '../models/counter'
 // ______________________________________________________
 
-interface Props {
+const Component = (props: {
   name: string
   count: number
   expo2: number
   countSum: number
   increment: () => void
   decrement: () => void
-}
-export function Component({
-  name,
-  count,
-  expo2,
-  countSum,
-  increment,
-  decrement
-}: Props) {
-  return (
-    <div>
-      <h1>{name}</h1>
-      <p>count = {count}</p>
-      <p>expo2 = {expo2}</p>
-      <p>counter.count + todos.count = {countSum}</p>
-      <button onClick={() => increment()}>increment</button>
-      <button onClick={() => decrement()}>decrement</button>
-    </div>
-  )
-}
+}) =>
+  <div>
+    <h1>{props.name}</h1>
+    <p>count = {props.count}</p>
+    <p>expo2 = {props.expo2}</p>
+    <p>counter.count + todos.count = {props.countSum}</p>
+    <button onClick={() => props.increment()}>increment</button>
+    <button onClick={() => props.decrement()}>decrement</button>
+  </div>
 
 // ______________________________________________________
 //

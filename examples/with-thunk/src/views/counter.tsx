@@ -5,7 +5,7 @@ import { Q } from '../models/counter'
 import { startAutoIncrement } from '../thunks/counter'
 // ______________________________________________________
 
-interface Props {
+const Component = (props: {
   name: string
   count: number
   expo2: number
@@ -13,29 +13,17 @@ interface Props {
   increment: () => void
   decrement: () => void
   startAutoIncrement: () => void
-}
-export function Component({
-  name,
-  count,
-  expo2,
-  autoIncrementBtnLabel,
-  increment,
-  decrement,
-  startAutoIncrement
-}: Props) {
-  return (
-    <div>
-      <h1>{name}</h1>
-      <p>count = {count}</p>
-      <p>expo2 = {expo2}</p>
-      <button onClick={() => increment()}>increment</button>
-      <button onClick={() => decrement()}>decrement</button>
-      <button onClick={() => startAutoIncrement()}>
-        {autoIncrementBtnLabel}
-      </button>
-    </div>
-  )
-}
+}) =>
+  <div>
+    <h1>{props.name}</h1>
+    <p>count = {props.count}</p>
+    <p>expo2 = {props.expo2}</p>
+    <button onClick={() => props.increment()}>increment</button>
+    <button onClick={() => props.decrement()}>decrement</button>
+    <button onClick={() => props.startAutoIncrement()}>
+      {props.autoIncrementBtnLabel}
+    </button>
+  </div>
 
 // ______________________________________________________
 //

@@ -7,7 +7,7 @@ import { P, Q, S } from '../models/counter'
 //
 // @ Components
 
-interface Props {
+const Component = (props: {
   name: string
   count: number
   expo2: number
@@ -15,28 +15,16 @@ interface Props {
   increment: () => void
   decrement: () => void
   setNestedValue: (p: P['setNestedValue']) => void
-}
-export function Component({
-  name,
-  count,
-  expo2,
-  abc,
-  increment,
-  decrement,
-  setNestedValue,
-}: Props) {
-  return (
-    <div>
-      <h1>{name}</h1>
-      <p>count = {count}</p>
-      <p>expo2 = {expo2}</p>
-      <p>a.b.c = {abc}</p>
-      <button onClick={() => increment()}>increment</button>
-      <button onClick={() => decrement()}>decrement</button>
-      <button onClick={() => setNestedValue('immutable change')}>setNestedValue</button>
-    </div>
-  )
-}
+}) =>
+  <div>
+    <h1>{props.name}</h1>
+    <p>count = {props.count}</p>
+    <p>expo2 = {props.expo2}</p>
+    <p>a.b.c = {props.abc}</p>
+    <button onClick={() => props.increment()}>increment</button>
+    <button onClick={() => props.decrement()}>decrement</button>
+    <button onClick={() => props.setNestedValue('immutable change')}>setNestedValue</button>
+  </div>
 
 // ______________________________________________________
 //
