@@ -12,10 +12,8 @@ import { createAggregate } from 'redux-aggregate'
 const state = { count: 0 }
 const increment = s => ({ ...s, count: s.count + 1 })
 const decrement = s => ({ ...s, count: s.count - 1 })
-export const { reducerFactory } = createAggregate({
-  increment,
-  decrement
-}, 'counter/')
+const mutations = { increment, decrement }
+export const { reducerFactory } = createAggregate(mutations, 'counter/')
 
 export const Store = createStore(
   combineReducers({
@@ -54,25 +52,48 @@ By focusing on the state in the same file scope, it can add methods to use state
 
 ```javascript
 /*
-  Pure State Object
+  Pure state object.
+  This state is cloned and kept in the Store,
+  and that functions below this handle it.
+  Please note do not use this instance.
 */
 export const state = {
-  count: 0
+  count: 0,
+  unit: 'pt'
 }
 /*
-  Query methods for state
-  Be careful to only read state for just above.
+  Query methods for state.
+  Be careful to handle the state schema immediately above.
+  Export as necessary and have it function as a public method.
 */
 function expo2 (s) {
   return s.count ** 2
 }
-export Queries = { expo2 }
+function getCountLabel (s) {
+  return `${s.count}${s.unit}`
+}
+export const Queries = {
+  expo2,
+  getCountLabel
+}
 /*
   Mutation methods for state.
-  Generate boilerplate starting from this function name.
+  Generate boilerplate starting from this functions name.
+  It be equal to behavior of Reducer.
+  The second argument is payload.
 */
+function increment(s) {
+  return { ...s, count: s.count + 1 }
+}
+function decrement(s) {
+  return { ...s, count: s.count - 1 }
+}
 function setCount (s, value) {
   return { ...s, count: value }
 }
-export Mutations = { setCount }
+export const Mutations = {
+  increment,
+  decrement,
+  setCount
+}
 ```

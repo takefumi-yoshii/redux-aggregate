@@ -5,31 +5,57 @@ This sample is the simplest configuration. Create a store instance with store.js
 ```javascript
 import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createAggregate, reduceAggregate } from 'redux-aggregate'
-import { domain } from './models/counter'
+import { createAggregate } from 'redux-aggregate'
+import { S, M } from './models/counter'
 
-function defineStore(reducer) {
+// ______________________________________________________
+
+export function defineStore(reducer) {
   return createStore(
     combineReducers(reducer),
     composeWithDevTools()
   )
 }
-export const counter = createAggregate('counter/', domain)
+
+// ______________________________________________________
+
+export const Counter = createAggregate(M, 'counter/')
 export const store = defineStore({
-  counter: reduceAggregate(counter, { name: 'COUNTER' })
+  counter: Counter.reducerFactory({ ...S, name: 'COUNTER' })
 })
 ```
 
-The Domain Object consists of state / computed / actions. Computed is optional, but by using it, it becomes possible to calculate the necessary value from the value to be held, and it will be effective in various situations.
+The Aggregate generate from Mutations. Queries is optional, but by using it, it becomes possible to calculate the necessary value from the value to be held, and it will be effective in various situations.
 
 ```javascript
-export const state = { count: 0 }
-export const computed = {
-  expo2() { return this.count ** 2 }
+// ______________________________________________________
+//
+// @ State
+
+export const S = {
+  name: '',
+  count: 0
 }
-export const actions = {
-  increment() { this.count++ },
-  decrement() { this.count-- }
+
+// ______________________________________________________
+//
+// @ Queries
+
+function expo2(state) {
+  return state.count ** 2
 }
-export const domain = { state, computed, actions }
+export const Q = { expo2 }
+
+// ______________________________________________________
+//
+// @ Mutations
+
+function increment(state) {
+  return { ...state, count: state.count + 1 }
+}
+function decrement(state) {
+  return { ...state, count: state.count - 1 }
+}
+export const M = { increment, decrement }
+
 ```

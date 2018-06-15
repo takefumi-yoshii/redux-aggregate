@@ -6,39 +6,34 @@ Nested state also has behavior.
 ```javascript
 // ______________________________________________________
 //
-// @ TodoModel types
+// @ TodoModel State
 
-export interface state {
+export interface S {
   value: string
   date: Date
 }
-export interface computed {
-  getDateLabel(): string
-}
-export interface Model extends state, computed {}
-type This = ThisType<Model>
-
-// ______________________________________________________
-//
-// @ TodoModel
-
-export const state: state = {
+export const S: S = {
   value: '',
   date: new Date()
 }
 
-export const computed: This & computed = {
-  getDateLabel(): string {
-    const month = this.date.getMonth() + 1
-    const date = this.date.getDate()
-    const hour = this.date.getHours()
-    const minute = this.date.getMinutes()
-    const second = this.date.getSeconds()
-    return `${month}/${date} ${hour}:${minute}:${second}`
-  }
+// ______________________________________________________
+//
+// @ TodoModel Queries
+
+function getDateLabel({ date }: S): string {
+  const month = date.getMonth() + 1
+  const _date = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+  return `${month}/${_date} ${hour}:${minute}:${second}`
+}
+export const Q = {
+  getDateLabel
 }
 
-export const Model = injects => ({ ...state, ...injects, ...computed })
+export const Model = (injects: S): S => ({ ...S, ...injects })
 
 ```
 
@@ -50,17 +45,14 @@ import { Model as TodoModel } from './todo'
 
 // ______________________________________________________
 //
-// @ Todos Domain
+// @ TodosModel Mutations
 
-export const actions: This & actions = {
-  addTodo(): void {
-    if (this.input === null) return
-    const todo = TodoModel({ value: this.input, date: new Date() })
-    this.todos.push(todo)
-    this.input = ''
-  },
-  setInputValue(value: string | number): void {
-    this.input = value
-  }
+function addTodo(state: S): S {
+  const value = Q.getInputValue(state)
+  if (value === '') return
+  const todo = TodoModel({ value, date: new Date() })
+  const items = [...state.items]
+  items.push(todo)
+  return { ...state, items, input: '' }
 }
 ```
