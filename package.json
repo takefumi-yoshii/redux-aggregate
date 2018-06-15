@@ -5,8 +5,10 @@
   "main": "dist/index.js",
   "typings": "src/index.ts",
   "scripts": {
-    "prepublish": "npm run build",
-    "build": "tsc src/index.ts --outDir ./dist"
+    "prepublish": "npm run test && npm run build",
+    "build": "tsc src/index.ts --outDir ./dist",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -22,9 +24,21 @@
     "redux": "3.7.2"
   },
   "devDependencies": {
+    "@types/jest": "^23.1.0",
     "@types/node": "9.4.6",
+    "jest": "^23.1.0",
+    "ts-jest": "^22.4.6",
     "ts-node": "5.0.0",
     "typescript": "2.7.2",
     "typescript-eslint-parser": "14.0.0"
+  },
+  "jest": {
+    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
+    },
+    "testMatch": [
+      "**/__tests__/*.(ts|tsx)"
+    ]
   }
 }
