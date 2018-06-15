@@ -33,6 +33,7 @@ export const TodosQR = {
 
 export interface TodosPL {
   setInputValue: string | number
+  setItemDone: { id: string, done: boolean }
 }
 function addTodo(state: TodosST): TodosST {
   const value = TodosQR.getInputValue(state)
@@ -42,10 +43,23 @@ function addTodo(state: TodosST): TodosST {
   items.push(todo)
   return { ...state, items, input: '' }
 }
-function setInputValue(state: TodosST, value: TodosPL['setInputValue']): TodosST {
+function setInputValue(
+  state: TodosST,
+  value: TodosPL['setInputValue']
+): TodosST {
   return { ...state, input: value }
+}
+function setItemDone(
+  state: TodosST,
+  { id, done }: TodosPL['setItemDone']
+): TodosST {
+  return { ...state, items: [...state.items].map(item => {
+    return item.id === id ? { ...item, done } : item
+    })
+  }
 }
 export const TodosMT = {
   addTodo,
-  setInputValue
+  setInputValue,
+  setItemDone
 }

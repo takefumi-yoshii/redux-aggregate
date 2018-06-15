@@ -1,15 +1,22 @@
+import { uuid } from './uuid'
+
 // ______________________________________________________
 //
 // @ State
 
+type Injects<T> = { [P in keyof T]?: T[P] }
 export interface TodoST {
-  value: string
+  id: string
   date: Date
+  value: string
+  done: boolean
 }
-export const TodoST: TodoST = {
+export const TodoST = (): TodoST => ({
+  id: uuid(),
+  date: new Date(),
   value: '',
-  date: new Date()
-}
+  done: false
+})
 
 // ______________________________________________________
 //
@@ -28,4 +35,4 @@ export const TodoQR = {
 }
 
 export interface TodoModel extends TodoST {}
-export const TodoModel = (injects: TodoST): TodoST => ({ ...TodoST, ...injects })
+export const TodoModel = (injects: Injects<TodoST>): TodoST => ({ ...TodoST(), ...injects })

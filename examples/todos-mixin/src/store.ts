@@ -1,30 +1,23 @@
 import { createStore, combineReducers, Store } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createAggregate, } from 'redux-aggregate'
-import { mittMiddleware } from 'redux-mitt'
-import { runService } from './services/counter'
-import { CounterST, CounterMT } from './models/counter'
-import { TodosST, TodosMT } from './models/todos'
+import { TodosPresentST, TodosPresentMT } from './models/todos_present'
 
 // ______________________________________________________
 
 export function defineStore(reducer): Store<StoreST> {
   return createStore(
     combineReducers(reducer),
-    composeWithDevTools(mittMiddleware())
+    composeWithDevTools()
   )
 }
 
 // ______________________________________________________
 
 export interface StoreST {
-  counter: CounterST
-  todos: TodosST
+  todos: TodosPresentST
 }
-export const Counter = createAggregate(CounterMT, 'counter/')
-export const Todos = createAggregate(TodosMT, 'todos/')
+export const Todos = createAggregate(TodosPresentMT, 'todos/')
 export const store = defineStore({
-  counter: Counter.reducerFactory({ ...CounterST, name: 'COUNTER' }),
-  todos: Todos.reducerFactory({ ...TodosST, name: 'TODOS' })
+  todos: Todos.reducerFactory({ ...TodosPresentST, name: 'TODOS' })
 })
-runService(store)
