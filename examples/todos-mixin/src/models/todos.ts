@@ -1,3 +1,4 @@
+import immer from 'immer'
 import { TodoModel } from './todo'
 
 // ______________________________________________________
@@ -6,7 +7,7 @@ import { TodoModel } from './todo'
 
 export interface TodosST {
   name: string
-  input: string | number
+  input: string
   items: TodoModel[]
 }
 export const TodosST: TodosST = {
@@ -32,32 +33,31 @@ export const TodosQR = {
 // @ Mutations
 
 export interface TodosPL {
-  setInputValue: string | number
+  setInputValue: string
   setItemDone: { id: string, done: boolean }
 }
-function addTodo(state: TodosST): TodosST {
-  const value = TodosQR.getInputValue(state)
+const addTodo = (
+  state: TodosST
+): TodosST => immer(state, _state => {
+  const value = TodosQR.getInputValue(_state)
   if (value === '') return
-  const todo = TodoModel({ value, date: new Date() })
-  const items = [...state.items]
-  items.push(todo)
-  return { ...state, items, input: '' }
-}
-function setInputValue(
+  _state.items.push(TodoModel({ value, date: new Date() }))
+  _state.input = ''
+})
+const setInputValue = (
   state: TodosST,
   value: TodosPL['setInputValue']
-): TodosST {
-  return { ...state, input: value }
-}
-function setItemDone(
+): TodosST => immer(state, _state => {
+  _state.input = value
+})
+const setItemDone = (
   state: TodosST,
   { id, done }: TodosPL['setItemDone']
-): TodosST {
-  return { ...state, items: [...state.items].map(item => {
-    return item.id === id ? { ...item, done } : item
-    })
-  }
-}
+): TodosST => immer(state, _state => {
+  const item = _state.items.find(item => item.id === id)
+  item.done = done
+})
+
 export const TodosMT = {
   addTodo,
   setInputValue,

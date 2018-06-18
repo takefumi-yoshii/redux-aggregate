@@ -1,3 +1,4 @@
+import immer from 'immer'
 import { TodosST, TodosQR, TodosPL, TodosMT } from './todos'
 import { TodoModel } from './todo'
 
@@ -48,9 +49,11 @@ export const TodosPresentQR = {
 
 export interface TodosPresentPL extends TodosPL {
 }
-function toggleShowAll (state: TodosPresentST): TodosPresentST {
-  return { ...state, showAll: !state.showAll }
-}
+const toggleShowAll = (
+  state: TodosPresentST
+): TodosPresentST => immer(state, _state => {
+  _state.showAll = !_state.showAll
+})
 export const TodosPresentMT = {
   ...TodosMT,
   toggleShowAll
