@@ -89,7 +89,7 @@ It is recommended to use it inside a container to raise the purity of the compon
 ```javascript
 // ______________________________________________________
 //
-// @ Containers
+// @ Container
 
 export const CounterContainer = connect(
   (s: StoreST) => ({
@@ -99,8 +99,20 @@ export const CounterContainer = connect(
     autoIncrementBtnLabel: CounterQR.getAutoIncrementBtnLabel(s.counter)
   }),
   {
-    ...Counter.creators,
-    startAutoIncrement
+    handleClickIncrement: Counter.creators.increment,
+    handleClickDecrement: Counter.creators.decrement,
+    handleClickAutoIncrement: CounterThunks.startAutoIncrement
   }
-)(props => <Component {...props} />)
+)(p =>
+  <div>
+    <h1>{p.name}</h1>
+    <p>count = {p.count}</p>
+    <p>expo2 = {p.expo2}</p>
+    <button onClick={() => p.handleClickIncrement()}>increment</button>
+    <button onClick={() => p.handleClickIncrement()}>decrement</button>
+    <button onClick={() => p.handleClickAutoIncrement()}>
+      {p.autoIncrementBtnLabel}
+    </button>
+  </div>
+)
 ```
