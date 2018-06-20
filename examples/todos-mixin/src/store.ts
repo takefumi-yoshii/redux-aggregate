@@ -1,6 +1,6 @@
 import { createStore, combineReducers, Store } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createAggregate, } from 'redux-aggregate'
+import { createAggregate } from 'redux-aggregate'
 import { TodosPresentST, TodosPresentMT } from './models/todos_present'
 
 // ______________________________________________________

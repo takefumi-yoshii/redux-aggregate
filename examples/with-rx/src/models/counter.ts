@@ -36,16 +36,13 @@ export const CounterQR = {
 //
 // @ Mutations
 
-export interface CounterPL {
-  setTodoCount: number
-}
 function increment(state: CounterST): CounterST {
   return { ...state, count: state.count + 1 }
 }
 function decrement(state: CounterST): CounterST {
   return { ...state, count: state.count - 1 }
 }
-function setTodoCount(state: CounterST, todoCount: CounterPL['setTodoCount']): CounterST {
+function setTodoCount(state: CounterST, todoCount: number): CounterST {
   return { ...state, todoCount }
 }
 export const CounterMT = {

@@ -32,16 +32,13 @@ export const CounterQR = {
 //
 // @ Mutations
 
-export interface CounterPL {
-  setNestedValue: string
-}
 function increment(state: CounterST): CounterST {
   return { ...state, count: state.count + 1 }
 }
 function decrement(state: CounterST): CounterST {
   return { ...state, count: state.count - 1 }
 }
-function setNestedValue(state: CounterST, value: CounterPL['setNestedValue']): CounterST {
+function setNestedValue(state: CounterST, value: string): CounterST {
   return {
     ...state, a: {
       ...state.a, b: {

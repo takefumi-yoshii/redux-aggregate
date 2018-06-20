@@ -1,5 +1,5 @@
 import immer from 'immer'
-import { TodosST, TodosQR, TodosPL, TodosMT } from './todos'
+import { TodosST, TodosQR, TodosMT } from './todos'
 import { TodoModel } from './todo'
 
 // ______________________________________________________
@@ -47,8 +47,6 @@ export const TodosPresentQR = {
 //
 // @ Mutations
 
-export interface TodosPresentPL extends TodosPL {
-}
 const toggleShowAll = (
   state: TodosPresentST
 ): TodosPresentST => immer(state, _state => {

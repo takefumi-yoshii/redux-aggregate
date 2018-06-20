@@ -31,9 +31,6 @@ export const TodosQR = {
 //
 // @ Mutations
 
-export interface TodosPL {
-  setInputValue: string | number
-}
 function addTodo(state: TodosST): TodosST {
   const value = TodosQR.getInputValue(state)
   if (value === '') return
@@ -42,7 +39,7 @@ function addTodo(state: TodosST): TodosST {
   items.push(todo)
   return { ...state, items, input: '' }
 }
-function setInputValue(state: TodosST, value: TodosPL['setInputValue']): TodosST {
+function setInputValue(state: TodosST, value: string | number): TodosST {
   return { ...state, input: value }
 }
 export const TodosMT = {

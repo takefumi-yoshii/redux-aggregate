@@ -32,10 +32,6 @@ export const TodosQR = {
 //
 // @ Mutations
 
-export interface TodosPL {
-  setInputValue: string
-  setItemDone: { id: string, done: boolean }
-}
 const addTodo = (
   state: TodosST
 ): TodosST => immer(state, _state => {
@@ -46,13 +42,13 @@ const addTodo = (
 })
 const setInputValue = (
   state: TodosST,
-  value: TodosPL['setInputValue']
+  value: string
 ): TodosST => immer(state, _state => {
   _state.input = value
 })
 const setItemDone = (
   state: TodosST,
-  { id, done }: TodosPL['setItemDone']
+  { id, done }: { id: string, done: boolean }
 ): TodosST => immer(state, _state => {
   const item = _state.items.find(item => item.id === id)
   item.done = done
