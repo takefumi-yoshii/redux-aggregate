@@ -1,44 +1,12 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
 import { StoreST, Todos } from '../store'
-import { TodosQR, TodosPL } from '../models/todos'
+import { TodosQR } from '../models/todos'
 import { TodoModel, TodoQR } from '../models/todo'
 
 // ______________________________________________________
 //
-// @ Components
-
-const Component = (p: {
-  name: string
-  items: TodoModel[],
-  inputValue: string
-  addTodo: () => void
-  setInputValue: (pl: TodosPL['setInputValue']) => void
-}) =>
-  <div>
-    <h1>{p.name}</h1>
-    <form onSubmit={e => {
-      e.preventDefault()
-      p.addTodo()
-    }}>
-      <input
-        type='text'
-        value={p.inputValue}
-        onChange={(e: any) => p.setInputValue(e.target.value)}
-      />
-      <button>addTodo</button>
-    </form>
-    {p.items.map(todo =>
-      <div>
-        <p>{TodoQR.getDateLabel(todo)}</p>
-        <p>{todo.value}</p>
-      </div>
-    )}
-  </div>
-
-// ______________________________________________________
-//
-// @ Containers
+// @ Container
 
 export const TodosContainer = connect(
   (s: StoreST) => ({
@@ -46,5 +14,52 @@ export const TodosContainer = connect(
     items: s.todos.items,
     inputValue: TodosQR.getInputValue(s.todos)
   }),
-  { ...Todos.creators }
-)(props => <Component {...props} />)
+  {
+    handleSubmit: Todos.creators.addTodo,
+    handleInputChange: Todos.creators.setInputValue
+   }
+)(p =>
+  <div>
+    <h1>{p.name}</h1>
+    <TodoForm
+      inputValue={p.inputValue}
+      handleSubmit={p.handleSubmit}
+      handleInputChange={p.handleInputChange}
+    />
+    {p.items.map(todo =>
+      <TodoItem
+        todo={todo}
+      />
+    )}
+  </div>
+)
+
+// ______________________________________________________
+//
+// @ Components
+
+const TodoForm = (p: {
+  inputValue: string
+  handleSubmit: () => any
+  handleInputChange: (payload: string) => any
+}) =>
+  <form onSubmit={e => {
+    e.preventDefault()
+    p.handleSubmit()
+  }}>
+    <input
+      type='text'
+      value={p.inputValue}
+      onChange={(e: any) => p.handleInputChange(e.target.value)}
+    />
+    <button>addTodo</button>
+  </form>
+
+
+const TodoItem = (p: {
+  todo: TodoModel
+}) =>
+  <div>
+    <p>{TodoQR.getDateLabel(p.todo)}</p>
+    <p>{p.todo.value}</p>
+  </div>

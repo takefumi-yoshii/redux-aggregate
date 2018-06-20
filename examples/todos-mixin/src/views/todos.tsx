@@ -1,58 +1,12 @@
 import { h } from 'preact'
 import { connect } from 'preact-redux'
 import { StoreST, Todos } from '../store'
-import { TodosPresentQR, TodosPresentPL } from '../models/todos_present'
-import { TodoModel, TodoQR } from '../models/todo'
+import { TodosPresentQR } from '../models/todos_present'
+import { TodoModel } from '../models/todo';
 
 // ______________________________________________________
 //
-// @ Components
-
-const Component = (p: {
-  name: string
-  items: TodoModel[],
-  inputValue: string,
-  todosCountStatusLabel: string,
-  toggleVisibleItemsBtnLabel: string,
-  addTodo: () => void
-  setInputValue: (pl: TodosPresentPL['setInputValue']) => void
-  setItemDone: (pl: TodosPresentPL['setItemDone']) => void
-  toggleShowAll: () => void
-}) =>
-  <div>
-    <h1>{p.name}</h1>
-    <p>{p.todosCountStatusLabel}</p>
-    <p>
-      <button onClick={() => p.toggleShowAll()}>
-        {p.toggleVisibleItemsBtnLabel}
-      </button>
-    </p>
-    <form onSubmit={e => {
-      e.preventDefault()
-      p.addTodo()
-    }}>
-      <input
-        type='text'
-        value={p.inputValue}
-        onChange={(e: any) => p.setInputValue(e.target.value)}
-      />
-      <button>addTodo</button>
-    </form>
-    {p.items.map(todo =>
-      <div>
-        <p>{todo.value}</p>
-        {!todo.done && (
-          <button onClick={() => p.setItemDone({ id: todo.id, done: true })}>
-            done
-          </button>
-        )}
-      </div>
-    )}
-  </div>
-
-// ______________________________________________________
-//
-// @ Containers
+// @ Container
 
 export const TodosContainer = connect(
   (s: StoreST) => ({
@@ -62,5 +16,66 @@ export const TodosContainer = connect(
     todosCountStatusLabel: TodosPresentQR.getTodosCountStatusLabel(s.todos),
     toggleVisibleItemsBtnLabel: TodosPresentQR.getToggleVisibleItemsBtnLabel(s.todos)
   }),
-  { ...Todos.creators }
-)(props => <Component {...props} />)
+  {
+    handleClickToggle: Todos.creators.toggleShowAll,
+    handleSubmit: Todos.creators.addTodo,
+    handleInputChange: Todos.creators.setInputValue,
+    handleClickDone: Todos.creators.setItemDone
+   }
+)(p =>
+  <div>
+    <h1>{p.name}</h1>
+    <p>{p.todosCountStatusLabel}</p>
+    <p>
+      <button onClick={() => p.handleClickToggle()}>
+        {p.toggleVisibleItemsBtnLabel}
+      </button>
+    </p>
+    <TodoForm
+      inputValue={p.inputValue}
+      handleSubmit={p.handleSubmit}
+      handleInputChange={p.handleInputChange}
+    />
+    {p.items.map(todo =>
+      <TodoItem
+        todo={todo}
+        handleClickDone={p.handleClickDone}
+      />
+    )}
+  </div>
+)
+
+// ______________________________________________________
+//
+// @ Components
+
+const TodoForm = (p: {
+  inputValue: string
+  handleSubmit: () => any
+  handleInputChange: (payload: string) => any
+}) =>
+  <form onSubmit={e => {
+    e.preventDefault()
+    p.handleSubmit()
+  }}>
+    <input
+      type='text'
+      value={p.inputValue}
+      onChange={(e: any) => p.handleInputChange(e.target.value)}
+    />
+    <button>addTodo</button>
+  </form>
+
+
+const TodoItem = (p: {
+  todo: TodoModel
+  handleClickDone: (payload: { id: string, done: boolean }) => any
+}) =>
+  <div>
+    <p>{p.todo.value}</p>
+    {!p.todo.done && (
+      <button onClick={() => p.handleClickDone({ id: p.todo.id, done: true })}>
+        done
+      </button>
+    )}
+  </div>
