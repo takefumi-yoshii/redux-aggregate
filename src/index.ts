@@ -1,11 +1,11 @@
 import { Reducer } from 'redux'
 
-export type Types<M> = {
-  [S in keyof M]: string
-}
-export type Creators<M> = {
-  [S in keyof M]: <P>(payload?: P) => any
-}
+type Types<M> = {[S in keyof M]: string}
+type SecondArgs<T> = T extends (a1: any, a2: infer A2, ...rest: any[]) => any ? A2 : never
+type Payload<T> = T extends SecondArgs<T> ? never : SecondArgs<T>
+type Creator<T> = T extends SecondArgs<T> ? () => any : (payload: Payload<T>) => any
+export type Creators<M> = {[S in keyof M]: Creator<M[S]>}
+
 export interface Aggregate<M> {
   types: Types<M>
   creators: Creators<M>
@@ -22,19 +22,18 @@ export function createAggregate<M>(mutations: M, namespace: string): Aggregate<M
   }
   const types = {}
   const creators = {}
-  const functions = {}
-  Object.keys(mutations).forEach(row => {
-    const type = `${namespace}${row}`
-    types[row] = type
-    creators[row] = payload => ({ type, payload })
-    functions[type] = mutations[row]
+  const mutators = {}
+  Object.keys(mutations).forEach(mutationKey => {
+    const type = `${namespace}${mutationKey}`
+    types[mutationKey] = type
+    creators[mutationKey] = payload => ({ type, payload })
+    mutators[type] = mutations[mutationKey]
   })
   function reducerFactory<S>(initialState: S): Reducer<S> {
     return (state = initialState, action) => {
-      const fn = functions[action.type]
-      if (typeof fn !== 'function') return state
-      const payload = action.payload || {}
-      return fn(state, payload)
+      const mutator = mutators[action.type]
+      if (typeof mutator !== 'function') return state
+      return mutator(state, action.payload)
     }
   }
   return {
