@@ -1,20 +1,23 @@
 import { Reducer } from 'redux'
 
-type Types<M> = {[S in keyof M]: string}
-type SecondArgs<T> = T extends (a1: any, a2: infer A2, ...rest: any[]) => any ? A2 : never
-type Payload<T> = T extends SecondArgs<T> ? never : SecondArgs<T>
-type Creator<T> = T extends SecondArgs<T> ? () => any : (payload: Payload<T>) => any
-export type Creators<M> = {[S in keyof M]: Creator<M[S]>}
-
-export interface Aggregate<M> {
-  types: Types<M>
-  creators: Creators<M>
-  reducerFactory: <S>(state: S) => Reducer<S>
+type A1<T> = T extends (a1: infer I, ...rest: any[]) => any ? I : never
+type A2<T> = T extends (a1: any, a2: infer I, ...rest: any[]) => any ? I : never
+type Types<T> = {readonly [K in keyof T]: string}
+type Payload<T> = T extends A2<T> ? never : A2<T>
+type CreatorReturn<T> = T extends A2<T> ? { type: string } : { type: string, payload: A2<T> }
+type Creator<T> = T extends A2<T> ? () => CreatorReturn<T> : (payload: Payload<T>) => CreatorReturn<T>
+type Creators<T> = {readonly [K in keyof T]: Creator<T[K]>}
+type Mutation<T> = T extends A2<T> ? (state: A1<T>) => A1<T> : (state: A1<T>, payload: A2<T>) => A1<T>
+type Mutations<T> = {readonly [K in keyof T]: Mutation<T[K]>}
+interface Aggregate<M> {
+  readonly types: Types<M>
+  readonly creators: Creators<M>
+  readonly reducerFactory: <S>(state: S) => Reducer<S>
 }
 
 const namespaced = {}
 
-export function createAggregate<M>(mutations: M, namespace: string): Aggregate<M> {
+export function createAggregate<M extends Mutations<M>>(mutations: M, namespace: string): Aggregate<M> {
   if (namespaced[namespace] !== undefined) {
     throw new Error(`redux-aggregate: conflict namespace -> ${namespace}`)
   } else {
