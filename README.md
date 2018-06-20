@@ -1,6 +1,6 @@
 # redux-aggregate
 
-[![Latest Version](https://img.shields.io/badge/npm-v1.1.1-C12127.svg)](https://www.npmjs.com/package/redux-aggregate)
+[![Latest Version](https://img.shields.io/badge/npm-v1.2.1-C12127.svg)](https://www.npmjs.com/package/redux-aggregate)
 
 The helper module making Redux more usable.
 Inspired by [unistore](https://github.com/developit/unistore).
@@ -28,7 +28,7 @@ This is only a support role to use Redux.
 Basic understanding of Redux and boilerplate are necessary.
 Here we are creating them with `createAggregate`.
 `Aggregate` contains "ActionTypes / ActionCreators / ReducerFactory".
-The first argument is a DomainObject including "state / actions / computed(optional)".
+The first argument is `Mutations`, a set of mutate functions.
 The second argument is a unique namespace.With this, ActionType won't conflict.
 
 ```javascript
