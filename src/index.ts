@@ -3,8 +3,8 @@ import { Reducer } from 'redux'
 type A2<T> = T extends (a1: any, a2: infer I, ...rest: any[]) => any ? I : never
 type Types<M> = {readonly [S in keyof M]: string}
 type Payload<T> = T extends A2<T> ? never : A2<T>
-type CreatorReturn<T> = T extends A2<T> ? { type: string } : { type: string, payload: T }
-type Creator<T> = T extends A2<T> ? () => CreatorReturn<A2<T>> : (payload: Payload<T>) => CreatorReturn<A2<T>>
+type CreatorReturn<T> = T extends A2<T> ? { type: string } : { type: string, payload: A2<T> }
+type Creator<T> = T extends A2<T> ? () => CreatorReturn<T> : (payload: Payload<T>) => CreatorReturn<T>
 type Creators<M> = {readonly [S in keyof M]: Creator<M[S]>}
 interface Aggregate<M> {
   readonly types: Types<M>
