@@ -5,9 +5,8 @@ type Types<M> = {[S in keyof M]: string}
 type Payload<T> = T extends A2<T> ? never : A2<T>
 type CreatorReturn<T> = T extends A2<T> ? { type: string } : { type: string, payload: T }
 type Creator<T> = T extends A2<T> ? () => CreatorReturn<A2<T>> : (payload: Payload<T>) => CreatorReturn<A2<T>>
-export type Creators<M> = {[S in keyof M]: Creator<M[S]>}
-
-export interface Aggregate<M> {
+type Creators<M> = {[S in keyof M]: Creator<M[S]>}
+interface Aggregate<M> {
   types: Types<M>
   creators: Creators<M>
   reducerFactory: <S>(state: S) => Reducer<S>
