@@ -1,19 +1,26 @@
+import { uuid } from './uuid'
+
 // ______________________________________________________
 //
-// @ State
+// @ TodoModel State
 
+type Injects<T> = { [P in keyof T]?: T[P] }
 export interface TodoST {
-  value: string
+  id: string
   date: Date
+  value: string
+  done: boolean
 }
-export const TodoST: TodoST = {
+export const TodoST = (): TodoST => ({
+  id: uuid(),
+  date: new Date(),
   value: '',
-  date: new Date()
-}
+  done: false
+})
 
 // ______________________________________________________
 //
-// @ Queries
+// @ TodoModel Queries
 
 function getDateLabel({ date }: TodoST): string {
   const month = date.getMonth() + 1
@@ -26,6 +33,5 @@ function getDateLabel({ date }: TodoST): string {
 export const TodoQR = {
   getDateLabel
 }
-
 export interface TodoModel extends TodoST {}
-export const TodoModel = (injects: TodoST): TodoST => ({ ...TodoST, ...injects })
+export const TodoModel = (injects: Injects<TodoST>): TodoST => ({ ...TodoST(), ...injects })

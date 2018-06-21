@@ -6,7 +6,7 @@ import { TodoModel } from './todo'
 
 export interface TodosST {
   name: string
-  input: string | number
+  input: string | null
   items: TodoModel[]
 }
 export const TodosST: TodosST = {
@@ -33,13 +33,13 @@ export const TodosQR = {
 
 function addTodo(state: TodosST): TodosST {
   const value = TodosQR.getInputValue(state)
-  if (value === '') return
+  if (value === '') return state
   const todo = TodoModel({ value, date: new Date() })
   const items = [...state.items]
   items.push(todo)
   return { ...state, items, input: '' }
 }
-function setInputValue(state: TodosST, value: string | number): TodosST {
+function setInputValue(state: TodosST, value: string | null): TodosST {
   return { ...state, input: value }
 }
 export const TodosMT = {

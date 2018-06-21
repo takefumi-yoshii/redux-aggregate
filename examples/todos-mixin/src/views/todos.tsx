@@ -38,6 +38,7 @@ export const TodosContainer = connect(
     />
     {p.items.map(todo =>
       <TodoItem
+        key={todo.id}
         todo={todo}
         handleClickDone={p.handleClickDone}
       />
