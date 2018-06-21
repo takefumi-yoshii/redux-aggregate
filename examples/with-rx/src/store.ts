@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, Store, ReducersMapObject } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createEpicMiddleware } from 'redux-observable'
-import { createAggregate } from '../../../src/index'
+import { createAggregate } from 'redux-aggregate'
 import { rootEpic} from './services/counter'
 import { CounterST, CounterMT } from './models/counter'
 import { TodosST, TodosMT } from './models/todos'
