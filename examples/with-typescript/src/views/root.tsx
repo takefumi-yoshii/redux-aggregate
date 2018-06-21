@@ -3,7 +3,7 @@ import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import styled from 'styled-components'
 import { StoreST } from '../store'
-import { CounterContainer1, CounterContainer2, CounterContainer3 } from './counter'
+import { CounterContainer1, CounterContainer2, CounterContainer3 } from './CounterContainer'
 
 // ______________________________________________________
 
