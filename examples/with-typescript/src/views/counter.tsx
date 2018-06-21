@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { StoreST, Counter1, Counter2, Counter3 } from '../store'
 import { CounterQR, CounterST } from '../models/counter'
 
@@ -44,6 +45,21 @@ export const CounterContainer3 = connect(
 //
 // @ Components
 
+const View = styled.div`
+  flex: 1 0 auto;
+  margin: 10px 20px;
+  padding: 20px;
+  border-radius: 5px;
+  border: 2px solid;
+  > h1 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: bolder;
+  }
+  > p {
+    margin-bottom: 10px;
+  }
+`
 const Component = (p: {
   name: string
   count: number
@@ -53,7 +69,7 @@ const Component = (p: {
   handleClickDecrement: () => any
   handleClickNestedValue: (value: string) => any
 }) =>
-  <div>
+  <View>
     <h1>{p.name}</h1>
     <p>count = {p.count}</p>
     <p>expo2 = {p.expo2}</p>
@@ -61,4 +77,4 @@ const Component = (p: {
     <button onClick={() => p.handleClickIncrement()}>increment</button>
     <button onClick={() => p.handleClickDecrement()}>decrement</button>
     <button onClick={() => p.handleClickNestedValue('immutable change')}>setNestedValue</button>
-  </div>
+  </View>
