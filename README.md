@@ -1,6 +1,6 @@
 # redux-aggregate
 
-[![Latest Version](https://img.shields.io/badge/npm-v1.2.1-C12127.svg)](https://www.npmjs.com/package/redux-aggregate)
+[![Latest Version](https://img.shields.io/badge/npm-v1.3.0-C12127.svg)](https://www.npmjs.com/package/redux-aggregate)
 
 The helper module making Redux more usable.
 Inspired by [unistore](https://github.com/developit/unistore).
