@@ -1,5 +1,5 @@
-import { h } from 'preact'
-import { connect } from 'preact-redux'
+import * as React from 'react'
+import { connect } from 'react-redux'
 import { StoreST, Counter1, Counter2, Counter3 } from '../store'
 import { CounterQR, CounterST } from '../models/counter'
 

@@ -21,11 +21,7 @@ const module = {
 
 const resolve = {
   extensions: [ '.js', '.ts', '.tsx' ],
-  alias: {
-    '~': `${SRC}`,
-    'react': 'preact-compat',
-    'react-dom': 'preact-compat'
-  }
+  alias: { '~': `${SRC}` }
 }
 
 // _____________

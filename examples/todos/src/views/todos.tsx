@@ -1,5 +1,5 @@
-import { h } from 'preact'
-import { connect } from 'preact-redux'
+import * as React from 'react'
+import { connect } from 'react-redux'
 import { StoreST, Todos } from '../store'
 import { TodosQR } from '../models/todos'
 import { TodoModel, TodoQR } from '../models/todo'
