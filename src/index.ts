@@ -2,20 +2,21 @@ import { Reducer } from 'redux'
 
 type A1<T> = T extends (a1: infer I, ...rest: any[]) => any ? I : never
 type A2<T> = T extends (a1: any, a2: infer I, ...rest: any[]) => any ? I : never
-type Types<T> = {readonly [K in keyof T]: string}
+type Types<T> = KeyRefMap & {readonly [K in keyof T]: string}
 type Payload<T> = T extends A2<T> ? never : A2<T>
 type CreatorReturn<T> = T extends A2<T> ? { type: string } : { type: string, payload: A2<T> }
 type Creator<T> = T extends A2<T> ? () => CreatorReturn<T> : (payload: Payload<T>) => CreatorReturn<T>
-type Creators<T> = {readonly [K in keyof T]: Creator<T[K]>}
+type Creators<T> = KeyRefMap & {readonly [K in keyof T]: Creator<T[K]>}
 type Mutation<T> = T extends A2<T> ? (state: A1<T>) => A1<T> : (state: A1<T>, payload: A2<T>) => A1<T>
-type Mutations<T> = {readonly [K in keyof T]: Mutation<T[K]>}
+type Mutations<T> = KeyRefMap & {readonly [K in keyof T]: Mutation<T[K]>}
+interface KeyRefMap { [K: string]: any }
 interface Aggregate<M> {
   readonly types: Types<M>
   readonly creators: Creators<M>
   readonly reducerFactory: <S>(state: S) => Reducer<S>
 }
 
-const namespaced = {}
+const namespaced: KeyRefMap = {}
 
 export function createAggregate<M extends Mutations<M>>(mutations: M, namespace: string): Aggregate<M> {
   if (namespaced[namespace] !== undefined) {
@@ -23,13 +24,13 @@ export function createAggregate<M extends Mutations<M>>(mutations: M, namespace:
   } else {
     namespaced[namespace] = namespace
   }
-  const types = {}
-  const creators = {}
-  const mutators = {}
+  const types: KeyRefMap = {}
+  const creators: KeyRefMap = {}
+  const mutators: KeyRefMap = {}
   Object.keys(mutations).forEach(mutationKey => {
     const type = `${namespace}${mutationKey}`
     types[mutationKey] = type
-    creators[mutationKey] = payload => ({ type, payload })
+    creators[mutationKey] = (payload: any) => ({ type, payload })
     mutators[type] = mutations[mutationKey]
   })
   function reducerFactory<S>(initialState: S): Reducer<S> {

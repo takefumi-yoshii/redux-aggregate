@@ -1,14 +1,14 @@
-import { createStore, combineReducers, applyMiddleware, Store } from 'redux'
+import { createStore, combineReducers, applyMiddleware, Store, ReducersMapObject } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createEpicMiddleware } from 'redux-observable'
-import { createAggregate, } from 'redux-aggregate'
+import { createAggregate } from 'redux-aggregate'
 import { rootEpic} from './services/counter'
 import { CounterST, CounterMT } from './models/counter'
 import { TodosST, TodosMT } from './models/todos'
 
 // ______________________________________________________
 
-export function defineStore(reducer): Store<StoreST> {
+export function defineStore<R extends ReducersMapObject>(reducer: R): Store<StoreST> {
   return createStore(
     combineReducers(reducer),
     composeWithDevTools(

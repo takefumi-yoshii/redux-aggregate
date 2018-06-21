@@ -1,11 +1,11 @@
-import { createStore, combineReducers, Store } from 'redux'
+import { createStore, combineReducers, Store, ReducersMapObject } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createAggregate, } from 'redux-aggregate'
+import { createAggregate } from 'redux-aggregate'
 import { CounterMT, CounterST } from './models/counter'
 
 // ______________________________________________________
 
-export function defineStore(reducer): Store<StoreST> {
+export function defineStore<R extends ReducersMapObject>(reducer: R): Store<StoreST> {
   return createStore(
     combineReducers(reducer),
     composeWithDevTools()

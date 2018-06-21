@@ -1,5 +1,5 @@
-import { h } from 'preact'
-import { connect } from 'preact-redux'
+import * as React from 'react'
+import { connect } from 'react-redux'
 import { StoreST, Todos } from '../store'
 import { TodosPresentQR } from '../models/todos_present'
 import { TodoModel } from '../models/todo';
@@ -38,6 +38,7 @@ export const TodosContainer = connect(
     />
     {p.items.map(todo =>
       <TodoItem
+        key={todo.id}
         todo={todo}
         handleClickDone={p.handleClickDone}
       />

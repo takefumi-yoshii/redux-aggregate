@@ -1,19 +1,26 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "module": "commonjs",
     "target": "es5",
-    "noImplicitAny": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": true,
     "removeComments": true,
-    "sourceMap": true,
+    "strictNullChecks": true,
     "jsx": "react",
-    "jsxFactory": "h",
     "lib": [
+      "es5",
       "dom",
       "es2015"
-    ],
-    "types": [
-      "jest"
     ]
-  }
+  },
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "webpack.config.ts"
+  ]
 }

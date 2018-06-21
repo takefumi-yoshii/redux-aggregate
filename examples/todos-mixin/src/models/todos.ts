@@ -7,7 +7,7 @@ import { TodoModel } from './todo'
 
 export interface TodosST {
   name: string
-  input: string
+  input: string | null
   items: TodoModel[]
 }
 export const TodosST: TodosST = {
@@ -51,6 +51,7 @@ const setItemDone = (
   { id, done }: { id: string, done: boolean }
 ): TodosST => immer(state, _state => {
   const item = _state.items.find(item => item.id === id)
+  if (item === undefined) return
   item.done = done
 })
 

@@ -1,11 +1,11 @@
-import { createStore, combineReducers, Store } from 'redux'
+import { createStore, combineReducers, Store, ReducersMapObject } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createAggregate } from 'redux-aggregate'
 import { TodosPresentST, TodosPresentMT } from './models/todos_present'
 
 // ______________________________________________________
 
-export function defineStore(reducer): Store<StoreST> {
+export function defineStore<R extends ReducersMapObject>(reducer: R): Store<StoreST> {
   return createStore(
     combineReducers(reducer),
     composeWithDevTools()

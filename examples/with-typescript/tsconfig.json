@@ -3,11 +3,12 @@
     "baseUrl": "./",
     "module": "commonjs",
     "target": "es5",
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "noImplicitThis": true,
+    "noUnusedParameters": true,
     "removeComments": true,
+    "strictNullChecks": true,
     "jsx": "react",
-    "jsxFactory": "h",
     "lib": [
       "es5",
       "dom",
@@ -19,6 +20,7 @@
     "./src/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "webpack.config.ts"
   ]
 }
