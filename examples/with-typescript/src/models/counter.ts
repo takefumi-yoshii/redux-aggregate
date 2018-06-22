@@ -5,11 +5,13 @@
 export interface CounterST {
   name: string
   count: number
+  bgColor: string
   a: { b: { c: string } }
 }
 export const CounterST: CounterST = {
   name: '',
   count: 0,
+  bgColor: '#fff',
   a: { b: { c: 'c' } }
 }
 
