@@ -29,7 +29,7 @@ const View = (props: Props) => (
     <p>count = {props.count}</p>
     <p>expo2 = {props.expo2}</p>
     <button onClick={() => props.handleClickIncrement()}>increment</button>
-    <button onClick={() => props.handleClickIncrement()}>decrement</button>
+    <button onClick={() => props.handleClickDecrement()}>decrement</button>
     <button onClick={() => props.handleClickAutoIncrement()}>
       {props.autoIncrementBtnLabel}
     </button>

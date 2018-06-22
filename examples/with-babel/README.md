@@ -6,36 +6,44 @@ This sample is the simplest configuration. Create a store instance with store.js
 import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createAggregate } from 'redux-aggregate'
-import { CounterST, CounterMT } from './models/counter'
+import { CounterModel, CounterMT } from './models/counter'
 
 // ______________________________________________________
 
-export function defineStore(reducer) {
+export const Counter = createAggregate(CounterMT, 'counter/')
+
+// ______________________________________________________
+
+function storeFactory(reducer) {
   return createStore(
     combineReducers(reducer),
     composeWithDevTools()
   )
 }
 
-// ______________________________________________________
-
-export const Counter = createAggregate(CounterMT, 'counter/')
-export const store = defineStore({
-  counter: Counter.reducerFactory({ ...CounterST, name: 'COUNTER' })
+export const store = storeFactory({
+  counter: Counter.reducerFactory(
+    CounterModel({ name: 'COUNTER' })
+  )
 })
+
 ```
 
-The Aggregate generate from Mutations. Queries is optional, but by using it, it becomes possible to calculate the necessary value from the value to be held, and it will be effective in various situations.
+The Aggregate generate from Mutations. Queries is optional, but by using it,
+it becomes possible to calculate the necessary value from the value to be held,
+and it will be effective in various situations.
 
 ```javascript
 // ______________________________________________________
 //
-// @ State
+// @ Model
 
-export const CounterST = {
+export const CounterModel = injects => ({
   name: '',
-  count: 0
-}
+  count: 0,
+  styled: { bg: '#fff' },
+  ...injects
+})
 
 // ______________________________________________________
 //

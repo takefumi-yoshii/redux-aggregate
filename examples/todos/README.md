@@ -6,16 +6,21 @@ Nested state also has behavior.
 ```javascript
 // ______________________________________________________
 //
-// @ TodoModel State
+// @ TodoModel
 
 export interface TodoST {
-  value: string
+  id: string
   date: Date
+  value: string
+  done: boolean
 }
-export const TodoST: TodoST = {
+export const TodoModel: Modeler<TodoST> = injects => ({
+  id: uuid(),
+  date: new Date(),
   value: '',
-  date: new Date()
-}
+  done: false,
+  ...injects
+})
 
 // ______________________________________________________
 //
@@ -32,15 +37,14 @@ function getDateLabel({ date }: TodoST): string {
 export const TodoQR = {
   getDateLabel
 }
-export interface TodoModel extends TodoST {}
-export const TodoModel = (injects: TodoST): TodoST => ({ ...TodoST, ...injects })
+
 ```
 
 It is important to be able to dependencies inject when creating instances.
 By manipulating this factory method you can get the behavior of an abstracted child model.
 
 ```javascript
-import { Model as TodoModel } from './todo'
+import { TodoModel, TodoST } from './todo'
 
 // ______________________________________________________
 //
@@ -48,8 +52,8 @@ import { Model as TodoModel } from './todo'
 
 function addTodo(state: TodosST): TodosST {
   const value = TodosQR.getInputValue(state)
-  if (value === '') return
-  const todo = TodoModel({ value, date: new Date() })
+  if (value === '') return state
+  const todo = TodoModel({ value })
   const items = [...state.items]
   items.push(todo)
   return { ...state, items, input: '' }

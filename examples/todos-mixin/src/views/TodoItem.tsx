@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { TodoModel } from '../models/todo'
+import { TodoST } from '../models/todo'
 
 export default (props: {
-  todo: TodoModel
+  todo: TodoST
   handleClickDone: (payload: { id: string, done: boolean }) => any
 }) => (
   <div>

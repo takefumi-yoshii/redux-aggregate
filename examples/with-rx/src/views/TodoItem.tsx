@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { TodoModel, TodoQR } from '../models/todo'
+import { TodoST, TodoQR } from '../models/todo'
 
 export default (props: {
-  todo: TodoModel
+  todo: TodoST
 }) => (
   <div>
     <p>{TodoQR.getDateLabel(props.todo)}</p>

@@ -25,7 +25,7 @@ const View = (props: Props) => (
     <p>expo2 = {props.expo2}</p>
     <p>counter.count + todos.count = {props.countSum}</p>
     <button onClick={() => props.handleClickIncrement()}>increment</button>
-    <button onClick={() => props.handleClickIncrement()}>decrement</button>
+    <button onClick={() => props.handleClickDecrement()}>decrement</button>
   </div>
 )
 

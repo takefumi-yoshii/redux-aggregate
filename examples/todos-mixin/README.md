@@ -1,5 +1,10 @@
-import immer from 'immer'
-import { Modeler } from 'redux-aggregate'
+## Topics of this Example
+
+This sample reproduced OOP inheritance with mixin.
+Inherits Todos used in other examples.
+The subclass deals with display interest as a presentation layer.
+
+```javascript
 import { TodosST, TodosQR, TodosMT, TodosModel } from './todos'
 import { TodoST } from './todo'
 
@@ -44,7 +49,12 @@ export const TodosPresentQR = {
   getTodosCountStatusLabel,
   getToggleVisibleItemsBtnLabel
 }
+```
 
+With use [immer](https://www.npmjs.com/package/immer), immutable change become easily.
+Use is optional, but there is no doubt that you can concentrate more on development.
+
+```javascript
 // ______________________________________________________
 //
 // @ Mutations
@@ -58,3 +68,6 @@ export const TodosPresentMT = {
   ...TodosMT,
   toggleShowAll
 }
+
+```
+
