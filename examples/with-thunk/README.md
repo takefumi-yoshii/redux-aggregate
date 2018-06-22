@@ -91,7 +91,7 @@ It is recommended to use it inside a container to raise the purity of the compon
 //
 // @ Container
 
-export const CounterContainer = connect(
+export const CounterCT = connect(
   (s: StoreST) => ({
     name: s.counter.name,
     count: s.counter.count,

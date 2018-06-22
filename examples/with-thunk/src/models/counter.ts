@@ -5,11 +5,13 @@
 export interface CounterST {
   name: string
   count: number
+  bgColor: string
   autoIncrement: boolean
 }
 export const CounterST: CounterST = {
   name: '',
   count: 0,
+  bgColor: '#fff',
   autoIncrement: false
 }
 

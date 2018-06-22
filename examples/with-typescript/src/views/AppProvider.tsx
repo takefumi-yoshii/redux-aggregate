@@ -11,20 +11,12 @@ export class AppProvider extends React.Component<{ store: Store<StoreST> }, neve
   render() {
     return (
       <Provider store={this.props.store}>
-        <RootView />
+        <StyledView>
+          <CounterContainer.CT1 />
+          <CounterContainer.CT2 />
+          <CounterContainer.CT3 />
+        </StyledView>
       </Provider>
-    )
-  }
-}
-
-class RootView extends React.Component<{}, never> {
-  render () {
-    return (
-      <StyledView>
-        <CounterContainer.CT1 />
-        <CounterContainer.CT2 />
-        <CounterContainer.CT3 />
-      </StyledView>
     )
   }
 }
