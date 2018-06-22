@@ -4,7 +4,10 @@ The example where `redux-thunk` can be used normally.
 Extract `ActionCreators` from `Aggregate` and dispatch in thunk function.
 
 ```javascript
-import { Counter } from '../store'
+import { Action } from 'redux'
+import { ThunkAction } from 'redux-thunk'
+import { Counter, StoreST } from '../store'
+type ThunkAsyncReturn = ThunkAction<Promise<void>, StoreST, null, Action>
 
 function wait () {
   return new Promise(resolve => {
@@ -12,37 +15,42 @@ function wait () {
   })
 }
 
-export function startAutoIncrement () {
+export function startAutoIncrement (): ThunkAsyncReturn {
   const { toggleAutoIncrement, increment } = Counter.creators
   return async (dispatch, getState) => {
     dispatch(toggleAutoIncrement())
     while (true) {
       await wait()
-      const { autoIncrement } = getState().counter
-      if (!autoIncrement) break
+      const { counter } = getState()
+      if (!counter.autoIncrement) break
       dispatch(increment())
     }
   }
 }
+
 ```
 
 `getAutoIncrementBtnLabel` uses the entity of `autoIncrement` to get the label of the button.
+In the chain of Queries function, you can calculate complex states.
 
 ```javascript
 // ______________________________________________________
 //
-// @ State
+// @ Model
 
 export interface CounterST {
   name: string
   count: number
+  bgColor: string
   autoIncrement: boolean
 }
-export const CounterST: CounterST = {
+export const CounterModel: Modeler<CounterST> = injects => ({
   name: '',
   count: 0,
-  autoIncrement: false
-}
+  bgColor: '#fff',
+  autoIncrement: false,
+  ...injects
+})
 
 // ______________________________________________________
 //
@@ -83,7 +91,8 @@ export const CounterMT = {
 }
 ```
 
-Even if the internal state and business logic complicatedly, the ViewComponent will not be broken.
+Even if the internal state and business logic become complicated, ViewComponent will not broken.
+it is the place where `CounterQR` is applicable.
 It is recommended to use it inside a container to raise the purity of the component.
 
 ```javascript
@@ -91,28 +100,24 @@ It is recommended to use it inside a container to raise the purity of the compon
 //
 // @ Container
 
-export const CounterContainer = connect(
-  (s: StoreST) => ({
-    name: s.counter.name,
-    count: s.counter.count,
-    expo2: CounterQR.expo2(s.counter),
-    autoIncrementBtnLabel: CounterQR.getAutoIncrementBtnLabel(s.counter)
-  }),
-  {
+const mapState = (s: CounterST): MapState => ({
+  name: s.name,
+  count: s.count,
+  expo2: CounterQR.expo2(s),
+  autoIncrementBtnLabel: CounterQR.getAutoIncrementBtnLabel(s),
+  styled: { bg: s.bgColor }
+})
+
+const mapDispatch = (dispatch: Dispatch<StoreST>): MapDispatch =>
+  bindActionCreators({
     handleClickIncrement: Counter.creators.increment,
     handleClickDecrement: Counter.creators.decrement,
     handleClickAutoIncrement: CounterThunks.startAutoIncrement
-  }
-)(p =>
-  <div>
-    <h1>{p.name}</h1>
-    <p>count = {p.count}</p>
-    <p>expo2 = {p.expo2}</p>
-    <button onClick={() => p.handleClickIncrement()}>increment</button>
-    <button onClick={() => p.handleClickIncrement()}>decrement</button>
-    <button onClick={() => p.handleClickAutoIncrement()}>
-      {p.autoIncrementBtnLabel}
-    </button>
-  </div>
-)
+  }, dispatch)
+
+export const CounterContainer = connect(
+  (store: StoreST) => mapState(store.counter),
+  (dispatch: Dispatch<StoreST>) => mapDispatch(dispatch)
+)(props => <CounterComponent {...props} />)
+
 ```
