@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { Store } from 'redux'
 import { Provider } from 'react-redux'
+import styled from 'styled-components'
 import { StoreST } from '../store'
-import { CounterContainer } from './counter'
+import { CounterContainer } from './CounterContainer'
+import { TodosContainer } from './TodosContainer'
 
 // ______________________________________________________
 
@@ -10,8 +12,17 @@ export class AppProvider extends React.Component<{ store: Store<StoreST> }, neve
   render() {
     return (
       <Provider store={this.props.store}>
-        <CounterContainer />
+        <StyledView>
+          <CounterContainer />
+          <TodosContainer />
+        </StyledView>
       </Provider>
     )
   }
 }
+
+const StyledView = styled.div`
+  width: 100%;
+  padding: 20px 10px;
+  box-sizing: border-box;
+`
