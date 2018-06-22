@@ -33,7 +33,7 @@ const View = (props: Props) => (
 //
 // @ StyledView
 
-const StyledView = styled<Props, any>(View)`
+export default styled<Props, any>(View)`
   flex: 1 0 auto;
   margin: 10px 20px;
   padding: 20px;
@@ -49,5 +49,3 @@ const StyledView = styled<Props, any>(View)`
     margin-bottom: 10px;
   }
 `
-
-export const CounterComponent = StyledView

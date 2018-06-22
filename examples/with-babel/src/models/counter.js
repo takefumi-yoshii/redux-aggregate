@@ -4,7 +4,8 @@
 
 export const CounterST = {
   name: '',
-  count: 0
+  count: 0,
+  styled: { bg: '#fff' }
 }
 
 // ______________________________________________________

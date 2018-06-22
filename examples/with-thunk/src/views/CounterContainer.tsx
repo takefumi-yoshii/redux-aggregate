@@ -4,7 +4,7 @@ import { bindActionCreators, Dispatch } from 'redux'
 import { StoreST, Counter } from '../store'
 import { CounterQR, CounterST } from '../models/counter'
 import * as CounterThunks from '../thunks/counter'
-import { CounterComponent, MapState, MapDispatch } from './CounterComponent'
+import CounterComponent, { MapState, MapDispatch } from './CounterComponent'
 
 // ______________________________________________________
 //

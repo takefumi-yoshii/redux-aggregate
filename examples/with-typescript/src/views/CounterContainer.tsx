@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { StoreST, Counter1, Counter2, Counter3 } from '../store'
 import { CounterQR, CounterST } from '../models/counter'
-import { CounterComponent, MapState, MapDispatch } from './CounterComponent'
+import CounterComponent, { MapState, MapDispatch } from './CounterComponent'
 
 // ______________________________________________________
 //

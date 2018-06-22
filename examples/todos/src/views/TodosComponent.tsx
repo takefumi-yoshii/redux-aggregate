@@ -1,44 +1,17 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { TodoModel, TodoQR } from '../models/todo'
+import { TodoModel } from '../models/todo'
+import TodosForm from './TodosForm'
+import TodoItem from './TodoItem'
 
 // ______________________________________________________
 //
-// @ Components
-
-const TodoForm = (props: {
-  inputValue: string
-  handleSubmit: () => any
-  handleInputChange: (payload: string) => any
-}) =>
-  <form onSubmit={e => {
-    e.preventDefault()
-    props.handleSubmit()
-  }}>
-    <input
-      type='text'
-      value={props.inputValue}
-      onChange={(e: any) => props.handleInputChange(e.target.value)}
-    />
-    <button>addTodo</button>
-  </form>
-
-const TodoItem = (props: {
-  todo: TodoModel
-}) =>
-  <div>
-    <p>{TodoQR.getDateLabel(props.todo)}</p>
-    <p>{props.todo.value}</p>
-  </div>
-
-// ______________________________________________________
-//
-// @ View
+// @ Types
 
 export type MapState = {
   name: string
-  inputValue: string
   items: TodoModel[]
+  inputValue: string
   styled: { bg: string }
 }
 export type MapDispatch = {
@@ -47,10 +20,14 @@ export type MapDispatch = {
 }
 type Props = MapState & MapDispatch & { className: string }
 
+// ______________________________________________________
+//
+// @ View
+
 const View = (props: Props) => (
   <div className={props.className}>
     <h1>{props.name}</h1>
-    <TodoForm
+    <TodosForm
       inputValue={props.inputValue}
       handleSubmit={props.handleSubmit}
       handleInputChange={props.handleInputChange}
@@ -68,7 +45,7 @@ const View = (props: Props) => (
 //
 // @ StyledView
 
-const StyledView = styled<Props, any>(View)`
+export default styled<Props, any>(View)`
   flex: 1 0 auto;
   margin: 10px 20px;
   padding: 20px;
@@ -84,5 +61,3 @@ const StyledView = styled<Props, any>(View)`
     margin-bottom: 10px;
   }
 `
-
-export const TodosComponent = StyledView

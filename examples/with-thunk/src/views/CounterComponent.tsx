@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 // ______________________________________________________
 //
-// @ View
+// @ Types
 
 export type MapState = {
   name: string
@@ -18,6 +18,10 @@ export type MapDispatch = {
   handleClickAutoIncrement: () => any
 }
 type Props = MapState & MapDispatch & { className: string }
+
+// ______________________________________________________
+//
+// @ View
 
 const View = (props: Props) => (
   <div className={props.className}>
@@ -36,7 +40,7 @@ const View = (props: Props) => (
 //
 // @ StyledView
 
-const StyledView = styled<Props, any>(View)`
+export default styled<Props, any>(View)`
   flex: 1 0 auto;
   margin: 10px 20px;
   padding: 20px;
@@ -52,5 +56,3 @@ const StyledView = styled<Props, any>(View)`
     margin-bottom: 10px;
   }
 `
-
-export const CounterComponent = StyledView

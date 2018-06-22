@@ -1,5 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { TodoModel } from '../models/todo'
+import TodosForm from './TodosForm'
+import TodoItem from './TodoItem'
 
 // ______________________________________________________
 //
@@ -7,15 +10,13 @@ import styled from 'styled-components'
 
 export type MapState = {
   name: string
-  count: number
-  expo2: number
-  abc: string
+  inputValue: string
+  items: TodoModel[]
   styled: { bg: string }
 }
 export type MapDispatch = {
-  handleClickIncrement: () => any
-  handleClickDecrement: () => any
-  handleClickNestedValue: (value: string) => any
+  handleSubmit: () => any
+  handleInputChange: (payload: string) => any
 }
 type Props = MapState & MapDispatch & { className: string }
 
@@ -26,12 +27,17 @@ type Props = MapState & MapDispatch & { className: string }
 const View = (props: Props) => (
   <div className={props.className}>
     <h1>{props.name}</h1>
-    <p>count = {props.count}</p>
-    <p>expo2 = {props.expo2}</p>
-    <p>a.b.c = {props.abc}</p>
-    <button onClick={() => props.handleClickIncrement()}>increment</button>
-    <button onClick={() => props.handleClickDecrement()}>decrement</button>
-    <button onClick={() => props.handleClickNestedValue('immutable change')}>setNestedValue</button>
+    <TodosForm
+      inputValue={props.inputValue}
+      handleSubmit={props.handleSubmit}
+      handleInputChange={props.handleInputChange}
+    />
+    {props.items.map(todo =>
+      <TodoItem
+        key={todo.id}
+        todo={todo}
+      />
+    )}
   </div>
 )
 
