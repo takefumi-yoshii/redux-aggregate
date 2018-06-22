@@ -1,5 +1,5 @@
 {
-  "name": "with-typescript",
+  "name": "instantiated-aggregate",
   "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server --mode=development",
