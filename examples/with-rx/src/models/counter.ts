@@ -1,3 +1,5 @@
+import { Modeler } from 'redux-aggregate'
+
 // ______________________________________________________
 //
 // @ State
@@ -8,12 +10,13 @@ export interface CounterST {
   todoCount: number
   bgColor: string
 }
-export const CounterST: CounterST = {
+export const CounterModel: Modeler<CounterST> = injects => ({
   name: '',
   count: 0,
   todoCount: 0,
-  bgColor: '#fff'
-}
+  bgColor: '#fff',
+  ...injects
+})
 
 // ______________________________________________________
 //

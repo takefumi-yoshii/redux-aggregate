@@ -48,8 +48,8 @@ import { Model as TodoModel } from './todo'
 
 function addTodo(state: TodosST): TodosST {
   const value = TodosQR.getInputValue(state)
-  if (value === '') return
-  const todo = TodoModel({ value, date: new Date() })
+  if (value === '') return state
+  const todo = TodoModel({ value })
   const items = [...state.items]
   items.push(todo)
   return { ...state, items, input: '' }

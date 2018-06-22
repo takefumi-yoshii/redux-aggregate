@@ -1,6 +1,7 @@
 import immer from 'immer'
-import { TodosST, TodosQR, TodosMT } from './todos'
-import { TodoModel } from './todo'
+import { Modeler } from 'redux-aggregate'
+import { TodosST, TodosQR, TodosMT, TodosModel } from './todos'
+import { TodoST } from './todo'
 
 // ______________________________________________________
 //
@@ -9,22 +10,23 @@ import { TodoModel } from './todo'
 export interface TodosPresentST extends TodosST {
   showAll: boolean
 }
-export const TodosPresentST: TodosPresentST = {
-  ...TodosST,
-  showAll: true
-}
+export const TodosPresentModel: Modeler<TodosPresentST> = injects => ({
+  ...TodosModel(),
+  showAll: true,
+  ...injects
+})
 
 // ______________________________________________________
 //
 // @ Queries
 
-function getDoingItems (state: TodosPresentST): TodoModel[] {
+function getDoingItems (state: TodosPresentST): TodoST[] {
   return state.items.filter(item => !item.done)
 }
-function getDoneItems (state: TodosPresentST): TodoModel[] {
+function getDoneItems (state: TodosPresentST): TodoST[] {
   return state.items.filter(item => item.done)
 }
-function getVisibleItems (state: TodosPresentST): TodoModel[] {
+function getVisibleItems (state: TodosPresentST): TodoST[] {
   return state.showAll ? state.items : getDoingItems(state)
 }
 function getTodosCountStatusLabel (state: TodosPresentST): string {

@@ -76,7 +76,7 @@ export interface StoreST {
 export const Counter1 = createAggregate(CounterMT, 'counter1/')
 export const Counter2 = createAggregate(CounterMT, 'counter2/')
 export const Counter3 = createAggregate(CounterMT, 'counter3/')
-export const store = defineStore({
+export const store = storeFactory({
   counter1: Counter1.reducerFactory({ ...CounterST, name: 'COUNTER_1' }),
   counter2: Counter2.reducerFactory({ ...CounterST, name: 'COUNTER_2', count: 10 }),
   counter3: Counter3.reducerFactory({ ...CounterST, name: 'COUNTER_3', count: 100 })

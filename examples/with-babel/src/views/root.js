@@ -1,8 +1,8 @@
 import { Component } from 'preact'
 import { Store } from 'redux'
 import { Provider } from 'preact-redux'
-import styled from 'styled-components'
 import { CounterContainer } from './counter'
+import styled from 'styled-components'
 
 // ______________________________________________________
 

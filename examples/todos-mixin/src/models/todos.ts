@@ -1,5 +1,6 @@
 import immer from 'immer'
-import { TodoModel } from './todo'
+import { Modeler } from 'redux-aggregate'
+import { TodoModel, TodoST } from './todo'
 
 // ______________________________________________________
 //
@@ -8,15 +9,16 @@ import { TodoModel } from './todo'
 export interface TodosST {
   name: string
   input: string | null
-  items: TodoModel[]
+  items: TodoST[]
   bgColor: string
 }
-export const TodosST: TodosST = {
+export const TodosModel: Modeler<TodosST> = injects => ({
   name: '',
   input: null,
   items: [],
-  bgColor: '#fff'
-}
+  bgColor: '#fff',
+  ...injects
+})
 
 // ______________________________________________________
 //

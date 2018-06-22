@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Store } from 'redux'
 import { Provider } from 'react-redux'
-import styled from 'styled-components'
 import { StoreST } from '../store'
 import CounterContainer from './CounterContainer'
+import styled from 'styled-components'
 
 // ______________________________________________________
 

@@ -1,6 +1,6 @@
 import { render } from 'preact'
-import { AppProvider } from './views/root'
 import { store } from './store'
+import { AppProvider } from './views/root'
 
 // ______________________________________________________
 

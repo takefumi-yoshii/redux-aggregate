@@ -1,4 +1,5 @@
-import { TodoModel } from './todo'
+import { Modeler } from 'redux-aggregate'
+import { TodoST, TodoModel } from './todo'
 
 // ______________________________________________________
 //
@@ -7,15 +8,16 @@ import { TodoModel } from './todo'
 export interface TodosST {
   name: string
   input: string | null
-  items: TodoModel[]
+  items: TodoST[]
   bgColor: string
 }
-export const TodosST: TodosST = {
+export const TodosModel: Modeler<TodosST> = injects => ({
   name: '',
   input: null,
   items: [],
-  bgColor: '#fff'
-}
+  bgColor: '#fff',
+  ...injects
+})
 
 // ______________________________________________________
 //
@@ -36,7 +38,7 @@ export const TodosQR = {
 function addTodo(state: TodosST): TodosST {
   const value = TodosQR.getInputValue(state)
   if (value === '') return state
-  const todo = TodoModel({ value, date: new Date() })
+  const todo = TodoModel({ value })
   const items = [...state.items]
   items.push(todo)
   return { ...state, items, input: '' }

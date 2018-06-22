@@ -1,21 +1,22 @@
+import { Modeler } from 'redux-aggregate'
 import { uuid } from './uuid'
 
 // ______________________________________________________
 //
 // @ State
 
-type Injects<T> = { [P in keyof T]?: T[P] }
 export interface TodoST {
   id: string
   date: Date
   value: string
   done: boolean
 }
-export const TodoST = (): TodoST => ({
+export const TodoModel: Modeler<TodoST> = injects => ({
   id: uuid(),
   date: new Date(),
   value: '',
-  done: false
+  done: false,
+  ...injects
 })
 
 // ______________________________________________________
@@ -33,6 +34,3 @@ function getDateLabel({ date }: TodoST): string {
 export const TodoQR = {
   getDateLabel
 }
-
-export interface TodoModel extends TodoST {}
-export const TodoModel = (injects: Injects<TodoST>): TodoST => ({ ...TodoST(), ...injects })

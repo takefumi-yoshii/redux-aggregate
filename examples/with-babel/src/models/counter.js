@@ -2,11 +2,12 @@
 //
 // @ State
 
-export const CounterST = {
+export const CounterModel = injects => ({
   name: '',
   count: 0,
-  styled: { bg: '#fff' }
-}
+  styled: { bg: '#fff' },
+  ...injects
+})
 
 // ______________________________________________________
 //

@@ -1,7 +1,7 @@
 import { connect } from 'preact-redux'
-import styled from 'styled-components'
 import { Counter } from '../store'
 import { CounterQR } from '../models/counter'
+import styled from 'styled-components'
 
 // ______________________________________________________
 //

@@ -1,8 +1,8 @@
 import * as React from 'react'
-import styled from 'styled-components'
-import { TodoModel } from '../models/todo'
+import { TodoST } from '../models/todo'
 import TodosForm from './TodosForm'
 import TodoItem from './TodoItem'
+import styled from 'styled-components'
 
 // ______________________________________________________
 //
@@ -10,7 +10,7 @@ import TodoItem from './TodoItem'
 
 export type MapState = {
   name: string
-  items: TodoModel[]
+  items: TodoST[]
   inputValue: string
   todosCountStatusLabel: string
   toggleVisibleItemsBtnLabel: string

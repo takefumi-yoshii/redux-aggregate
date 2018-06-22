@@ -10,7 +10,7 @@ import { CounterST, CounterMT } from './models/counter'
 
 // ______________________________________________________
 
-export function defineStore(reducer) {
+function storeFactory(reducer) {
   return createStore(
     combineReducers(reducer),
     composeWithDevTools()
@@ -20,7 +20,7 @@ export function defineStore(reducer) {
 // ______________________________________________________
 
 export const Counter = createAggregate(CounterMT, 'counter/')
-export const store = defineStore({
+export const store = storeFactory({
   counter: Counter.reducerFactory({ ...CounterST, name: 'COUNTER' })
 })
 ```
