@@ -3,7 +3,7 @@ import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import styled from 'styled-components'
 import { StoreST } from '../store'
-import { CounterCT } from './CounterContainer'
+import { CounterContainer } from './CounterContainer'
 
 // ______________________________________________________
 
@@ -12,7 +12,7 @@ export class AppProvider extends React.Component<{ store: Store<StoreST> }, neve
     return (
       <Provider store={this.props.store}>
         <StyledView>
-          <CounterCT />
+          <CounterContainer />
         </StyledView>
       </Provider>
     )

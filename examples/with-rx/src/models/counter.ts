@@ -6,11 +6,13 @@ export interface CounterST {
   name: string
   count: number
   todoCount: number
+  bgColor: string
 }
 export const CounterST: CounterST = {
   name: '',
   count: 0,
-  todoCount: 0
+  todoCount: 0,
+  bgColor: '#fff'
 }
 
 // ______________________________________________________

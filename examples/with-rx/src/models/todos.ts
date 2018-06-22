@@ -8,11 +8,13 @@ export interface TodosST {
   name: string
   input: string | null
   items: TodoModel[]
+  bgColor: string
 }
 export const TodosST: TodosST = {
   name: '',
   input: null,
-  items: []
+  items: [],
+  bgColor: '#fff'
 }
 
 // ______________________________________________________

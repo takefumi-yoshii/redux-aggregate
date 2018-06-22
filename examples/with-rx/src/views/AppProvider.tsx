@@ -1,28 +1,28 @@
 import * as React from 'react'
 import { Store } from 'redux'
 import { Provider } from 'react-redux'
+import styled from 'styled-components'
 import { StoreST } from '../store'
-import { CounterContainer } from './counter'
-import { TodosContainer } from './todos'
+import { CounterContainer } from './CounterContainer'
+import { TodosContainer } from './TodosContainer'
 
 // ______________________________________________________
 
-class RootView extends React.Component<{}, never> {
-  render() {
-    return (
-      <div>
-        <CounterContainer />
-        <TodosContainer />
-      </div>
-    )
-  }
-}
 export class AppProvider extends React.Component<{ store: Store<StoreST> }, never> {
   render() {
     return (
       <Provider store={this.props.store}>
-        <RootView />
+        <StyledView>
+          <CounterContainer />
+          <TodosContainer />
+        </StyledView>
       </Provider>
     )
   }
 }
+
+const StyledView = styled.div`
+  width: 100%;
+  padding: 20px 10px;
+  box-sizing: border-box;
+`
