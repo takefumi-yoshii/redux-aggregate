@@ -3,7 +3,7 @@ import { uuid } from './uuid'
 
 // ______________________________________________________
 //
-// @ State
+// @ Model
 
 export interface TodoST {
   id: string

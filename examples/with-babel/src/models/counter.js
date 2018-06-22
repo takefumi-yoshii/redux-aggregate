@@ -1,6 +1,6 @@
 // ______________________________________________________
 //
-// @ State
+// @ Model
 
 export const CounterModel = injects => ({
   name: '',

@@ -5,7 +5,7 @@ import { TodoST } from './todo'
 
 // ______________________________________________________
 //
-// @ State
+// @ Model
 
 export interface TodosPresentST extends TodosST {
   showAll: boolean

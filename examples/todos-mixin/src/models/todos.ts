@@ -4,7 +4,7 @@ import { TodoModel, TodoST } from './todo'
 
 // ______________________________________________________
 //
-// @ State
+// @ Model
 
 export interface TodosST {
   name: string

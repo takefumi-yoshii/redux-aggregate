@@ -2,7 +2,7 @@ import { Modeler } from 'redux-aggregate'
 
 // ______________________________________________________
 //
-// @ State
+// @ Model
 
 export interface CounterST {
   name: string
