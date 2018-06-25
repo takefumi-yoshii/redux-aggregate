@@ -1,23 +1,12 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { MergeProps } from './CounterContainer'
 
 // ______________________________________________________
 //
 // @ Types
 
-export type MapState = {
-  name: string
-  count: number
-  expo2: number
-  abc: string
-  styled: { bg: string }
-}
-export type MapDispatch = {
-  handleClickIncrement: () => any
-  handleClickDecrement: () => any
-  handleClickNestedValue: (value: string) => any
-}
-type Props = MapState & MapDispatch & { className: string }
+type Props = MergeProps & { className: string }
 
 // ______________________________________________________
 //
