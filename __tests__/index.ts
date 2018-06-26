@@ -1,5 +1,5 @@
 import { createStore, combineReducers, Store } from 'redux'
-import { createAggregate } from '../src/index'
+import { createAggregate } from '../dist/index'
 
 describe('createAggregate', () => {
   interface CounterST {

@@ -13,7 +13,6 @@ type Creators<T>    = { readonly [K in keyof T]: Creator<T[K]> }
 type Mutations<T>   = { readonly [K in keyof T]: Mutation<T[K]> }
 type IMutations<T>  = { readonly [K in keyof T]: IMutation<T[K]> }
 type ReducerFactory = <S>(state: S) => Reducer<S>
-type Reducer<T> = Reducer<T>
 interface Aggregate<M> {
   readonly types: Types<M>
   readonly creators: Creators<M>
