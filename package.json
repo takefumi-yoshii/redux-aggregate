@@ -3,7 +3,7 @@
   "version": "1.4.0",
   "description": "The helper module making Redux more usable.",
   "main": "dist/index.js",
-  "typings": "src/index.ts",
+  "typings": "src/index.d.ts",
   "scripts": {
     "prepublish": "npm run test && npm run build",
     "build": "tsc src/index.ts --outDir ./dist",
