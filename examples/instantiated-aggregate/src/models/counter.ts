@@ -45,9 +45,12 @@ function decrement(state: CounterST): CounterST {
 }
 function setNestedValue(state: CounterST, value: string): CounterST {
   return {
-    ...state, a: {
-      ...state.a, b: {
-        ...state.a.b, c: value
+    ...state,
+    a: {
+      ...state.a,
+      b: {
+        ...state.a.b,
+        c: value
       }
     }
   }

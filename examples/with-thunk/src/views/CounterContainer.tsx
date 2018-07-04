@@ -19,11 +19,14 @@ const mapState = (s: CounterST): MapState => ({
 })
 
 const mapDispatch = (dispatch: Dispatch<StoreST>): MapDispatch =>
-  bindActionCreators({
-    handleClickIncrement: Counter.creators.increment,
-    handleClickDecrement: Counter.creators.decrement,
-    handleClickAutoIncrement: CounterThunks.startAutoIncrement
-  }, dispatch)
+  bindActionCreators(
+    {
+      handleClickIncrement: Counter.creators.increment,
+      handleClickDecrement: Counter.creators.decrement,
+      handleClickAutoIncrement: CounterThunks.startAutoIncrement
+    },
+    dispatch
+  )
 
 export const CounterContainer = connect(
   (store: StoreST) => mapState(store.counter),

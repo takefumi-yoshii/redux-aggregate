@@ -4,16 +4,15 @@ import { Epic, combineEpics } from 'redux-observable'
 import { Counter, Todos } from '../store'
 import { StoreST } from '../store'
 
-const mapTodosCountToCounter: Epic<Action, StoreST> = (action$, store: Store<StoreST>) => {
+const mapTodosCountToCounter: Epic<Action, StoreST> = (
+  action$,
+  store: Store<StoreST>
+) => {
   const { setTodoCount } = Counter.creators
-  return action$
-    .ofType(Todos.types.addTodo)
-    .map(() => {
-      const length = store.getState().todos.items.length
-      return setTodoCount(length)
-    })
+  return action$.ofType(Todos.types.addTodo).map(() => {
+    const length = store.getState().todos.items.length
+    return setTodoCount(length)
+  })
 }
 
-export const rootEpic = combineEpics(
-  mapTodosCountToCounter
-)
+export const rootEpic = combineEpics(mapTodosCountToCounter)

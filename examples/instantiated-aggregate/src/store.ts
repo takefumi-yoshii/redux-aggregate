@@ -20,10 +20,7 @@ export const Counter3 = createAggregate(CounterMT, 'counter3/')
 // ______________________________________________________
 
 function storeFactory<R extends ReducersMapObject>(reducer: R): Store<StoreST> {
-  return createStore(
-    combineReducers(reducer),
-    composeWithDevTools()
-  )
+  return createStore(combineReducers(reducer), composeWithDevTools())
 }
 
 export const store = storeFactory({
@@ -49,4 +46,3 @@ export const store = storeFactory({
     })
   )
 })
-

@@ -1,9 +1,20 @@
 import { Reducer } from 'redux'
-import { KeyMap, Types, Creators, Mutations, ReducerFactory, Aggregate, Modeler } from './index.d'
+import {
+  KeyMap,
+  Types,
+  Creators,
+  Mutations,
+  ReducerFactory,
+  Aggregate,
+  Modeler
+} from './index.d'
 
 const namespaced: KeyMap = {}
 
-function createAggregate<M extends KeyMap & Mutations<M>>(mutations: M, namespace: string): Aggregate<M> {
+function createAggregate<M extends KeyMap & Mutations<M>>(
+  mutations: M,
+  namespace: string
+): Aggregate<M> {
   if (namespaced[namespace] !== undefined) {
     throw new Error(`redux-aggregate: conflict namespace -> ${namespace}`)
   } else {
@@ -26,9 +37,9 @@ function createAggregate<M extends KeyMap & Mutations<M>>(mutations: M, namespac
     }
   }
   return {
-    types: (types as Types<M>),
-    creators: (creators as Creators<M>),
-    reducerFactory: (reducerFactory as ReducerFactory)
+    types: types as Types<M>,
+    creators: creators as Creators<M>,
+    reducerFactory: reducerFactory as ReducerFactory
   }
 }
 

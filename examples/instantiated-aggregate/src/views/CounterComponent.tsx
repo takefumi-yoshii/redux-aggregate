@@ -20,7 +20,9 @@ const View = (props: Props) => (
     <p>a.b.c = {props.abc}</p>
     <button onClick={() => props.handleClickIncrement()}>increment</button>
     <button onClick={() => props.handleClickDecrement()}>decrement</button>
-    <button onClick={() => props.handleClickNestedValue('immutable change')}>setNestedValue</button>
+    <button onClick={() => props.handleClickNestedValue('immutable change')}>
+      setNestedValue
+    </button>
   </div>
 )
 

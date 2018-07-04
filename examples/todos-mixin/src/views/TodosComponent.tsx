@@ -20,7 +20,7 @@ export type MapDispatch = {
   handleClickToggle: () => any
   handleSubmit: () => any
   handleInputChange: (payload: string) => any
-  handleClickDone: (payload: { id: string, done: boolean }) => any
+  handleClickDone: (payload: { id: string; done: boolean }) => any
 }
 type Props = MapState & MapDispatch & { className: string }
 
@@ -42,13 +42,13 @@ const View = (props: Props) => (
       handleSubmit={props.handleSubmit}
       handleInputChange={props.handleInputChange}
     />
-    {props.items.map(todo =>
+    {props.items.map(todo => (
       <TodoItem
         key={todo.id}
         todo={todo}
         handleClickDone={props.handleClickDone}
       />
-    )}
+    ))}
   </div>
 )
 

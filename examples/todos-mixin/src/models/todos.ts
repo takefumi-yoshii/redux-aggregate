@@ -36,28 +36,26 @@ export const TodosQR = {
 //
 // @ Mutations
 
-const addTodo = (
-  state: TodosST
-): TodosST => immer(state, _state => {
-  const value = TodosQR.getInputValue(_state)
-  if (value === '') return
-  _state.items.push(TodoModel({ value, date: new Date() }))
-  _state.input = ''
-})
-const setInputValue = (
-  state: TodosST,
-  value: string
-): TodosST => immer(state, _state => {
-  _state.input = value
-})
+const addTodo = (state: TodosST): TodosST =>
+  immer(state, _state => {
+    const value = TodosQR.getInputValue(_state)
+    if (value === '') return
+    _state.items.push(TodoModel({ value, date: new Date() }))
+    _state.input = ''
+  })
+const setInputValue = (state: TodosST, value: string): TodosST =>
+  immer(state, _state => {
+    _state.input = value
+  })
 const setItemDone = (
   state: TodosST,
-  { id, done }: { id: string, done: boolean }
-): TodosST => immer(state, _state => {
-  const item = _state.items.find(item => item.id === id)
-  if (item === undefined) return
-  item.done = done
-})
+  { id, done }: { id: string; done: boolean }
+): TodosST =>
+  immer(state, _state => {
+    const item = _state.items.find(item => item.id === id)
+    if (item === undefined) return
+    item.done = done
+  })
 
 export const TodosMT = {
   addTodo,

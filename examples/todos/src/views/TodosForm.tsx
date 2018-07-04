@@ -5,16 +5,17 @@ export default (props: {
   handleSubmit: () => any
   handleInputChange: (payload: string) => any
 }) => (
-  <form onSubmit={e => {
-    e.preventDefault()
-    props.handleSubmit()
-  }}>
+  <form
+    onSubmit={e => {
+      e.preventDefault()
+      props.handleSubmit()
+    }}
+  >
     <input
-      type='text'
+      type="text"
       value={props.inputValue}
       onChange={(e: any) => props.handleInputChange(e.target.value)}
     />
     <button>addTodo</button>
   </form>
 )
-  

@@ -8,7 +8,10 @@ import styled from 'styled-components'
 
 // ______________________________________________________
 
-export class AppProvider extends React.Component<{ store: Store<StoreST> }, never> {
+export class AppProvider extends React.Component<
+  { store: Store<StoreST> },
+  never
+> {
   render() {
     return (
       <Provider store={this.props.store}>

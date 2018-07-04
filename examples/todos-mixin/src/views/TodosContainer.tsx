@@ -19,12 +19,15 @@ const mapState = (s: TodosPresentST): MapState => ({
 })
 
 const mapDispatch = (dispatch: Dispatch<StoreST>): MapDispatch =>
-  bindActionCreators({
-    handleClickToggle: Todos.creators.toggleShowAll,
-    handleSubmit: Todos.creators.addTodo,
-    handleInputChange: Todos.creators.setInputValue,
-    handleClickDone: Todos.creators.setItemDone
-  }, dispatch)
+  bindActionCreators(
+    {
+      handleClickToggle: Todos.creators.toggleShowAll,
+      handleSubmit: Todos.creators.addTodo,
+      handleInputChange: Todos.creators.setInputValue,
+      handleClickDone: Todos.creators.setItemDone
+    },
+    dispatch
+  )
 
 export const TodosContainer = connect(
   (store: StoreST) => mapState(store.todos),

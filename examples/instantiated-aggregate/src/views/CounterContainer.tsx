@@ -40,14 +40,16 @@ const containerFactory = (
         expo2: CounterQR.expo2(s),
         abc: s.a.b.c,
         styled: { bg: s.bgColor }
-      })
-    )(selectState(store)),
+      }))(selectState(store)),
     (dispatch: Dispatch<StoreST>): DispatchProps =>
-      bindActionCreators({
-        handleClickIncrement: creators.increment,
-        handleClickDecrement: creators.decrement,
-        handleClickNestedValue: creators.setNestedValue
-      }, dispatch)
+      bindActionCreators(
+        {
+          handleClickIncrement: creators.increment,
+          handleClickDecrement: creators.decrement,
+          handleClickNestedValue: creators.setNestedValue
+        },
+        dispatch
+      )
   )(props => <CounterComponent {...props} />)
 
 const CT1 = containerFactory(s => s.counter1, Counter1.creators)

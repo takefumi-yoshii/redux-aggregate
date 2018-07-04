@@ -10,14 +10,9 @@ export const Counter = createAggregate(CounterMT, 'counter/')
 // ______________________________________________________
 
 function storeFactory(reducer) {
-  return createStore(
-    combineReducers(reducer),
-    composeWithDevTools()
-  )
+  return createStore(combineReducers(reducer), composeWithDevTools())
 }
 
 export const store = storeFactory({
-  counter: Counter.reducerFactory(
-    CounterModel({ name: 'COUNTER' })
-  )
+  counter: Counter.reducerFactory(CounterModel({ name: 'COUNTER' }))
 })

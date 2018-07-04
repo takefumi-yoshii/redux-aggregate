@@ -1,4 +1,10 @@
-import { createStore, combineReducers, applyMiddleware, Store, ReducersMapObject } from 'redux'
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware,
+  Store,
+  ReducersMapObject
+} from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createAggregate } from 'redux-aggregate'
 import thunk from 'redux-thunk'
@@ -24,7 +30,5 @@ function storeFactory<R extends ReducersMapObject>(reducer: R): Store<StoreST> {
 }
 
 export const store = storeFactory({
-  counter: Counter.reducerFactory(
-    CounterModel({name: 'COUNTER' })
-  )
+  counter: Counter.reducerFactory(CounterModel({ name: 'COUNTER' }))
 })

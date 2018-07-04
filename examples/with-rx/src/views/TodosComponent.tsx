@@ -32,12 +32,7 @@ const View = (props: Props) => (
       handleSubmit={props.handleSubmit}
       handleInputChange={props.handleInputChange}
     />
-    {props.items.map(todo =>
-      <TodoItem
-        key={todo.id}
-        todo={todo}
-      />
-    )}
+    {props.items.map(todo => <TodoItem key={todo.id} todo={todo} />)}
   </div>
 )
 

@@ -19,7 +19,7 @@ describe('createAggregate', () => {
   const NameSpace = 'counter/'
   const Mutations = { increment, setCount }
   const Counter = createAggregate(Mutations, NameSpace)
-  
+
   describe('generated modules behavior', () => {
     test('types has namespaced value', () => {
       const { types } = Counter

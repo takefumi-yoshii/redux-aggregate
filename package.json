@@ -8,7 +8,8 @@
     "prepublish": "npm run test && npm run build",
     "build": "tsc src/index.ts --outDir ./dist",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prettier": "prettier \"src/**/*.ts\" \"__tests__/**/*.ts\" --write"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "@types/jest": "^23.1.0",
     "@types/node": "9.4.6",
     "jest": "^23.1.0",
+    "prettier": "^1.13.7",
     "ts-jest": "^22.4.6",
     "ts-node": "5.0.0",
     "typescript": ">=2.8.0",
@@ -44,5 +46,9 @@
     "testMatch": [
       "**/__tests__/*.(ts|tsx)"
     ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   }
 }

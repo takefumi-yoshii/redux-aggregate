@@ -7,14 +7,7 @@ import styled from 'styled-components'
 //
 // @ View
 
-const View = ({
-  className,
-  name,
-  count,
-  expo2,
-  increment,
-  decrement
-}) => (
+const View = ({ className, name, count, expo2, increment, decrement }) => (
   <div className={className}>
     <h1>{name}</h1>
     <p>count = {count}</p>

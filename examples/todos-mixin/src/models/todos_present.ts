@@ -20,22 +20,22 @@ export const TodosPresentModel: Modeler<TodosPresentST> = injects => ({
 //
 // @ Queries
 
-function getDoingItems (state: TodosPresentST): TodoST[] {
+function getDoingItems(state: TodosPresentST): TodoST[] {
   return state.items.filter(item => !item.done)
 }
-function getDoneItems (state: TodosPresentST): TodoST[] {
+function getDoneItems(state: TodosPresentST): TodoST[] {
   return state.items.filter(item => item.done)
 }
-function getVisibleItems (state: TodosPresentST): TodoST[] {
+function getVisibleItems(state: TodosPresentST): TodoST[] {
   return state.showAll ? state.items : getDoingItems(state)
 }
-function getTodosCountStatusLabel (state: TodosPresentST): string {
+function getTodosCountStatusLabel(state: TodosPresentST): string {
   const all = `all: ${state.items.length}`
   const doing = `doing: ${getDoingItems(state).length}`
   const done = `done: ${getDoneItems(state).length}`
   return `${all} / ${doing} / ${done}`
 }
-function getToggleVisibleItemsBtnLabel (state: TodosPresentST): string {
+function getToggleVisibleItemsBtnLabel(state: TodosPresentST): string {
   return state.showAll ? 'hide done items' : 'show all items'
 }
 export const TodosPresentQR = {
@@ -49,11 +49,10 @@ export const TodosPresentQR = {
 //
 // @ Mutations
 
-const toggleShowAll = (
-  state: TodosPresentST
-): TodosPresentST => immer(state, _state => {
-  _state.showAll = !_state.showAll
-})
+const toggleShowAll = (state: TodosPresentST): TodosPresentST =>
+  immer(state, _state => {
+    _state.showAll = !_state.showAll
+  })
 export const TodosPresentMT = {
   ...TodosMT,
   toggleShowAll

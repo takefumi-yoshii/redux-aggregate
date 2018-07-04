@@ -16,16 +16,11 @@ export const Todos = createAggregate(TodosMT, 'todos/')
 // ______________________________________________________
 
 function storeFactory<R extends ReducersMapObject>(reducer: R): Store<StoreST> {
-  return createStore(
-    combineReducers(reducer),
-    composeWithDevTools()
-  )
+  return createStore(combineReducers(reducer), composeWithDevTools())
 }
 
 // ______________________________________________________
 
 export const store = storeFactory({
-  todos: Todos.reducerFactory(
-    TodosModel({ name: 'TODOS' })
-  )
+  todos: Todos.reducerFactory(TodosModel({ name: 'TODOS' }))
 })
