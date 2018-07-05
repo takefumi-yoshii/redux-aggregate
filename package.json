@@ -3,13 +3,13 @@
   "version": "1.4.5",
   "description": "The helper module making Redux more usable.",
   "main": "dist/index.js",
-  "typings": "src/index.d.ts",
+  "typings": "typings/index.d.ts",
   "scripts": {
     "prepublish": "npm run test && npm run build",
     "build": "tsc src/index.ts --outDir ./dist",
     "test": "jest",
     "test:watch": "jest --watch",
-    "prettier": "prettier \"src/**/*.ts\" \"__tests__/**/*.ts\" --write"
+    "prettier": "prettier \"src/**/*.ts\" \"typings/**/*.ts\" \"__tests__/**/*.ts\" --write"
   },
   "repository": {
     "type": "git",

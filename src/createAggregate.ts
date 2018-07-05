@@ -7,7 +7,7 @@ import {
   ReducerFactory,
   Aggregate,
   Modeler
-} from './index.d'
+} from '../typings/index'
 
 const namespaced: KeyMap = {}
 

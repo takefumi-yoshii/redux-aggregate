@@ -20,8 +20,18 @@ interface Aggregate<M> {
 }
 type Injects<T> = { [P in keyof T]?: T[P] }
 type Modeler<T> = (injects?: Injects<T>) => T
-
 declare function createAggregate<M extends KeyMap & Mutations<M>>(
   mutations: M,
   namespace: string
 ): Aggregate<M>
+
+export {
+  KeyMap,
+  Types,
+  Creators,
+  Mutations,
+  ReducerFactory,
+  Aggregate,
+  Modeler,
+  createAggregate
+}
