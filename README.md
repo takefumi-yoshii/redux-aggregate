@@ -2,7 +2,7 @@
 
 [![Latest Version](https://img.shields.io/badge/npm-redux_aggregate-C12127.svg)](https://www.npmjs.com/package/redux-aggregate)
 
-The helper module making Redux more usable.
+The tiny ~550b helper module making Redux more usable.
 Inspired by [unistore](https://github.com/developit/unistore).
 Minimum code is as follows.The comfortable code is maintain quality.
 
