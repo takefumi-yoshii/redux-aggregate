@@ -15,7 +15,7 @@ function createAggregate<M extends KeyMap & Mutations<M>>(
   mutations: M,
   namespace: string
 ): Aggregate<M> {
-  if (namespaced[namespace] !== undefined) {
+  if (namespaced[namespace] !== undefined && process.env.NODE_ENV === 'production') {
     throw new Error(`redux-aggregate: conflict namespace -> ${namespace}`)
   } else {
     namespaced[namespace] = namespace
