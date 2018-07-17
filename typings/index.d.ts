@@ -23,6 +23,9 @@ declare function createAggregate<M extends KeyMap & Mutations<M>>(
   namespace: string
 ): Aggregate<M>
 
+type Injects<T> = { [P in keyof T]?: T[P] }
+type Modeler<T> = (injects?: Injects<T>) => T
+
 export {
   KeyMap,
   Types,
@@ -30,5 +33,6 @@ export {
   Mutations,
   ReducerFactory,
   Aggregate,
-  createAggregate
+  createAggregate,
+  Modeler
 }
