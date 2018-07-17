@@ -1,15 +1,16 @@
 import { createStore, combineReducers, Store } from 'redux'
-import { createAggregate } from '../dist/index'
+import { createAggregate, Modeler } from '../src/index'
 
 describe('createAggregate', () => {
   interface CounterST {
     name: string
     count: number
   }
-  const CounterST: CounterST = {
+  const CounterModel: Modeler<CounterST> = injects => ({
     name: 'MyName',
-    count: 0
-  }
+    count: 0,
+    ...injects
+  })
   function increment(state: CounterST): CounterST {
     return { ...state, count: state.count + 1 }
   }
@@ -53,7 +54,7 @@ describe('createAggregate', () => {
     }
     const store: Store<StoreST> = createStore(
       combineReducers({
-        counter: Counter.reducerFactory({ ...CounterST })
+        counter: Counter.reducerFactory(CounterModel())
       })
     )
     test('store has counter', () => {
