@@ -18,8 +18,6 @@ interface Aggregate<M> {
   readonly creators: Creators<M>
   readonly reducerFactory: ReducerFactory
 }
-type Injects<T> = { [P in keyof T]?: T[P] }
-type Modeler<T> = (injects?: Injects<T>) => T
 declare function createAggregate<M extends KeyMap & Mutations<M>>(
   mutations: M,
   namespace: string
@@ -32,6 +30,5 @@ export {
   Mutations,
   ReducerFactory,
   Aggregate,
-  Modeler,
   createAggregate
 }

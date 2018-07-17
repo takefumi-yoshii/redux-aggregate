@@ -5,9 +5,8 @@ import {
   Creators,
   Mutations,
   ReducerFactory,
-  Aggregate,
-  Modeler
-} from '../typings/index'
+  Aggregate
+} from '../typings'
 
 const namespaced: KeyMap = {}
 
@@ -15,7 +14,10 @@ function createAggregate<M extends KeyMap & Mutations<M>>(
   mutations: M,
   namespace: string
 ): Aggregate<M> {
-  if (namespaced[namespace] !== undefined && process.env.NODE_ENV !== 'development') {
+  if (
+    namespaced[namespace] !== undefined &&
+    process.env.NODE_ENV !== 'development'
+  ) {
     throw new Error(`redux-aggregate: conflict namespace -> ${namespace}`)
   } else {
     namespaced[namespace] = namespace
@@ -42,5 +44,8 @@ function createAggregate<M extends KeyMap & Mutations<M>>(
     reducerFactory: reducerFactory as ReducerFactory
   }
 }
+
+type Injects<T> = { [P in keyof T]?: T[P] }
+type Modeler<T> = (injects?: Injects<T>) => T
 
 export { createAggregate, Modeler }
