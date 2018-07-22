@@ -1,4 +1,4 @@
-# <img src='./logo.svg' width='285' height='60' alt='redux-aggregate' />
+# <img src='https://user-images.githubusercontent.com/22139818/43042403-c7b57bbe-8db7-11e8-8538-88baaf8a9f32.png' width='285' height='60' alt='redux-aggregate' />
 
 [![Latest Version](https://img.shields.io/badge/npm-redux_aggregate-C12127.svg)](https://www.npmjs.com/package/redux-aggregate)
 [![CircleCI](https://circleci.com/gh/takefumi-yoshii/redux-aggregate.svg?style=svg)](https://circleci.com/gh/takefumi-yoshii/redux-aggregate)
