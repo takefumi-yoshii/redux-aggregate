@@ -1,24 +1,24 @@
-# redux-aggregate
+# <img src='./logo.svg' style='width:100%; max-width: 300px;' alt='redux-aggregate' />
 
 [![Latest Version](https://img.shields.io/badge/npm-redux_aggregate-C12127.svg)](https://www.npmjs.com/package/redux-aggregate)
 [![CircleCI](https://circleci.com/gh/takefumi-yoshii/redux-aggregate.svg?style=svg)](https://circleci.com/gh/takefumi-yoshii/redux-aggregate)
 
 The tiny ~550b helper module making Redux more usable.
 Inspired by [unistore](https://github.com/developit/unistore).
-Minimum code is as follows.The comfortable code is maintain quality.
+Minimum code is as follows.The comfortable code is maintain quality.  
 
 ```javascript
 import { createStore, combineReducers } from 'redux'
 import { createAggregate } from 'redux-aggregate'
 
-const state = { count: 0 }
-const increment = s => ({ ...s, count: s.count + 1 })
-const decrement = s => ({ ...s, count: s.count - 1 })
+const initialState = => ({ count: 0 })
+const increment = state => ({ ...state, count: state.count + 1 })
+const decrement = state => ({ ...state, count: state.count - 1 })
 const mutations = { increment, decrement }
 const { reducerFactory } = createAggregate(mutations, 'counter/')
 const store = createStore(
   combineReducers({
-    counter: reducerFactory({ ...state })
+    counter: reducerFactory(initialState())
   })
 )
 ```
@@ -52,14 +52,14 @@ Let provide payload as the second argument if necessary.
 //
 // @ Mutations
 
-function increment(s) {
-  return { ...s, count: s.count + 1 }
+function increment(state) {
+  return { ...state, count: state.count + 1 }
 }
-function decrement(s) {
-  return { ...s, count: s.count - 1 }
+function decrement(state) {
+  return { ...state, count: state.count - 1 }
 }
-function setCount (s, value) {
-  return { ...s, count: value }
+function setCount (state, value) {
+  return { ...state, count: value }
 }
 export const Mutations = {
   increment,
@@ -88,11 +88,11 @@ const state = {
 //
 // @ Queries
 
-function expo2 (s) {
-  return s.count ** 2
+function expo2 (state) {
+  return state.count ** 2
 }
-function getCountLabel (s) {
-  return `${s.count}${s.unit}`
+function getCountLabel (state) {
+  return `${state.count}${state.unit}`
 }
 export const Queries = {
   expo2,
