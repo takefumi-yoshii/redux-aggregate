@@ -1,4 +1,4 @@
-<h1><img src='./logo.svg' style='max-width: 300px;' alt='redux-aggregate' /></h1>
+<h1 style='max-width: 300px;'><img src='./logo.svg' alt='redux-aggregate' /></h1>
 
 [![Latest Version](https://img.shields.io/badge/npm-redux_aggregate-C12127.svg)](https://www.npmjs.com/package/redux-aggregate)
 [![CircleCI](https://circleci.com/gh/takefumi-yoshii/redux-aggregate.svg?style=svg)](https://circleci.com/gh/takefumi-yoshii/redux-aggregate)
