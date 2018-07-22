@@ -72,6 +72,15 @@ This kind of action occurs.
 ![image.png](https://user-images.githubusercontent.com/22139818/37502814-59e06558-2918-11e8-93b8-3033f729fbf5.png)
 
 
+## 🔥 Type inference in conditional types
+
+By the map of Type inference in conditional types, 
+mutation's second argument will map to action creator's payload.
+(required ^TypeScript 2.8)
+
+![image.png](https://user-images.githubusercontent.com/22139818/43045685-06523d54-8df8-11e8-95fa-fe3423e45109.png)
+
+
 ## ✅ Give the behavior of Model to State
 
 Normal Redux only projects the State, but depending on requirements, this will be unsatisfactory.
@@ -100,11 +109,3 @@ export const Queries = {
 }
 
 ```
-
-## 🔥 Type inference in conditional types
-
-By the map of Type inference in conditional types, 
-mutation's second argument will map to action creator's payload.
-(required ^TypeScript 2.8)
-
-![image.png](https://user-images.githubusercontent.com/22139818/41963075-a5b09a9c-7a31-11e8-8452-868258768fee.png)
