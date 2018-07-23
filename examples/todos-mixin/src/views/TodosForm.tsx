@@ -14,7 +14,9 @@ export default (props: {
     <input
       type="text"
       value={props.inputValue}
-      onChange={(e: any) => props.handleInputChange(e.target.value)}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        props.handleInputChange(e.target.value)
+      }
     />
     <button>addTodo</button>
   </form>

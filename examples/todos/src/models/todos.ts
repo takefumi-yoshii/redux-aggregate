@@ -43,7 +43,7 @@ function addTodo(state: TodosST): TodosST {
   items.push(todo)
   return { ...state, items, input: '' }
 }
-function setInputValue(state: TodosST, value: string | null): TodosST {
+function setInputValue(state: TodosST, value: string): TodosST {
   return { ...state, input: value }
 }
 export const TodosMT = {

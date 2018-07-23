@@ -25,6 +25,10 @@ export class AppProvider extends React.Component<
 }
 
 const StyledView = styled.div`
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
   width: 100%;
   padding: 20px 10px;
   box-sizing: border-box;

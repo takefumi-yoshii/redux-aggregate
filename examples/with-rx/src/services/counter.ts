@@ -1,3 +1,7 @@
+// ______________________________________________________
+//
+// @ Counter Service
+
 import { Action } from 'redux'
 import { combineEpics, Epic, ofType } from 'redux-observable'
 import { map, withLatestFrom } from 'rxjs/operators'
