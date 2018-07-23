@@ -1,22 +1,16 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { MapState, MapDispatch } from './CounterContainer'
+
+// ______________________________________________________
+//
+// @ Types
+
+type Props = MapState & MapDispatch & { className?: string }
 
 // ______________________________________________________
 //
 // @ View
-
-export type MapState = {
-  name: string
-  count: number
-  expo2: number
-  countSum: number
-  styled: { bg: string }
-}
-export type MapDispatch = {
-  handleClickIncrement: () => any
-  handleClickDecrement: () => any
-}
-type Props = MapState & MapDispatch & { className: string }
 
 const View = (props: Props) => (
   <div className={props.className}>
@@ -33,7 +27,7 @@ const View = (props: Props) => (
 //
 // @ StyledView
 
-export default styled<Props, any>(View)`
+export default styled(View)`
   flex: 1 0 auto;
   margin: 10px 20px;
   padding: 20px;

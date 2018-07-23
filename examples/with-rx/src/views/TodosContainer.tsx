@@ -1,9 +1,26 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
+import { bindActionCreators, Dispatch, AnyAction } from 'redux'
 import { StoreST, Todos } from '../store'
 import { TodosQR, TodosST } from '../models/todos'
-import TodosComponent, { MapState, MapDispatch } from './TodosComponent'
+import { TodoST } from '../models/todo'
+import TodosComponent from './TodosComponent'
+
+// ______________________________________________________
+//
+// @ Types
+
+export type MapState = {
+  name: string
+  inputValue: string
+  items: TodoST[]
+  styled: { bg: string }
+}
+
+export type MapDispatch = {
+  handleSubmit: () => any
+  handleInputChange: (payload: string) => any
+}
 
 // ______________________________________________________
 //
@@ -16,7 +33,7 @@ const mapState = (s: TodosST): MapState => ({
   styled: { bg: s.bgColor }
 })
 
-const mapDispatch = (dispatch: Dispatch<StoreST>): MapDispatch =>
+const mapDispatch = (dispatch: Dispatch<AnyAction>): MapDispatch =>
   bindActionCreators(
     {
       handleSubmit: Todos.creators.addTodo,
@@ -27,5 +44,5 @@ const mapDispatch = (dispatch: Dispatch<StoreST>): MapDispatch =>
 
 export const TodosContainer = connect(
   (store: StoreST) => mapState(store.todos),
-  (dispatch: Dispatch<StoreST>) => mapDispatch(dispatch)
+  (dispatch: Dispatch<AnyAction>) => mapDispatch(dispatch)
 )(props => <TodosComponent {...props} />)

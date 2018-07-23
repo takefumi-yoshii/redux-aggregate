@@ -1,9 +1,30 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
+import { bindActionCreators, Dispatch, AnyAction } from 'redux'
 import { StoreST, Todos } from '../store'
 import { TodosPresentQR, TodosPresentST } from '../models/todos_present'
-import TodosComponent, { MapState, MapDispatch } from './TodosComponent'
+import { TodoST } from '../models/todo'
+import TodosComponent from './TodosComponent'
+
+// ______________________________________________________
+//
+// @ Types
+
+export type MapState = {
+  name: string
+  items: TodoST[]
+  inputValue: string
+  todosCountStatusLabel: string
+  toggleVisibleItemsBtnLabel: string
+  styled: { bg: string }
+}
+
+export type MapDispatch = {
+  handleClickToggle: () => any
+  handleSubmit: () => any
+  handleInputChange: (payload: string) => any
+  handleClickDone: (payload: { id: string; done: boolean }) => any
+}
 
 // ______________________________________________________
 //
@@ -18,7 +39,7 @@ const mapState = (s: TodosPresentST): MapState => ({
   styled: { bg: s.bgColor }
 })
 
-const mapDispatch = (dispatch: Dispatch<StoreST>): MapDispatch =>
+const mapDispatch = (dispatch: Dispatch<AnyAction>): MapDispatch =>
   bindActionCreators(
     {
       handleClickToggle: Todos.creators.toggleShowAll,
@@ -31,5 +52,5 @@ const mapDispatch = (dispatch: Dispatch<StoreST>): MapDispatch =>
 
 export const TodosContainer = connect(
   (store: StoreST) => mapState(store.todos),
-  (dispatch: Dispatch<StoreST>) => mapDispatch(dispatch)
+  (dispatch: Dispatch<AnyAction>) => mapDispatch(dispatch)
 )(props => <TodosComponent {...props} />)

@@ -1,24 +1,14 @@
 import * as React from 'react'
-import { TodoST } from '../models/todo'
 import TodosForm from './TodosForm'
 import TodoItem from './TodoItem'
+import { MapState, MapDispatch } from './TodosContainer'
 import styled from 'styled-components'
 
 // ______________________________________________________
 //
 // @ Types
 
-export type MapState = {
-  name: string
-  inputValue: string
-  items: TodoST[]
-  styled: { bg: string }
-}
-export type MapDispatch = {
-  handleSubmit: () => any
-  handleInputChange: (payload: string) => any
-}
-type Props = MapState & MapDispatch & { className: string }
+type Props = MapState & MapDispatch & { className?: string }
 
 // ______________________________________________________
 //
@@ -40,7 +30,7 @@ const View = (props: Props) => (
 //
 // @ StyledView
 
-export default styled<Props, any>(View)`
+export default styled(View)`
   flex: 1 0 auto;
   margin: 10px 20px;
   padding: 20px;

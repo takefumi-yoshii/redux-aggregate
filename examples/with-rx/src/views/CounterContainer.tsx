@@ -1,9 +1,26 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
+import { bindActionCreators, Dispatch, AnyAction } from 'redux'
 import { StoreST, Counter } from '../store'
 import { CounterQR, CounterST } from '../models/counter'
-import CounterComponent, { MapState, MapDispatch } from './CounterComponent'
+import CounterComponent from './CounterComponent'
+
+// ______________________________________________________
+//
+// @ Types
+
+export type MapState = {
+  name: string
+  count: number
+  expo2: number
+  countSum: number
+  styled: { bg: string }
+}
+
+export type MapDispatch = {
+  handleClickIncrement: () => any
+  handleClickDecrement: () => any
+}
 
 // ______________________________________________________
 //
@@ -17,7 +34,7 @@ const mapState = (s: CounterST): MapState => ({
   styled: { bg: s.bgColor }
 })
 
-const mapDispatch = (dispatch: Dispatch<StoreST>): MapDispatch =>
+const mapDispatch = (dispatch: Dispatch<AnyAction>): MapDispatch =>
   bindActionCreators(
     {
       handleClickIncrement: Counter.creators.increment,
@@ -28,5 +45,5 @@ const mapDispatch = (dispatch: Dispatch<StoreST>): MapDispatch =>
 
 export const CounterContainer = connect(
   (store: StoreST) => mapState(store.counter),
-  (dispatch: Dispatch<StoreST>) => mapDispatch(dispatch)
+  (dispatch: Dispatch<AnyAction>) => mapDispatch(dispatch)
 )(props => <CounterComponent {...props} />)

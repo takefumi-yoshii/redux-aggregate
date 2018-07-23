@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
+import { bindActionCreators, Dispatch, AnyAction } from 'redux'
 import { StoreST, Counter1, Counter2, Counter3 } from '../store'
 import { CounterQR, CounterST } from '../models/counter'
 import CounterComponent from './CounterComponent'
@@ -9,20 +9,20 @@ import CounterComponent from './CounterComponent'
 //
 // @ Types
 
-interface StateProps {
+interface MapState {
   name: string
   count: number
   expo2: number
   abc: string
   styled: { bg: string }
 }
-interface DispatchProps {
+interface MapDispatch {
   handleClickIncrement: () => any
   handleClickDecrement: () => any
   handleClickNestedValue: (value: string) => any
 }
 interface OwnProps {}
-export type MergeProps = StateProps & DispatchProps & OwnProps
+export type MergeProps = MapState & MapDispatch & OwnProps
 
 // ______________________________________________________
 //
@@ -32,16 +32,16 @@ const containerFactory = (
   selectState: (s: StoreST) => CounterST,
   creators = Counter1.creators // infered types
 ) =>
-  connect<StateProps, DispatchProps, OwnProps>(
+  connect<MapState, MapDispatch, OwnProps>(
     (store: StoreST) =>
-      ((s: CounterST): StateProps => ({
+      ((s: CounterST): MapState => ({
         name: s.name,
         count: s.count,
         expo2: CounterQR.expo2(s),
         abc: s.a.b.c,
         styled: { bg: s.bgColor }
       }))(selectState(store)),
-    (dispatch: Dispatch<StoreST>): DispatchProps =>
+    (dispatch: Dispatch<AnyAction>): MapDispatch =>
       bindActionCreators(
         {
           handleClickIncrement: creators.increment,

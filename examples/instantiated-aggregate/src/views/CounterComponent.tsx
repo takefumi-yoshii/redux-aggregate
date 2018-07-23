@@ -6,7 +6,7 @@ import { MergeProps } from './CounterContainer'
 //
 // @ Types
 
-type Props = MergeProps & { className: string }
+type Props = MergeProps & { className?: string }
 
 // ______________________________________________________
 //
@@ -30,7 +30,7 @@ const View = (props: Props) => (
 //
 // @ StyledView
 
-export default styled<Props, any>(View)`
+export default styled(View)`
   flex: 1 0 auto;
   margin: 10px 20px;
   padding: 20px;
