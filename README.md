@@ -109,3 +109,9 @@ export const Queries = {
 }
 
 ```
+
+## ❗️ Caution
+
+This helper violate to the Redux way, and will be restricted to aggregate way.
+Action / Reducer will be restricted to one-to-one / many-to-one mapping, and loses default Redux expectation behavior.
+[see also](https://redux.js.org/faq/actions#is-there-always-a-one-to-one-mapping-between-reducers-and-actions)
