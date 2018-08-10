@@ -3,7 +3,7 @@ import { ActionType, ActionTypes } from './commons'
 
 // ______________________________________________________
 
-type ACS<T> = () => void
+type ACS<T> = () => R<T>
 type ACSPL<T> = (payload: A1<T>) => R<T>
 type ActionSrc<T> = ACS<T> | ACSPL<T>
 type ActionsSrc<T> = { readonly [K in keyof T]: ActionSrc<T[K]> }
