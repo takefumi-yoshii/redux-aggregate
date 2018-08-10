@@ -1,4 +1,4 @@
-function tick () {
+function tick() {
   const date = new Date()
   const month = date.getMonth() + 1
   const _date = date.getDate()

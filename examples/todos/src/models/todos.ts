@@ -58,7 +58,7 @@ export const TodosMT = {
 // @ TodosModel Subscribes
 
 const Timer = {
-  tick (state: TodosST, timeLabel: string): TodosST {
+  tick(state: TodosST, timeLabel: string): TodosST {
     return { ...state, now: timeLabel }
   }
 }

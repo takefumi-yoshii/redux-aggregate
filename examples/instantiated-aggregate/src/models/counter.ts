@@ -68,7 +68,7 @@ export const CounterMT = {
 // @ CounterModel Subscribes
 
 const Timer = {
-  tick (state: CounterST, timeLabel: string): CounterST {
+  tick(state: CounterST, timeLabel: string): CounterST {
     return { ...state, now: timeLabel }
   }
 }

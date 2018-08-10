@@ -64,7 +64,7 @@ export const store = storeFactory({
 // @ Services
 
 async function runTimerService() {
-  while(true) {
+  while (true) {
     await wait()
     store.dispatch(Timer.creators.tick())
   }

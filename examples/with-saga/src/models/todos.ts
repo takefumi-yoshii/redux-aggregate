@@ -3,25 +3,27 @@ import { TodoST, TodoModel } from './todo'
 
 // ______________________________________________________
 //
-// @ Model
+// @ TodosModel State
 
 export interface TodosST {
   name: string
   input: string | null
   items: TodoST[]
+  now: string
   bgColor: string
 }
 export const TodosModel: Modeler<TodosST> = injects => ({
   name: '',
   input: null,
   items: [],
+  now: '',
   bgColor: '#fff',
   ...injects
 })
 
 // ______________________________________________________
 //
-// @ Queries
+// @ TodosModel Queries
 
 function getInputValue(state: TodosST): string {
   if (state.input === null) return ''
@@ -33,7 +35,7 @@ export const TodosQR = {
 
 // ______________________________________________________
 //
-// @ Mutations
+// @ TodosModel Mutations
 
 function addTodo(state: TodosST): TodosST {
   const value = TodosQR.getInputValue(state)
@@ -49,4 +51,17 @@ function setInputValue(state: TodosST, value: string): TodosST {
 export const TodosMT = {
   addTodo,
   setInputValue
+}
+
+// ______________________________________________________
+//
+// @ TodosModel Subscribes
+
+const Timer = {
+  tick(state: TodosST, timeLabel: string): TodosST {
+    return { ...state, now: timeLabel }
+  }
+}
+export const TodosSB = {
+  Timer
 }
