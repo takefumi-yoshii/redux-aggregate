@@ -1,9 +1,13 @@
 import { createStore, combineReducers, Store, ReducersMapObject } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createAggregate } from 'redux-aggregate'
-import { CounterMT, CounterST, CounterModel } from './models/counter'
+import { createAggregate, createActions } from '../../../src'
+import { TimerAC } from './actions/timer'
+import { CounterMT, CounterST, CounterModel, CounterSB } from './models/counter'
+import { wait } from './helper/promise'
 
 // ______________________________________________________
+//
+// @ Types
 
 export interface StoreST {
   counter1: CounterST
@@ -12,12 +16,20 @@ export interface StoreST {
 }
 
 // ______________________________________________________
+//
+// @ Aggregates
 
+export const Timer = createActions(TimerAC, 'timer/')
 export const Counter1 = createAggregate(CounterMT, 'counter1/')
 export const Counter2 = createAggregate(CounterMT, 'counter2/')
 export const Counter3 = createAggregate(CounterMT, 'counter3/')
+Counter1.subscribe(Timer, CounterSB.Timer)
+Counter2.subscribe(Timer, CounterSB.Timer)
+Counter3.subscribe(Timer, CounterSB.Timer)
 
 // ______________________________________________________
+//
+// @ Store
 
 function storeFactory<R extends ReducersMapObject>(reducer: R): Store<StoreST> {
   return createStore(combineReducers(reducer), composeWithDevTools())
@@ -46,3 +58,16 @@ export const store = storeFactory({
     })
   )
 })
+
+// ______________________________________________________
+//
+// @ Services
+
+async function runTimerService() {
+  while(true) {
+    await wait()
+    store.dispatch(Timer.creators.tick())
+  }
+}
+
+runTimerService()
