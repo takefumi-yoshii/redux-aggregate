@@ -16,6 +16,7 @@ export type MapState = {
   inputValue: string
   todosCountStatusLabel: string
   toggleVisibleItemsBtnLabel: string
+  timeLabel: string
   styled: { bg: string }
 }
 
@@ -36,6 +37,7 @@ const mapState = (s: TodosPresentST): MapState => ({
   inputValue: TodosPresentQR.getInputValue(s),
   todosCountStatusLabel: TodosPresentQR.getTodosCountStatusLabel(s),
   toggleVisibleItemsBtnLabel: TodosPresentQR.getToggleVisibleItemsBtnLabel(s),
+  timeLabel: s.now,
   styled: { bg: s.bgColor }
 })
 

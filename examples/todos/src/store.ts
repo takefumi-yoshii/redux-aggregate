@@ -42,5 +42,5 @@ async function runTimerService() {
     store.dispatch(Timer.creators.tick())
   }
 }
-
+store.dispatch(Timer.creators.tick())
 runTimerService()

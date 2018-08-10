@@ -3,7 +3,7 @@ import { uuid } from './uuid'
 
 // ______________________________________________________
 //
-// @ Model
+// @ TodosModel Model
 
 export interface TodoST {
   id: string
@@ -21,7 +21,7 @@ export const TodoModel: Modeler<TodoST> = injects => ({
 
 // ______________________________________________________
 //
-// @ Queries
+// @ TodosModel Queries
 
 function getDateLabel({ date }: TodoST): string {
   const month = date.getMonth() + 1
