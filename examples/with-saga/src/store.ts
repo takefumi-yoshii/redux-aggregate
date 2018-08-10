@@ -10,8 +10,9 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware from 'redux-saga'
 import { createAggregate, createActions } from '../../../src'
 import { TimerAC } from './actions/timer'
-import { CounterST, CounterMT, CounterModel, CounterSB } from './models/counter'
-import { TodosST, TodosMT, TodosModel, TodosSB } from './models/todos'
+import { CounterModel, CounterST, CounterMT, CounterSB } from './models/counter'
+import { TodosModel, TodosST, TodosMT, TodosSB } from './models/todos'
+import { SummaryModel, SummaryST, SummarySB } from './models/summary'
 import { rootSaga } from './services/counter'
 import { wait } from './helper/promise'
 
@@ -22,6 +23,7 @@ import { wait } from './helper/promise'
 export interface StoreST {
   counter: CounterST
   todos: TodosST
+  summary: SummaryST
 }
 
 // ______________________________________________________
@@ -31,8 +33,12 @@ export interface StoreST {
 export const Timer = createActions(TimerAC, 'timer/')
 export const Counter = createAggregate(CounterMT, 'counter/')
 export const Todos = createAggregate(TodosMT, 'todos/')
+export const Summary = createAggregate({}, 'summary/')
 Todos.subscribe(Timer, TodosSB.Timer)
 Counter.subscribe(Timer, CounterSB.Timer)
+Summary.subscribe(Timer, SummarySB.Timer)
+Summary.subscribe(Counter, SummarySB.Counter)
+Summary.subscribe(Todos, SummarySB.Todos)
 
 // ______________________________________________________
 //
@@ -51,8 +57,24 @@ function storeFactory<R extends ReducersMapObject, M extends Middleware>(
 }
 export const store = storeFactory(
   {
-    counter: Counter.reducerFactory(CounterModel({ name: 'COUNTER' })),
-    todos: Todos.reducerFactory(TodosModel({ name: 'TODOS' }))
+    counter: Counter.reducerFactory(
+      CounterModel({
+        name: 'COUNTER',
+        bgColor: '#fff'
+      })
+    ),
+    todos: Todos.reducerFactory(
+      TodosModel({
+        name: 'TODOS',
+        bgColor: '#eee'
+      })
+    ),
+    summary: Summary.reducerFactory(
+      SummaryModel({
+        name: 'SUMMARY',
+        bgColor: '#ccc'
+      })
+    )
   },
   sagaMiddleware
 )

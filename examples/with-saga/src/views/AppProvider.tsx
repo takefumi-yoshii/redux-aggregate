@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { StoreST } from '../store'
 import { CounterContainer } from './CounterContainer'
 import { TodosContainer } from './TodosContainer'
+import { SummaryContainer } from './SummaryContainer'
 import styled from 'styled-components'
 
 // ______________________________________________________
@@ -18,6 +19,7 @@ export class AppProvider extends React.Component<
         <StyledView>
           <CounterContainer />
           <TodosContainer />
+          <SummaryContainer />
         </StyledView>
       </Provider>
     )
