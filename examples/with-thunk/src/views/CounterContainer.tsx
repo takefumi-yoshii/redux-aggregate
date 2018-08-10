@@ -15,6 +15,7 @@ export type MapState = {
   count: number
   expo2: number
   autoIncrementBtnLabel: string
+  timeLabel: string
   styled: { bg: string }
 }
 
@@ -33,6 +34,7 @@ const mapState = (s: CounterST): MapState => ({
   count: s.count,
   expo2: CounterQR.expo2(s),
   autoIncrementBtnLabel: CounterQR.getAutoIncrementBtnLabel(s),
+  timeLabel: s.now,
   styled: { bg: s.bgColor }
 })
 

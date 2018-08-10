@@ -16,6 +16,8 @@ import { rootSaga } from './services/counter'
 import { wait } from './helper/promise'
 
 // ______________________________________________________
+//
+// @ Types
 
 export interface StoreST {
   counter: CounterST
