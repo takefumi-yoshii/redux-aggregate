@@ -40,8 +40,8 @@ type SubscribeMap<T extends ISM, M> = T extends Aggregate<SrcMap<T>>
   ? SubscribeAggregateMap<SrcMap<T>, M>
   : SubscribeActionsMap<SrcMap<T>, M>
 interface Aggregate<T> {
-  __namespace__: string
-  __srcmap__: T
+  readonly __namespace__: string
+  readonly __srcmap__: T
   readonly types: ActionTypes<T>
   readonly creators: ActionCreators<T>
   readonly reducerFactory: ReducerFactory

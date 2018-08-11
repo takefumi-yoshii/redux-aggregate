@@ -16,8 +16,8 @@ type ActionCreators<T> = { readonly [K in keyof T]: ActionCreator<T[K]> }
 // ______________________________________________________
 
 interface Actions<T> {
-  __namespace__: string
-  __srcmap__: T
+  readonly __namespace__: string
+  readonly __srcmap__: T
   readonly types: ActionTypes<T>
   readonly creators: ActionCreators<T>
 }
