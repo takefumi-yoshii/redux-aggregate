@@ -17,7 +17,7 @@ type ActionCreators<T> = { readonly [K in keyof T]: ActionCreator<T[K]> }
 
 // ______________________________________________________
 
-type HasKeysDiffErrorMessage = 'SUBSCRIBE_MAP_NOT_MATCH_KEYS'
+type HasKeysDiffErrorMessage = 'SUBSCRIPTIONS_KEY_NOT_MATCH'
 type PayloadErrorMessage = 'PAYLOAD_SCHEMA_NOT_MATCH'
 type ReducerFactory = <S>(state: S) => Reducer<S>
 type SubscribeActions<T, M> = R<T> extends A2<M> ? M : PayloadErrorMessage
@@ -33,10 +33,10 @@ type SubscribeAggregateMap<T, M> = HasKeysDiff<T, M> extends false
 
 type ISM = { __srcmap__: any }
 type SrcMap<T extends ISM> = T['__srcmap__']
-type SubscribeProvider<T extends ISM> =
+type ActionProvider<T extends ISM> =
   | Aggregate<SrcMap<T>>
   | Actions<SrcMap<T>>
-type SubscribeMap<T extends ISM, M> = T extends Aggregate<SrcMap<T>>
+type Subscriptions<T extends ISM, M> = T extends Aggregate<SrcMap<T>>
   ? SubscribeAggregateMap<SrcMap<T>, M>
   : SubscribeActionsMap<SrcMap<T>, M>
 interface Aggregate<T> {
@@ -45,9 +45,9 @@ interface Aggregate<T> {
   readonly types: ActionTypes<T>
   readonly creators: ActionCreators<T>
   readonly reducerFactory: ReducerFactory
-  subscribe: <T extends SubscribeProvider<T>, M extends SubscribeMap<T, M>>(
+  subscribe: <T extends ActionProvider<T>, M extends Subscriptions<T, M>>(
     provider: T,
-    subscribeMap: M
+    subscriptions: M
   ) => void
 }
 
@@ -65,8 +65,8 @@ export {
   ActionCreators,
   ReducerFactory,
   Aggregate,
-  SubscribeProvider,
-  SubscribeMap,
+  ActionProvider,
+  Subscriptions,
   createAggregate,
   Modeler
 }

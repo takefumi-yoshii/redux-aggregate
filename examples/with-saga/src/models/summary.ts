@@ -36,7 +36,7 @@ export const SummaryQR = {
 
 // ______________________________________________________
 //
-// @ SummaryModel Subscribes
+// @ SummaryModel Subscriptions
 
 const Timer = {
   tick(state: SummaryST, timeLabel: string): SummaryST {

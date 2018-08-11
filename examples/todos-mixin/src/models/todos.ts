@@ -67,7 +67,7 @@ export const TodosMT = {
 
 // ______________________________________________________
 //
-// @ TodosModel Subscribes
+// @ TodosModel Subscriptions
 
 const Timer = {
   tick(state: TodosST, timeLabel: string): TodosST {

@@ -7,8 +7,8 @@ import {
   ActionCreators,
   ReducerFactory,
   Aggregate,
-  SubscribeProvider,
-  SubscribeMap
+  ActionProvider,
+  Subscriptions
 } from '../typings/createAggregate'
 
 // ______________________________________________________
@@ -42,12 +42,12 @@ function createAggregate<T extends KeyMap & Mutations<T>>(
     }
   }
   function subscribe<
-    T extends SubscribeProvider<T>,
-    M extends SubscribeMap<T, M>
-  >(provider: T, subscribeMap: M) {
-    Object.keys(subscribeMap).forEach(key => {
+    T extends ActionProvider<T>,
+    M extends Subscriptions<T, M>
+  >(provider: T, subscriptions: M) {
+    Object.keys(subscriptions).forEach(key => {
       const type = `${provider.__namespace__}${key}`
-      __srcmap__[type] = (subscribeMap as KeyMap)[key]
+      __srcmap__[type] = (subscriptions as KeyMap)[key]
     })
   }
   return {

@@ -60,7 +60,7 @@ export const CounterMT = {
 
 // ______________________________________________________
 //
-// @ CounterModel Subscribes
+// @ CounterModel Subscriptions
 
 const Timer = {
   tick(state: CounterST, timeLabel: string): CounterST {
