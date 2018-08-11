@@ -18,7 +18,7 @@ type ActionCreators<T> = { readonly [K in keyof T]: ActionCreator<T[K]> }
 // ______________________________________________________
 
 type HasKeysDiffErrorMessage = 'SUBSCRIBE_MAP_NOT_MATCH_KEYS'
-type PayloadErrorMessage = 'PAYLOAD_SHEMA_NOT_MATCH'
+type PayloadErrorMessage = 'PAYLOAD_SCHEMA_NOT_MATCH'
 type ReducerFactory = <S>(state: S) => Reducer<S>
 type SubscribeActions<T, M> = R<T> extends A2<M> ? M : PayloadErrorMessage
 type SubscribeAggregate<T, M> = A2<M> extends A2<T> ? M : PayloadErrorMessage
