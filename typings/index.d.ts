@@ -1,2 +1,3 @@
+import { createActions } from './createActions'
 import { createAggregate, Modeler } from './createAggregate'
-export { createAggregate, Modeler }
+export { createActions, createAggregate, Modeler }
