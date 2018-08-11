@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { KeyMap, R, A1, A2, DiffKey, Typo } from './utils'
+import { KeyMap, R, A1, A2, DiffKey, HasKeysDiff } from './utils'
 import { ActionType, ActionTypes } from './commons'
 import { Actions, ActionsSrc } from './createActions'
 
@@ -17,17 +17,17 @@ type ActionCreators<T> = { readonly [K in keyof T]: ActionCreator<T[K]> }
 
 // ______________________________________________________
 
-type TypoErrorMessage = 'SUBSCRIBE_MAP_NOT_MATCH_KEYS'
+type HasKeysDiffErrorMessage = 'SUBSCRIBE_MAP_NOT_MATCH_KEYS'
 type PayloadErrorMessage = 'PAYLOAD_SHEMA_NOT_MATCH'
 type ReducerFactory = <S>(state: S) => Reducer<S>
 type SubscribeActions<T, M> = R<T> extends A2<M> ? M : PayloadErrorMessage
 type SubscribeAggregate<T, M> = A2<M> extends A2<T> ? M : PayloadErrorMessage
-type SubscribeActionsMap<T, M> = Typo<T, M> extends false
+type SubscribeActionsMap<T, M> = HasKeysDiff<T, M> extends false
   ? { [K in keyof T & keyof M]?: SubscribeActions<T[K], M[K]> } & KeyMap
-  : TypoErrorMessage
-type SubscribeAggregateMap<T, M> = Typo<T, M> extends false
+  : HasKeysDiffErrorMessage
+type SubscribeAggregateMap<T, M> = HasKeysDiff<T, M> extends false
   ? { [K in keyof T & keyof M]?: SubscribeAggregate<T[K], M[K]> } & KeyMap
-  : TypoErrorMessage
+  : HasKeysDiffErrorMessage
 
 // ______________________________________________________
 

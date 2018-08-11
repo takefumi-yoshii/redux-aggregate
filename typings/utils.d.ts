@@ -10,8 +10,8 @@ type DiffKey<
   U extends string | number | symbol
 > = ({ [P in T]: P } & { [P in U]: never } & { [x: string]: never })[T]
 
-type Typo<T, M> = DiffKey<keyof M, keyof T> extends never
+type HasKeysDiff<T, M> = DiffKey<keyof M, keyof T> extends never
   ? false
   : DiffKey<keyof T, keyof M> extends never ? false : true
 
-export { KeyMap, R, A1, A2, DiffKey, Typo }
+export { KeyMap, R, A1, A2, DiffKey, HasKeysDiff }
