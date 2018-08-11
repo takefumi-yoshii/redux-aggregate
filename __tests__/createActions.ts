@@ -20,15 +20,24 @@ describe('createActions', () => {
 
   interface FollowerST {
     now: string
+    name: string
   }
   const FollowerModel: Modeler<FollowerST> = injects => ({
     now: '',
+    name: 'unknown',
     ...injects
   })
-  const mutations = {}
+  const mutations = {
+    setName (state: FollowerST, name: string) {
+      return { ...state, name }
+    }
+  }
   const subscriptions = {
-    tick (state: FollowerST, timeLabel: string) {
-      return { ...state, now: timeLabel }
+    tick (state: FollowerST, now: string) {
+      return { ...state, now }
+    },
+    setName (state: FollowerST, name: string) {
+      return { ...state, name }
     }
   }
 
@@ -40,6 +49,7 @@ describe('createActions', () => {
   const Follower2 = createAggregate(mutations, 'follower2/')
   Follower1.subscribe(Timer, subscriptions)
   Follower2.subscribe(Timer, subscriptions)
+  Follower2.subscribe(Follower1, subscriptions)
 
   // ______________________________________________________
 
@@ -74,8 +84,8 @@ describe('createActions', () => {
     }
     const store: Store<StoreST> = createStore(
       combineReducers({
-        follower1: Follower1.reducerFactory(FollowerModel()),
-        follower2: Follower2.reducerFactory(FollowerModel())
+        follower1: Follower1.reducerFactory(FollowerModel({ name: 'USER_1' })),
+        follower2: Follower2.reducerFactory(FollowerModel({ name: 'USER_2' }))
       })
     )
 
@@ -90,6 +100,19 @@ describe('createActions', () => {
       const afterState = store.getState()
       expect(afterState.follower1.now).toEqual(payload)
       expect(afterState.follower2.now).toEqual(payload)
+    })
+
+    test('aggregate have behavior of action provider', () => {
+      const { type, payload } = Follower1.creators.setName('MY_NAME')
+      const beforeState = store.getState()
+      expect(beforeState.follower1.name).not.toEqual(payload)
+      expect(beforeState.follower2.name).not.toEqual(payload)
+
+      store.dispatch({ type, payload })
+
+      const afterState = store.getState()
+      expect(afterState.follower1.name).toEqual(payload)
+      expect(afterState.follower2.name).toEqual(payload)
     })
   })
 
