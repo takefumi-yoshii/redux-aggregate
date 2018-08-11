@@ -1,19 +1,22 @@
 import { Reducer } from 'redux'
+import { namespaced } from './namespaced'
+import { KeyMap } from '../typings/utils'
+import { ActionTypes } from '../typings/commons'
 import {
-  KeyMap,
-  Types,
-  Creators,
   Mutations,
+  ActionCreators,
   ReducerFactory,
-  Aggregate
-} from '../typings'
+  Aggregate,
+  ActionProvider,
+  Subscriptions
+} from '../typings/createAggregate'
 
-const namespaced: KeyMap = {}
+// ______________________________________________________
 
-function createAggregate<M extends KeyMap & Mutations<M>>(
-  mutations: M,
+function createAggregate<T extends KeyMap & Mutations<T>>(
+  mutations: T,
   namespace: string
-): Aggregate<M> {
+): Aggregate<T> {
   if (
     namespaced[namespace] !== undefined &&
     process.env.NODE_ENV !== 'development'
@@ -24,28 +27,41 @@ function createAggregate<M extends KeyMap & Mutations<M>>(
   }
   const types: KeyMap = {}
   const creators: KeyMap = {}
-  const mutators: KeyMap = {}
-  Object.keys(mutations).forEach(mutationKey => {
-    const type = `${namespace}${mutationKey}`
-    types[mutationKey] = type
-    creators[mutationKey] = (payload: any) => ({ type, payload })
-    mutators[type] = mutations[mutationKey]
+  const __srcmap__: KeyMap = {}
+  Object.keys(mutations).forEach(key => {
+    const type = `${namespace}${key}`
+    types[key] = type
+    creators[key] = (payload?: any) => ({ type, payload })
+    __srcmap__[type] = mutations[key]
   })
   function reducerFactory<S>(initialState: S): Reducer<S> {
     return (state = initialState, action) => {
-      const mutator = mutators[action.type]
+      const mutator = __srcmap__[action.type]
       if (typeof mutator !== 'function') return state
       return mutator(state, action.payload)
     }
   }
+  function subscribe<
+    T extends ActionProvider<T>,
+    M extends Subscriptions<T, M>
+  >(provider: T, subscriptions: M) {
+    Object.keys(subscriptions).forEach(key => {
+      const type = `${provider.__namespace__}${key}`
+      __srcmap__[type] = (subscriptions as KeyMap)[key]
+    })
+  }
   return {
-    types: types as Types<M>,
-    creators: creators as Creators<M>,
-    reducerFactory: reducerFactory as ReducerFactory
+    __namespace__: namespace,
+    __srcmap__: __srcmap__ as T,
+    types: types as ActionTypes<T>,
+    creators: creators as ActionCreators<T>,
+    reducerFactory: reducerFactory as ReducerFactory,
+    subscribe
   }
 }
 
-type Injects<T> = { [P in keyof T]?: T[P] }
-type Modeler<T> = (injects?: Injects<T>) => T
+// ______________________________________________________
+
+type Modeler<T> = (injects?: Partial<T>) => T
 
 export { createAggregate, Modeler }

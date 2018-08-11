@@ -10,12 +10,14 @@ export interface TodosST {
   input: string | null
   items: TodoST[]
   bgColor: string
+  now: string
 }
 export const TodosModel: Modeler<TodosST> = injects => ({
   name: '',
   input: null,
   items: [],
   bgColor: '#fff',
+  now: '',
   ...injects
 })
 
@@ -49,4 +51,17 @@ function setInputValue(state: TodosST, value: string): TodosST {
 export const TodosMT = {
   addTodo,
   setInputValue
+}
+
+// ______________________________________________________
+//
+// @ TodosModel Subscriptions
+
+const Timer = {
+  tick(state: TodosST, timeLabel: string): TodosST {
+    return { ...state, now: timeLabel }
+  }
+}
+export const TodosSB = {
+  Timer
 }

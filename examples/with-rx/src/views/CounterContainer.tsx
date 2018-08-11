@@ -14,6 +14,7 @@ export type MapState = {
   count: number
   expo2: number
   countSum: number
+  timeLabel: string
   styled: { bg: string }
 }
 
@@ -31,6 +32,7 @@ const mapState = (s: CounterST): MapState => ({
   count: s.count,
   expo2: CounterQR.expo2(s),
   countSum: s.count + s.todoCount,
+  timeLabel: s.now,
   styled: { bg: s.bgColor }
 })
 

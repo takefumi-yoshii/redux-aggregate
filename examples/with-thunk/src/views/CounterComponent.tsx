@@ -14,6 +14,7 @@ type Props = MapState & MapDispatch & { className?: string }
 const View = (props: Props) => (
   <div className={props.className}>
     <h1>{props.name}</h1>
+    <p>{props.timeLabel}</p>
     <p>count = {props.count}</p>
     <p>expo2 = {props.expo2}</p>
     <button onClick={() => props.handleClickIncrement()}>increment</button>

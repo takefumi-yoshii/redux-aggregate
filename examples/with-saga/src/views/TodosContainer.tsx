@@ -14,6 +14,7 @@ export type MapState = {
   name: string
   inputValue: string
   items: TodoST[]
+  timeLabel: string
   styled: { bg: string }
 }
 
@@ -30,6 +31,7 @@ const mapState = (s: TodosST): MapState => ({
   name: s.name,
   items: s.items,
   inputValue: TodosQR.getInputValue(s),
+  timeLabel: s.now,
   styled: { bg: s.bgColor }
 })
 

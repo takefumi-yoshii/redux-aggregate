@@ -17,6 +17,7 @@ type Props = MapState & MapDispatch & { className?: string }
 const View = (props: Props) => (
   <div className={props.className}>
     <h1>{props.name}</h1>
+    <p>{props.timeLabel}</p>
     <p>{props.todosCountStatusLabel}</p>
     <p>
       <button onClick={() => props.handleClickToggle()}>

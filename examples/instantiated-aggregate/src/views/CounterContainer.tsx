@@ -14,6 +14,7 @@ interface MapState {
   count: number
   expo2: number
   abc: string
+  timeLabel: string
   styled: { bg: string }
 }
 interface MapDispatch {
@@ -39,6 +40,7 @@ const containerFactory = (
         count: s.count,
         expo2: CounterQR.expo2(s),
         abc: s.a.b.c,
+        timeLabel: s.now,
         styled: { bg: s.bgColor }
       }))(selectState(store)),
     (dispatch: Dispatch<AnyAction>): MapDispatch =>
