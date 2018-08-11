@@ -31,7 +31,7 @@ function createAggregate<T extends KeyMap & Mutations<T>>(
   Object.keys(mutations).forEach(key => {
     const type = `${namespace}${key}`
     types[key] = type
-    creators[key] = (payload: any) => ({ type, payload })
+    creators[key] = (payload?: any) => ({ type, payload })
     __srcmap__[type] = mutations[key]
   })
   function reducerFactory<S>(initialState: S): Reducer<S> {

@@ -23,7 +23,7 @@ function createActions<T extends KeyMap & ActionsSrc<T>>(
   Object.keys(actionsSrc).forEach(key => {
     const type = `${namespace}${key}`
     types[key] = type
-    creators[key] = (payload: any) => ({
+    creators[key] = (payload?: any) => ({
       type,
       payload: actionsSrc[key](payload)
     })
