@@ -11,7 +11,7 @@
     "preact-compat": "3.18.0",
     "preact-redux": "2.0.3",
     "redux": "^4.0.0",
-    "redux-aggregate": "^2.0.0",
+    "redux-aggregate": "^2.0.2",
     "redux-devtools-extension": "2.13.2",
     "styled-components": "^3.3.3"
   },

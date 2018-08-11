@@ -8,7 +8,7 @@ import {
 } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware from 'redux-saga'
-import { createAggregate, createActions } from '../../../src'
+import { createAggregate, createActions } from 'redux-aggregate'
 import { TimerAC } from './actions/timer'
 import { CounterModel, CounterST, CounterMT, CounterSB } from './models/counter'
 import { TodosModel, TodosST, TodosMT, TodosSB } from './models/todos'

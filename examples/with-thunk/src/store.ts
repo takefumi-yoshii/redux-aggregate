@@ -6,7 +6,7 @@ import {
   ReducersMapObject
 } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createAggregate, createActions } from '../../../src'
+import { createAggregate, createActions } from 'redux-aggregate'
 import thunk from 'redux-thunk'
 import { TimerAC } from './actions/timer'
 import { CounterST, CounterMT, CounterModel, CounterSB } from './models/counter'

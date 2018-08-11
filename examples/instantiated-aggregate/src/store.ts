@@ -1,6 +1,6 @@
 import { createStore, combineReducers, Store, ReducersMapObject } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createAggregate, createActions } from '../../../src'
+import { createAggregate, createActions } from 'redux-aggregate'
 import { TimerAC } from './actions/timer'
 import { CounterMT, CounterST, CounterModel, CounterSB } from './models/counter'
 import { wait } from './helper/promise'

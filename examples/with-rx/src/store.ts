@@ -7,7 +7,7 @@ import {
 } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createEpicMiddleware, EpicMiddleware } from 'redux-observable'
-import { createAggregate, createActions } from '../../../src'
+import { createAggregate, createActions } from 'redux-aggregate'
 import { TimerAC } from './actions/timer'
 import { CounterST, CounterMT, CounterModel, CounterSB } from './models/counter'
 import { TodosST, TodosMT, TodosModel, TodosSB } from './models/todos'

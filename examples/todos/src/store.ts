@@ -1,6 +1,6 @@
 import { createStore, combineReducers, Store, ReducersMapObject } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createAggregate, createActions } from '../../../src'
+import { createAggregate, createActions } from 'redux-aggregate'
 import { TimerAC } from './actions/timer'
 import { TodosST, TodosMT, TodosModel, TodosSB } from './models/todos'
 import { wait } from './helper/promise'
