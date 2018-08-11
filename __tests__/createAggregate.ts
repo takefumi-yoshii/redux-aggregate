@@ -17,14 +17,16 @@ describe('createAggregate', () => {
   function setCount(state: CounterST, value: number): CounterST {
     return { ...state, count: value }
   }
-  const NameSpace = 'counter/'
-  const Mutations = { increment, setCount }
-  const Counter = createAggregate(Mutations, NameSpace)
+  const namespace = 'counter/'
+  const mutations = { increment, setCount }
+  const Counter = createAggregate(mutations, namespace)
+
+  // ______________________________________________________
 
   describe('generated modules behavior', () => {
     test('types has namespaced value', () => {
       const { types } = Counter
-      expect(types.increment).toEqual(`${NameSpace}increment`)
+      expect(types.increment).toEqual(`${namespace}increment`)
     })
     test('creators has function', () => {
       const { creators } = Counter
@@ -70,7 +72,7 @@ describe('createAggregate', () => {
 
   describe('raise error', () => {
     test('conflict namespace', () => {
-      const conflictHandler = () => createAggregate(Mutations, NameSpace)
+      const conflictHandler = () => createAggregate(mutations, namespace)
       expect(conflictHandler).toThrow()
     })
   })
