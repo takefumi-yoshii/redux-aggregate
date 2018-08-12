@@ -9,8 +9,8 @@ type ActionSrc<T> = ACS<T> | ACSPL<T>
 type ActionsSrc<T> = { readonly [K in keyof T]: ActionSrc<T[K]> }
 
 type CR<T> = () => { type: ActionType }
-type CRPL<T> = (payload: any) => { type: ActionType; payload: R<T> }
-type ActionCreator<T> = T extends ACSPL<T> ? CRPL<T> : CR<T>
+type CRPL<T> = (payload: A1<T>) => { type: ActionType; payload: R<T> }
+type ActionCreator<T> = A1<T> extends never ? CR<T> : CRPL<T>
 type ActionCreators<T> = { readonly [K in keyof T]: ActionCreator<T[K]> }
 
 // ______________________________________________________
