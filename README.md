@@ -30,7 +30,7 @@ Basic understanding of Redux and boilerplate are necessary.
 
 Here we are creating them with `createAggregate`.
 `Aggregate` contains "ActionTypes / ActionCreators / ReducerFactory".
-The first argument is `Mutations`, a set of mutate functions.
+The first argument is `Mutations`, a map of mutate functions.
 The second argument is a unique namespace.With this, ActionType won't conflict.
 
 ```javascript
@@ -107,11 +107,81 @@ export const Queries = {
   expo2,
   getCountLabel
 }
-
 ```
 
-## ❗️ Caution
+## How to extract define actions?
 
-This helper violate to the Redux way, and will be restricted to aggregate way.
-Action / Reducer will be restricted to one-to-one / many-to-one mapping, and loses default Redux expectation behavior.
-[see also](https://redux.js.org/faq/actions#is-there-always-a-one-to-one-mapping-between-reducers-and-actions)
+Use `createActions`. This api return "ActionTypes / ActionCreators".
+The first argument is `ActionSrc`, a map of pure functions.
+ActionSrc function has no more than one argument.Other than that, it's free.
+The second argument is a unique namespace.With this, ActionType won't conflict.
+
+```javascript
+import { createActions } from 'redux-aggregate'
+import { actionSrc } from 'path/to/model'
+const {
+  types,        // Generated ActionTypes
+  creators      // Generated ActionCreators
+} = createActions(actionSrc, 'timer/')
+```
+
+```javascript
+function tick() {
+  return new Date()
+}
+function notifyProgressMessage(amount) {
+  return { messaga: `passed time is ${amount}` }
+}
+export const actionSrc = {
+  tick,
+  notifyProgress
+}
+```
+
+**By this alone, completed to define AcrtionCreators with inferred type.**
+
+## How to caught another actions/aggregate action?
+
+Aggregate contain method of `subscribe` action.
+In the example below, subscribe to what I defined earlier.
+
+```javascript
+import { createAggregate, createActions } from 'redux-aggregate'
+import { TimerActions } from './actions/timer'
+import { TodosMutations, TodosSubscriptions, TodosModel } from './models/todos'
+// ______________________________________________________
+//
+// @ Aggregates
+
+export const Timer = createActions(TimerActions, 'timer/')
+export const Todos = createAggregate(TodosMutations, 'todos/')
+Todos.subscribe(Timer, TodosSubscriptions.Timer)
+```
+
+The map of `Subscriptions`, It looks very much like mutations.
+**But, that will not to generete ActionCreator / ActionTypes.**
+That's exactly what unit reducer.
+
+The subscription first argument take state of file scope.
+**The method name and the payload schema have already been determined.**
+Because, subscription follow origin what you defined.
+The only remaining work is to define change the state.
+
+
+```javascript
+export const TodosSubscriptions = {
+  Timer: {
+    tick(state, date) {
+      if (!state.shouldUpdateTimerView) return state
+      return { ...state, date }
+    }
+    notifyProgressMessage(state, { message }) {
+      return { ...state, messegaFromTimer: message }
+    }
+  }
+}
+
+```
+In the same way, aggregate can subscribe another aggregate actions.
+But, this approach will be obscure that action orner.
+If that action is interest of crossover, it would be better to fefine as neutral.
