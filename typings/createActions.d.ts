@@ -3,14 +3,14 @@ import { ActionType, ActionTypes } from './commons'
 
 // ______________________________________________________
 
-type ACS<T> = (payload?: any) => ReturnVoid<T>
-type ACSPL<T> = (payload?: any) => R<T>
+type ACS<T> = (payload?: any) => R<T>
+type ACSPL<T> = (payload: A1<T>) => R<T>
 type ActionSrc<T> = ACS<T> | ACSPL<T>
 type ActionsSrc<T> = { readonly [K in keyof T]: ActionSrc<T[K]> }
 
-type CR<T> = (payload?: any) => { type: ActionType }
-type CRPL<T> = (payload?: any) => { type: ActionType; payload: R<T> }
-type ActionCreator<T> = T extends ACS<T> ? CR<T> : CRPL<T>
+type CR<T> = () => { type: ActionType }
+type CRPL<T> = (payload: any) => { type: ActionType; payload: R<T> }
+type ActionCreator<T> = T extends ACSPL<T> ? CRPL<T> : CR<T>
 type ActionCreators<T> = { readonly [K in keyof T]: ActionCreator<T[K]> }
 
 // ______________________________________________________
