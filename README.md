@@ -112,9 +112,9 @@ export const Queries = {
 ## How to extract define actions?
 
 Use `createActions`. This api return "ActionTypes / ActionCreators".
-The first argument is `ActionSrc`, a map of pure functions.
-ActionSrc function has no more than one argument.Other than that, it's free.
-The second argument is a unique namespace.With this, ActionType won't conflict.
+First argument is map of pure functions `ActionSrc`.
+Second argument is a unique namespace.With this, ActionType won't conflict.
+`ActionSrcFunction` require to include one argument or not.
 
 ```javascript
 import { createActions } from 'redux-aggregate'
