@@ -12,3 +12,19 @@ mutation's second argument will map to action creator's payload.
 ![image.png](/assets/type_inference-in_conditional_types.png)
 
 If you use this library, development with TypeScript is strongly recommended.
+
+___
+
+* [Concepts](concepts.md)
+  * [Inferred Types](inferredTypes.md)
+  * [Mutations](mutations.md)
+  * [ActionSrc](actionSources.md)
+  * [Subscriptions](subscriptions.md)
+  * [Queries](queries.md)
+
+* [APIs](apis.md)
+  * [createAggregate](createAggregate.md)
+  * [createActions](createActions.md)
+  * [subscribe](subscribe.md)
+
+* [Advanced](advanced.md)

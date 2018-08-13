@@ -3,7 +3,7 @@
 * [Concepts](concepts.md)
   * [Inferred Types](inferredTypes.md)
   * [Mutations](mutations.md)
-  * [ActionSrc](actionSrc.md)
+  * [ActionSrc](actionSources.md)
   * [Subscriptions](subscriptions.md)
   * [Queries](queries.md)
 

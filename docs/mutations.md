@@ -39,3 +39,19 @@ Related: [Mutations for createAggregate ->](createAggregate.md)
 
 If you need extract define action, use [createActions](createActions.md).
 If you need extract define reducer, use [subscribe](subscribe.md) and [subscriptions](subscriptions.md).
+
+___
+
+* [Concepts](concepts.md)
+  * [Inferred Types](inferredTypes.md)
+  * [Mutations](mutations.md)
+  * [ActionSrc](actionSources.md)
+  * [Subscriptions](subscriptions.md)
+  * [Queries](queries.md)
+
+* [APIs](apis.md)
+  * [createAggregate](createAggregate.md)
+  * [createActions](createActions.md)
+  * [subscribe](subscribe.md)
+
+* [Advanced](advanced.md)
