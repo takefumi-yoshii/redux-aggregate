@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>mutations · GitBook</title>
+        <title>Mutations · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="subscriptions.html" />
+    <link rel="next" href="actionSources.html" />
     
     
-    <link rel="prev" href="queries.html" />
+    <link rel="prev" href="inferredTypes.html" />
     
 
     </head>
@@ -102,9 +102,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="CONCEPTS.html">
+        <li class="chapter " data-level="1.2" data-path="concepts.html">
             
-                <a href="CONCEPTS.html">
+                <a href="concepts.html">
             
                     
                     Concepts
@@ -116,12 +116,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="queries.html">
+        <li class="chapter " data-level="1.2.1" data-path="inferredTypes.html">
             
-                <a href="queries.html">
+                <a href="inferredTypes.html">
             
                     
-                    queries
+                    Inferred Types
             
                 </a>
             
@@ -134,7 +134,7 @@
                 <a href="mutations.html">
             
                     
-                    mutations
+                    Mutations
             
                 </a>
             
@@ -142,12 +142,38 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="subscriptions.html">
+        <li class="chapter " data-level="1.2.3" data-path="actionSources.html">
+            
+                <a href="actionSources.html">
+            
+                    
+                    ActionSources
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="subscriptions.html">
             
                 <a href="subscriptions.html">
             
                     
-                    subscriptions
+                    Subscriptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="queries.html">
+            
+                <a href="queries.html">
+            
+                    
+                    Queries
             
                 </a>
             
@@ -160,9 +186,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="APIS.html">
+        <li class="chapter " data-level="1.3" data-path="apis.html">
             
-                <a href="APIS.html">
+                <a href="apis.html">
             
                     
                     APIs
@@ -218,9 +244,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="ADVANCED.html">
+        <li class="chapter " data-level="1.4" data-path="advanced.html">
             
-                <a href="ADVANCED.html">
+                <a href="advanced.html">
             
                     
                     Advanced
@@ -261,7 +287,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >mutations</a>
+        <a href="." >Mutations</a>
     </h1>
 </div>
 
@@ -276,7 +302,40 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="mutations">mutations</h1>
+                                <h1 id="mutations">Mutations</h1>
+<h3 id="&#x2705;-in-most-use-cases-are-enough-for-this">&#x2705; In most use cases are enough for this</h3>
+<p>Mutaions is immutable mutate functions for state.
+Generate boilerplate starting from this MutationsMap.
+It be equal to behavior of Reducer.
+Let provide payload as the second argument if necessary.
+<strong>This is pure function for state.</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> state = {
+  count: <span class="hljs-number">0</span>,
+  unit: <span class="hljs-string">&apos;pt&apos;</span>
+}
+<span class="hljs-comment">// ______________________________________________________</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// @ Mutations</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">increment</span>(<span class="hljs-params">state</span>) </span>{
+  <span class="hljs-keyword">return</span> { ...state, count: state.count + <span class="hljs-number">1</span> }
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">decrement</span>(<span class="hljs-params">state</span>) </span>{
+  <span class="hljs-keyword">return</span> { ...state, count: state.count - <span class="hljs-number">1</span> }
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setCount</span> (<span class="hljs-params">state, value</span>) </span>{
+  <span class="hljs-keyword">return</span> { ...state, count: value }
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Mutations = {
+  increment,
+  decrement,
+  setCount
+}
+</code></pre>
+<p>Related: <a href="createAggregate.html">Mutations for createAggregate -&gt;</a></p>
+<h3 id="&#x2753;-how-to-define-many-to-many">&#x2753; How to define many-to-many</h3>
+<p>If you need extract define action, use <a href="createActions.html">createActions</a>.
+If you need extract define reducer, use <a href="subscribe.html">subscribe</a> and <a href="subscriptions.html">subscriptions</a>.</p>
 
                                 
                                 </section>
@@ -304,12 +363,12 @@
 
             
                 
-                <a href="queries.html" class="navigation navigation-prev " aria-label="Previous page: queries">
+                <a href="inferredTypes.html" class="navigation navigation-prev " aria-label="Previous page: Inferred Types">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="subscriptions.html" class="navigation navigation-next " aria-label="Next page: subscriptions">
+                <a href="actionSources.html" class="navigation navigation-next " aria-label="Next page: ActionSources">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -320,7 +379,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"mutations","level":"1.2.2","depth":2,"next":{"title":"subscriptions","level":"1.2.3","depth":2,"path":"subscriptions.md","ref":"subscriptions.md","articles":[]},"previous":{"title":"queries","level":"1.2.1","depth":2,"path":"queries.md","ref":"queries.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"mutations.md","mtime":"2018-08-13T10:45:56.211Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-13T10:43:55.578Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Mutations","level":"1.2.2","depth":2,"next":{"title":"ActionSources","level":"1.2.3","depth":2,"path":"actionSources.md","ref":"actionSources.md","articles":[]},"previous":{"title":"Inferred Types","level":"1.2.1","depth":2,"path":"inferredTypes.md","ref":"inferredTypes.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"mutations.md","mtime":"2018-08-13T15:26:08.390Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-13T15:09:41.400Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
