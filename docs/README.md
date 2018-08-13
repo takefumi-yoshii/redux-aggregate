@@ -1,2 +1,1 @@
-# About redux-aggregate
-
+# redux-aggregate
