@@ -1,0 +1,369 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Introduction · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Introduction</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id=""><img src="https://user-images.githubusercontent.com/22139818/43042403-c7b57bbe-8db7-11e8-8538-88baaf8a9f32.png" width="285" height="60" alt="redux-aggregate"></h1>
+<p><a href="https://www.npmjs.com/package/redux-aggregate" target="_blank"><img src="https://img.shields.io/badge/npm-redux_aggregate-C12127.svg" alt="Latest Version"></a>
+<a href="https://circleci.com/gh/takefumi-yoshii/redux-aggregate" target="_blank"><img src="https://circleci.com/gh/takefumi-yoshii/redux-aggregate.svg?style=svg" alt="CircleCI"></a></p>
+<p>The tiny ~550b helper module making Redux more usable.
+Inspired by <a href="https://github.com/developit/unistore" target="_blank">unistore</a>.
+Minimum code is as follows.The comfortable code is maintain quality.  </p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { createStore, combineReducers } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;redux&apos;</span>
+<span class="hljs-keyword">import</span> { createAggregate } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;redux-aggregate&apos;</span>
+
+<span class="hljs-keyword">const</span> initialState = =&gt; ({ count: <span class="hljs-number">0</span> })
+<span class="hljs-keyword">const</span> increment = state =&gt; ({ ...state, count: state.count + <span class="hljs-number">1</span> })
+<span class="hljs-keyword">const</span> decrement = state =&gt; ({ ...state, count: state.count - <span class="hljs-number">1</span> })
+<span class="hljs-keyword">const</span> mutations = { increment, decrement }
+<span class="hljs-keyword">const</span> { reducerFactory } = createAggregate(mutations, <span class="hljs-string">&apos;counter/&apos;</span>)
+<span class="hljs-keyword">const</span> store = createStore(
+  combineReducers({
+    counter: reducerFactory(initialState())
+  })
+)
+</code></pre>
+<p>This is only a support role to use Redux.
+Basic understanding of Redux and boilerplate are necessary.</p>
+<h2 id="&#x2705;-reduce-boilerplate">&#x2705; Reduce boilerplate</h2>
+<p>Here we are creating them with <code>createAggregate</code>.
+<code>Aggregate</code> contains &quot;ActionTypes / ActionCreators / ReducerFactory&quot;.
+The first argument is <code>Mutations</code>, a map of mutate functions.
+The second argument is a unique namespace.With this, ActionType won&apos;t conflict.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { createAggregate } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;redux-aggregate&apos;</span>
+<span class="hljs-keyword">import</span> { mutations } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;path/to/model&apos;</span>
+<span class="hljs-keyword">const</span> {
+  types,         <span class="hljs-comment">// Generated ActionTypes</span>
+  creators,      <span class="hljs-comment">// Generated ActionCreators</span>
+  reducerFactory <span class="hljs-comment">// Generated ReducerFactory</span>
+} = createAggregate(mutations, <span class="hljs-string">&apos;counter/&apos;</span>)
+</code></pre>
+<p>Mutaions is immutable mutate functions for state.
+Generate boilerplate starting from this MutationsMap.
+It be equal to behavior of Reducer.
+Let provide payload as the second argument if necessary.</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">//</span>
+<span class="hljs-comment">// @ Mutations</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">increment</span>(<span class="hljs-params">state</span>) </span>{
+  <span class="hljs-keyword">return</span> { ...state, count: state.count + <span class="hljs-number">1</span> }
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">decrement</span>(<span class="hljs-params">state</span>) </span>{
+  <span class="hljs-keyword">return</span> { ...state, count: state.count - <span class="hljs-number">1</span> }
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setCount</span> (<span class="hljs-params">state, value</span>) </span>{
+  <span class="hljs-keyword">return</span> { ...state, count: value }
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Mutations = {
+  increment,
+  decrement,
+  setCount
+}
+</code></pre>
+<p>This kind of action occurs.</p>
+<p><img src="https://user-images.githubusercontent.com/22139818/37502814-59e06558-2918-11e8-93b8-3033f729fbf5.png" alt="image.png"></p>
+<h2 id="&#x1F525;-type-inference-in-conditional-types">&#x1F525; Type inference in conditional types</h2>
+<p>By the map of Type inference in conditional types, 
+mutation&apos;s second argument will map to action creator&apos;s payload.
+(required ^TypeScript 2.8)</p>
+<p><img src="https://user-images.githubusercontent.com/22139818/43045685-06523d54-8df8-11e8-95fa-fe3423e45109.png" alt="image.png"></p>
+<h2 id="&#x2705;-give-the-behavior-of-model-to-state">&#x2705; Give the behavior of Model to State</h2>
+<p>Normal Redux only projects the State, but depending on requirements, this will be unsatisfactory.
+By focusing on the state in the same file scope, it can add methods to use state.
+<strong>The State now has behavior as a <code>Model</code>, It same as <code>computed</code> in another library.</strong>
+Export as necessary and have it function as a public method.
+Be careful to handle the state schema immediately above.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> state = {
+  count: <span class="hljs-number">0</span>,
+  unit: <span class="hljs-string">&apos;pt&apos;</span>
+}
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// @ Queries</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">expo2</span> (<span class="hljs-params">state</span>) </span>{
+  <span class="hljs-keyword">return</span> state.count ** <span class="hljs-number">2</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCountLabel</span> (<span class="hljs-params">state</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${state.count}</span><span class="hljs-subst">${state.unit}</span>`</span>
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Queries = {
+  expo2,
+  getCountLabel
+}
+</code></pre>
+<h2 id="how-to-extract-define-actions">How to extract define actions?</h2>
+<p>Use <code>createActions</code>. This api return &quot;ActionTypes / ActionCreators&quot;.
+First argument is map of pure functions <code>ActionSrc</code>.
+Second argument is a unique namespace.With this, ActionType won&apos;t conflict.
+<code>ActionSrcFunction</code> require to include one argument or not.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { createActions } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;redux-aggregate&apos;</span>
+<span class="hljs-keyword">import</span> { actionSrc } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;path/to/model&apos;</span>
+<span class="hljs-keyword">const</span> {
+  types,        <span class="hljs-comment">// Generated ActionTypes</span>
+  creators      <span class="hljs-comment">// Generated ActionCreators</span>
+} = createActions(actionSrc, <span class="hljs-string">&apos;timer/&apos;</span>)
+</code></pre>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">tick</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">notifyProgressMessage</span>(<span class="hljs-params">amount</span>) </span>{
+  <span class="hljs-keyword">return</span> { messaga: <span class="hljs-string">`passed time is <span class="hljs-subst">${amount}</span>`</span> }
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> actionSrc = {
+  tick,
+  notifyProgress
+}
+</code></pre>
+<p><strong>By this alone, completed to define AcrtionCreators with inferred type.</strong></p>
+<h2 id="how-to-caught-another-actionsaggregate-action">How to caught another actions/aggregate action?</h2>
+<p>Aggregate contain method of <code>subscribe</code> action.
+In the example below, subscribe to what I defined earlier.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { createAggregate, createActions } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;redux-aggregate&apos;</span>
+<span class="hljs-keyword">import</span> { TimerActions } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./actions/timer&apos;</span>
+<span class="hljs-keyword">import</span> { TodosMutations, TodosSubscriptions, TodosModel } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./models/todos&apos;</span>
+<span class="hljs-comment">// ______________________________________________________</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// @ Aggregates</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Timer = createActions(TimerActions, <span class="hljs-string">&apos;timer/&apos;</span>)
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> Todos = createAggregate(TodosMutations, <span class="hljs-string">&apos;todos/&apos;</span>)
+Todos.subscribe(Timer, TodosSubscriptions.Timer)
+</code></pre>
+<p>The map of <code>Subscriptions</code>, It looks very much like mutations.
+<strong>But, that will not to generete ActionCreator / ActionTypes.</strong>
+That&apos;s exactly what unit reducer.</p>
+<p>The subscription first argument take state of file scope.
+<strong>The method name and the payload schema have already been determined.</strong>
+Because, subscription follow origin what you defined.
+The only remaining work is to define change the state.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> TodosSubscriptions = {
+  Timer: {
+    tick(state, date) {
+      <span class="hljs-keyword">if</span> (!state.shouldUpdateTimerView) <span class="hljs-keyword">return</span> state
+      <span class="hljs-keyword">return</span> { ...state, date }
+    }
+    notifyProgressMessage(state, { message }) {
+      <span class="hljs-keyword">return</span> { ...state, messegaFromTimer: message }
+    }
+  }
+}
+</code></pre>
+<p>In the same way, aggregate can subscribe another aggregate actions.
+But, this approach will be obscure that action orner.
+If that action is interest of crossover, it would be better to fefine as neutral.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2018-08-12T11:25:00.143Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-13T09:52:10.133Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
