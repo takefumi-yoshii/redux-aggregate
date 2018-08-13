@@ -7,8 +7,8 @@ Return value and action type was tightly coupled.
 ```javascript
 function tick(message) {
   const date = new Date()
-  if (message !== undefined) return { type: 'TIMER_TICK', date }
-  return { type: 'TIMER_TICK', date, message }
+  if (message !== undefined) return { type: 'TIMER_TICK', payload: { date }}
+  return { type: 'TIMER_TICK', payload: { date, message }}
 }
 ```
 
