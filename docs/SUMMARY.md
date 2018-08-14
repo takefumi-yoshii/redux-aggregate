@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Concepts](concepts.md)
+* [Core Concepts](coreConcepts.md)
 * [Inferred Types](inferredTypes.md)
 * [Mutations](mutations.md)
 * [ActionSources](actionSources.md)

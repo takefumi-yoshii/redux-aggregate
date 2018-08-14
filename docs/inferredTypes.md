@@ -15,7 +15,7 @@ If you use this library, development with TypeScript is strongly recommended.
 
 ___
 
-* [Concepts](concepts.md)
+* [Core Concepts](coreConcepts.md)
   * [Inferred Types](inferredTypes.md)
   * [Mutations](mutations.md)
   * [ActionSrc](actionSources.md)

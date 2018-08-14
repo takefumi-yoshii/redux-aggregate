@@ -21,7 +21,7 @@ Related: [Define ActionSources ->](actionSources.md)
 
 ___
 
-* [Concepts](concepts.md)
+* [Core Concepts](coreConcepts.md)
   * [Inferred Types](inferredTypes.md)
   * [Mutations](mutations.md)
   * [ActionSrc](actionSources.md)

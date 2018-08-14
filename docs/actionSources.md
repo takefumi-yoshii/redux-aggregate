@@ -33,7 +33,8 @@ Related: [ActionSources for createActions ->](createActions.md)
 
 ___
 
-* [Concepts](concepts.md)
+
+* [Core Concepts](coreConcepts.md)
   * [Inferred Types](inferredTypes.md)
   * [Mutations](mutations.md)
   * [ActionSrc](actionSources.md)
