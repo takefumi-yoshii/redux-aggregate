@@ -3,9 +3,7 @@
 [![Latest Version](https://img.shields.io/badge/npm-redux_aggregate-C12127.svg)](https://www.npmjs.com/package/redux-aggregate)
 [![CircleCI](https://circleci.com/gh/takefumi-yoshii/redux-aggregate.svg?style=svg)](https://circleci.com/gh/takefumi-yoshii/redux-aggregate)
 
-The tiny ~550b helper module making Redux more usable.
-Inspired by [unistore](https://github.com/developit/unistore).
-Minimum code is as follows.The comfortable code is maintain quality.  
+The tiny ~550b helper module making Redux more usable.Inspired by [unistore](https://github.com/developit/unistore).State management is core of the application.The purpose of this library is to make the application core independent by pure language specification.This is only a support role to use Redux. Basic understanding of Redux and boilerplate are necessary.
 
 ```javascript
 import { createStore, combineReducers } from 'redux'
@@ -23,10 +21,16 @@ const store = createStore(
 )
 ```
 
-This is only a support role to use Redux.
-Basic understanding of Redux and boilerplate are necessary.
+## 🔥 Surprisingly small type definition
 
-## ✅ Reduce boilerplate
+By the map of Type inference in conditional types, 
+mutation's second argument will map to action creator's payload.
+(required ^TypeScript 2.8)
+
+![image.png](https://user-images.githubusercontent.com/22139818/43045685-06523d54-8df8-11e8-95fa-fe3423e45109.png)
+
+
+## 🚀 Accelerate development
 
 Here we are creating them with `createAggregate`.
 `Aggregate` contains "ActionTypes / ActionCreators / ReducerFactory".
@@ -43,12 +47,19 @@ const {
 } = createAggregate(mutations, 'counter/')
 ```
 
+**By this alone, completed to define AcrtionTypes/AcrtionCreators/ReducerFactory with inferred type.**
+
 Mutaions is immutable mutate functions for state.
 Generate boilerplate starting from this MutationsMap.
 It be equal to behavior of Reducer.
 Let provide payload as the second argument if necessary.
 
 ```javascript
+const state = {
+  count: 0,
+  unit: 'pt'
+}
+// ______________________________________________________
 //
 // @ Mutations
 
@@ -72,10 +83,58 @@ This kind of action occurs.
 ![image.png](https://user-images.githubusercontent.com/22139818/37502814-59e06558-2918-11e8-93b8-3033f729fbf5.png)
 
 
-## 🔥 Type inference in conditional types
+## 🌎 Anything will happen
 
-By the map of Type inference in conditional types, 
-mutation's second argument will map to action creator's payload.
-(required ^TypeScript 2.8)
+`createActions` return `ActionTypes / ActionCreators`.
+First argument is map of `ActionSources`.
+Second argument is a unique namespace.With this, ActionType won't conflict.
 
-![image.png](https://user-images.githubusercontent.com/22139818/43045685-06523d54-8df8-11e8-95fa-fe3423e45109.png)
+```javascript
+import { createActions } from 'redux-aggregate'
+import { ActionSources } from 'path/to/actions/timer'
+const {
+  types,    // Generated ActionTypes
+  creators  // Generated ActionCreators
+} = createActions(ActionSources, 'timer/')
+```
+
+**By this alone, completed to define AcrtionTypes/AcrtionCreators with inferred type.**
+
+ActionSources for `createActions` is just a pure javascript function's map. Arguments is optional.
+
+```javascript
+// ______________________________________________________
+//
+// @ ActionSources
+
+function tick(message) {
+  const date = new Date()
+  if (message !== undefined) return { date }
+  return { date, message }
+}
+export const ActionSources = { tick }
+```
+
+
+## 📡 Caught outside Actions
+
+
+Aggregate contain method of `subscribe` action.
+In the example below, subscribe TimerActions.
+
+```javascript
+import { createAggregate, createActions } from 'redux-aggregate'
+import { TimerAC } from './actions/timer'
+import { TodosMT, TodosSB } from './models/todos'
+// ______________________________________________________
+//
+// @ Aggregates
+
+export const Timer = createActions(TimerAC, 'timer/')
+export const Todos = createAggregate(TodosMT, 'todos/')
+Todos.subscribe(Timer, TodosSB.Timer)
+```
+
+The map of `Subscriptions`, It looks very much like mutations.  
+**But, that will not to generete ActionCreator / ActionTypes.**  
+That's exactly what unit reducer.
