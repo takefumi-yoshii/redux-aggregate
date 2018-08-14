@@ -1,5 +1,7 @@
 # Subscriptions
 
+### Expand reducer
+
 Subscription map in the same file scope where defined state.
 It looks like a mutations but does not generate an `ActionType / ActionCreator`.
 Unit subscription is equivalent to prior reducer sorted by conventional switch statement.
@@ -34,6 +36,8 @@ export const TodosSubscriptions = {
 ```
 
 Mutations are usually sufficient,This is useful when you start to be interested outside Action.
+
+Related: [subscribe ->](subscribe.md)
 
 ___
 

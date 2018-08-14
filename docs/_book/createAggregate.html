@@ -60,7 +60,7 @@
     <link rel="next" href="createActions.html" />
     
     
-    <link rel="prev" href="apis.md" />
+    <link rel="prev" href="apis.html" />
     
 
     </head>
@@ -113,9 +113,10 @@
             
 
             
-        </li>
+            <ul class="articles">
+                
     
-        <li class="chapter " data-level="1.3" data-path="inferredTypes.html">
+        <li class="chapter " data-level="1.2.1" data-path="inferredTypes.html">
             
                 <a href="inferredTypes.html">
             
@@ -128,7 +129,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="mutations.html">
+        <li class="chapter " data-level="1.2.2" data-path="mutations.html">
             
                 <a href="mutations.html">
             
@@ -141,7 +142,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="actionSources.html">
+        <li class="chapter " data-level="1.2.3" data-path="actionSources.html">
             
                 <a href="actionSources.html">
             
@@ -154,7 +155,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="subscriptions.html">
+        <li class="chapter " data-level="1.2.4" data-path="subscriptions.html">
             
                 <a href="subscriptions.html">
             
@@ -167,7 +168,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="queries.html">
+        <li class="chapter " data-level="1.2.5" data-path="queries.html">
             
                 <a href="queries.html">
             
@@ -180,9 +181,14 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="apis.md">
+
+            </ul>
             
-                <span>
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="apis.html">
+            
+                <a href="apis.html">
             
                     
                     APIs
@@ -191,9 +197,10 @@
             
 
             
-        </li>
+            <ul class="articles">
+                
     
-        <li class="chapter active" data-level="1.9" data-path="createAggregate.html">
+        <li class="chapter active" data-level="1.3.1" data-path="createAggregate.html">
             
                 <a href="createAggregate.html">
             
@@ -206,7 +213,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="createActions.html">
+        <li class="chapter " data-level="1.3.2" data-path="createActions.html">
             
                 <a href="createActions.html">
             
@@ -219,7 +226,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.11" data-path="subscribe.html">
+        <li class="chapter " data-level="1.3.3" data-path="subscribe.html">
             
                 <a href="subscribe.html">
             
@@ -232,7 +239,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12" data-path="redux-aggregate-immer.html">
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="redux-aggregate-immer.html">
             
                 <a href="redux-aggregate-immer.html">
             
@@ -297,18 +309,18 @@
 The first argument is <code>Mutations</code>, a map of mutate functions.
 The second argument is a unique namespace.With this, ActionType won&apos;t conflict.</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">import</span> { createAggregate } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;redux-aggregate&apos;</span>
-<span class="hljs-keyword">import</span> { mutations } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;path/to/model&apos;</span>
+<span class="hljs-keyword">import</span> { Mutations } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;path/to/model&apos;</span>
 <span class="hljs-keyword">const</span> {
   types,         <span class="hljs-comment">// Generated ActionTypes</span>
   creators,      <span class="hljs-comment">// Generated ActionCreators</span>
   reducerFactory <span class="hljs-comment">// Generated ReducerFactory</span>
-} = createAggregate(mutations, <span class="hljs-string">&apos;counter/&apos;</span>)
+} = createAggregate(Mutations, <span class="hljs-string">&apos;counter/&apos;</span>)
 </code></pre>
 <p>Mutaions is immutable mutate functions for state.
 Generate boilerplate starting from this MutationsMap.
 It be equal to behavior of Reducer.
 Let provide payload as the second argument if necessary.</p>
-<p>Related: <a href="mutations.html">Define Mutations -&gt;</a></p>
+<p>Related: <a href="mutations.html">Mutations -&gt;</a></p>
 <hr>
 <h3 id="concepts">Concepts</h3>
 <ul>
@@ -321,7 +333,7 @@ Let provide payload as the second argument if necessary.</p>
 </ul>
 <h3 id="usage">Usage</h3>
 <ul>
-<li><a href="apis.md">APIs</a></li>
+<li><a href="apis.html">APIs</a></li>
 <li><a href="createAggregate.html">createAggregate</a></li>
 <li><a href="createActions.html">createActions</a></li>
 <li><a href="subscribe.html">subscribe</a></li>
@@ -357,7 +369,7 @@ Let provide payload as the second argument if necessary.</p>
 
             
                 
-                <a href="apis.md" class="navigation navigation-prev " aria-label="Previous page: APIs">
+                <a href="apis.html" class="navigation navigation-prev " aria-label="Previous page: APIs">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -373,7 +385,7 @@ Let provide payload as the second argument if necessary.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"createAggregate","level":"1.9","depth":1,"next":{"title":"createActions","level":"1.10","depth":1,"path":"createActions.md","ref":"createActions.md","articles":[]},"previous":{"title":"APIs","level":"1.8","depth":1,"path":"apis.md","ref":"apis.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"createAggregate.md","mtime":"2018-08-14T01:56:18.453Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-14T01:57:16.857Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"createAggregate","level":"1.3.1","depth":2,"next":{"title":"createActions","level":"1.3.2","depth":2,"path":"createActions.md","ref":"createActions.md","articles":[]},"previous":{"title":"APIs","level":"1.3","depth":1,"path":"apis.md","ref":"apis.md","articles":[{"title":"createAggregate","level":"1.3.1","depth":2,"path":"createAggregate.md","ref":"createAggregate.md","articles":[]},{"title":"createActions","level":"1.3.2","depth":2,"path":"createActions.md","ref":"createActions.md","articles":[]},{"title":"subscribe","level":"1.3.3","depth":2,"path":"subscribe.md","ref":"subscribe.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"createAggregate.md","mtime":"2018-08-14T02:39:22.708Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-14T02:41:15.551Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

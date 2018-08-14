@@ -8,7 +8,7 @@ In the example below, subscribe TimerActions.
 ```javascript
 import { createAggregate, createActions } from 'redux-aggregate'
 import { TimerAC } from './actions/timer'
-import { TodosMT, TodosSB, TodosModel } from './models/todos'
+import { TodosMT, TodosSB } from './models/todos'
 // ______________________________________________________
 //
 // @ Aggregates
@@ -18,9 +18,11 @@ export const Todos = createAggregate(TodosMT, 'todos/')
 Todos.subscribe(Timer, TodosSB.Timer)
 ```
 
-The map of `Subscriptions`, It looks very much like mutations.
-**But, that will not to generete ActionCreator / ActionTypes.**
+The map of `Subscriptions`, It looks very much like mutations.  
+**But, that will not to generete ActionCreator / ActionTypes.**  
 That's exactly what unit reducer.
+
+Related: [subscriptions ->](subscriptions.md)
 
 ___
 

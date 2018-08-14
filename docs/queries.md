@@ -28,6 +28,7 @@ export const Queries = {
   getCountLabel
 }
 ```
+This is optional feature. If you need this concept, please define it near the state.
 
 ___
 
