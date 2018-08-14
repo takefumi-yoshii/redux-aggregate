@@ -1,4 +1,8 @@
-![image.png](/assets/logo.svg)
+# Advanced Feature
+
+[redux-aggregate-immer](https://www.npmjs.com/package/redux-aggregate-immer)
+
+___
 
 ### Concepts
 
@@ -11,6 +15,7 @@
 
 ### Usage
 
+* [APIs](apis.md)
 * [createAggregate](createAggregate.md)
 * [createActions](createActions.md)
 * [subscribe](subscribe.md)

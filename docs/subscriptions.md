@@ -37,16 +37,22 @@ Mutations are usually sufficient,This is useful when you start to be interested 
 
 ___
 
+### Concepts
+
 * [Core Concepts](coreConcepts.md)
-  * [Inferred Types](inferredTypes.md)
-  * [Mutations](mutations.md)
-  * [ActionSrc](actionSources.md)
-  * [Subscriptions](subscriptions.md)
-  * [Queries](queries.md)
+* [Inferred Types](inferredTypes.md)
+* [Mutations](mutations.md)
+* [ActionSrc](actionSources.md)
+* [Subscriptions](subscriptions.md)
+* [Queries](queries.md)
+
+### Usage
 
 * [APIs](apis.md)
-  * [createAggregate](createAggregate.md)
-  * [createActions](createActions.md)
-  * [subscribe](subscribe.md)
+* [createAggregate](createAggregate.md)
+* [createActions](createActions.md)
+* [subscribe](subscribe.md)
 
-* [Advanced](advanced.md)
+### Advanced Feature
+
+* [redux-aggregate-immer](redux-aggregate-immer.md)
