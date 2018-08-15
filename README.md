@@ -27,7 +27,7 @@ By the map of Type inference in conditional types,
 mutation's second argument will map to action creator's payload.
 (required ^TypeScript 2.8)
 
-![image.png](https://user-images.githubusercontent.com/22139818/43045685-06523d54-8df8-11e8-95fa-fe3423e45109.png)
+![image.png](https://redux-aggregate.js.org/assets/type_inference-in_conditional_types.png)
 
 
 ## 🚀 Accelerate development
