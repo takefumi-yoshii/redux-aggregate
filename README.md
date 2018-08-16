@@ -27,13 +27,13 @@ By the map of Type inference in conditional types,
 mutation's second argument will map to action creator's payload.
 (required ^TypeScript 2.8)
 
-![image.png](https://redux-aggregate.js.org/assets/type_inference-in_conditional_types.png)
+![image.png](https://redux-aggregate.js.org/assets/type_inference_in_conditional_types_mutation.png)
 
 
 ## 🚀 Accelerate development
 
-Here we are creating them with `createAggregate`.
-`Aggregate` contains "ActionTypes / ActionCreators / ReducerFactory".
+Here we are creating Redux boilerplate with `createAggregate`. 
+`Aggregate` contains `ActionTypes / ActionCreators / ReducerFactory`.
 The first argument is `Mutations`, a map of mutate functions.
 The second argument is a unique namespace.With this, ActionType won't conflict.
 
@@ -47,7 +47,7 @@ const {
 } = createAggregate(mutations, 'counter/')
 ```
 
-**By this alone, completed to define AcrtionTypes/AcrtionCreators/ReducerFactory with inferred type.**
+**By this alone, completed to define ActionTypes/ActionCreators/ReducerFactory with inferred type.**
 
 Mutaions is immutable mutate functions for state.
 Generate boilerplate starting from this MutationsMap.
@@ -98,7 +98,7 @@ const {
 } = createActions(ActionSources, 'timer/')
 ```
 
-**By this alone, completed to define AcrtionTypes/AcrtionCreators with inferred type.**
+**By this alone, completed to define ActionTypes/ActionCreators with inferred type.**
 
 ActionSources for `createActions` is just a pure javascript function's map. Arguments is optional.
 
@@ -117,7 +117,6 @@ export const ActionSources = { tick }
 
 
 ## 📡 Caught outside Actions
-
 
 Aggregate contain method of `subscribe` action.
 In the example below, subscribe TimerActions.
@@ -138,3 +137,7 @@ Todos.subscribe(Timer, TodosSB.Timer)
 The map of `Subscriptions`, It looks very much like mutations.  
 **But, that will not to generete ActionCreator / ActionTypes.**  
 That's exactly what unit reducer.
+
+## Documents
+
+[https://redux-aggregate.js.org/](https://redux-aggregate.js.org/)
