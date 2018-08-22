@@ -17,25 +17,25 @@ describe('createActions', () => {
 
   // @ Model
 
-  interface FollowerST {
+  interface SubscriberST {
     now: string
     name: string
   }
-  const FollowerModel: Modeler<FollowerST> = injects => ({
+  const SubscriberModel: Modeler<SubscriberST> = injects => ({
     now: '',
     name: 'unknown',
     ...injects
   })
   const mutations = {
-    setName(state: FollowerST, name: string) {
+    setName(state: SubscriberST, name: string) {
       return { ...state, name }
     }
   }
   const subscriptions = {
-    tick(state: FollowerST, now: string) {
+    tick(state: SubscriberST, now: string) {
       return { ...state, now }
     },
-    setName(state: FollowerST, name: string) {
+    setName(state: SubscriberST, name: string) {
       return { ...state, name }
     }
   }
@@ -44,11 +44,11 @@ describe('createActions', () => {
 
   const namespace = 'timer/'
   const Timer = createActions(TimerAC, namespace)
-  const Follower1 = createAggregate(mutations, 'follower1/')
-  const Follower2 = createAggregate(mutations, 'follower2/')
-  Follower1.subscribe(Timer, subscriptions)
-  Follower2.subscribe(Timer, subscriptions)
-  Follower2.subscribe(Follower1, subscriptions)
+  const Subscriber1 = createAggregate(mutations, 'subscriber1/')
+  const Subscriber2 = createAggregate(mutations, 'subscriber2/')
+  Subscriber1.subscribe(Timer, subscriptions)
+  Subscriber2.subscribe(Timer, subscriptions)
+  Subscriber2.subscribe(Subscriber1, subscriptions)
 
   // ______________________________________________________
 
@@ -78,40 +78,40 @@ describe('createActions', () => {
 
   describe('reducerFactory', () => {
     interface StoreST {
-      follower1: FollowerST
-      follower2: FollowerST
+      subscriber1: SubscriberST
+      subscriber2: SubscriberST
     }
     const store: Store<StoreST> = createStore(
       combineReducers({
-        follower1: Follower1.reducerFactory(FollowerModel({ name: 'USER_1' })),
-        follower2: Follower2.reducerFactory(FollowerModel({ name: 'USER_2' }))
+        subscriber1: Subscriber1.reducerFactory(SubscriberModel({ name: 'USER_1' })),
+        subscriber2: Subscriber2.reducerFactory(SubscriberModel({ name: 'USER_2' }))
       })
     )
 
     test('subscribers update by providers action', () => {
       const { type, payload } = Timer.creators.tick()
       const beforeState = store.getState()
-      expect(beforeState.follower1.now).not.toEqual(payload)
-      expect(beforeState.follower2.now).not.toEqual(payload)
+      expect(beforeState.subscriber1.now).not.toEqual(payload)
+      expect(beforeState.subscriber2.now).not.toEqual(payload)
 
       store.dispatch({ type, payload })
 
       const afterState = store.getState()
-      expect(afterState.follower1.now).toEqual(payload)
-      expect(afterState.follower2.now).toEqual(payload)
+      expect(afterState.subscriber1.now).toEqual(payload)
+      expect(afterState.subscriber2.now).toEqual(payload)
     })
 
     test('aggregate have behavior of action provider', () => {
-      const { type, payload } = Follower1.creators.setName('MY_NAME')
+      const { type, payload } = Subscriber1.creators.setName('MY_NAME')
       const beforeState = store.getState()
-      expect(beforeState.follower1.name).not.toEqual(payload)
-      expect(beforeState.follower2.name).not.toEqual(payload)
+      expect(beforeState.subscriber1.name).not.toEqual(payload)
+      expect(beforeState.subscriber2.name).not.toEqual(payload)
 
       store.dispatch({ type, payload })
 
       const afterState = store.getState()
-      expect(afterState.follower1.name).toEqual(payload)
-      expect(afterState.follower2.name).toEqual(payload)
+      expect(afterState.subscriber1.name).toEqual(payload)
+      expect(afterState.subscriber2.name).toEqual(payload)
     })
   })
 
