@@ -1,14 +1,16 @@
 import { Reducer } from 'redux'
 import { namespaced } from './namespaced'
 import { KeyMap } from '../typings/utils'
-import { ActionTypes } from '../typings/commons'
+import {
+  ActionTypes,
+  ReducerFactory,
+  ActionProvider,
+  Subscriptions
+} from '../typings/commons'
 import {
   Mutations,
   ActionCreators,
-  ReducerFactory,
-  Aggregate,
-  ActionProvider,
-  Subscriptions
+  Aggregate
 } from '../typings/createAggregate'
 
 // ______________________________________________________
