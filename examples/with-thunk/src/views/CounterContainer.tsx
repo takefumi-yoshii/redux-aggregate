@@ -51,4 +51,4 @@ const mapDispatch = (dispatch: Dispatch<AnyAction>): MapDispatch =>
 export const CounterContainer = connect(
   (store: StoreST) => mapState(store.counter),
   (dispatch: Dispatch<AnyAction>) => mapDispatch(dispatch)
-)(props => <CounterComponent {...props} />)
+)(CounterComponent)

@@ -47,4 +47,4 @@ const mapDispatch = (dispatch: Dispatch<AnyAction>): MapDispatch =>
 export const TodosContainer = connect(
   (store: StoreST) => mapState(store.todos),
   (dispatch: Dispatch<AnyAction>) => mapDispatch(dispatch)
-)(props => <TodosComponent {...props} />)
+)(TodosComponent)

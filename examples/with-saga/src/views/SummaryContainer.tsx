@@ -2,7 +2,6 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { StoreST, Summary } from '../store'
 import { SummaryST, SummaryQR } from '../models/summary'
-import { TodoST } from '../models/todo'
 import SummaryComponent from './SummaryComponent'
 
 // ______________________________________________________
@@ -33,4 +32,4 @@ const mapState = (s: SummaryST): MapState => ({
 
 export const SummaryContainer = connect((store: StoreST) =>
   mapState(store.summary)
-)(props => <SummaryComponent {...props} />)
+)(SummaryComponent)

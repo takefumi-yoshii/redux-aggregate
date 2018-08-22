@@ -52,7 +52,7 @@ const containerFactory = (
         },
         dispatch
       )
-  )(props => <CounterComponent {...props} />)
+  )(CounterComponent)
 
 const CT1 = containerFactory(s => s.counter1, Counter1.creators)
 const CT2 = containerFactory(s => s.counter2, Counter2.creators)
