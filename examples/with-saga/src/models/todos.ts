@@ -40,9 +40,7 @@ export const TodosQR = {
 function addTodo(state: TodosST): TodosST {
   const value = TodosQR.getInputValue(state)
   if (value === '') return state
-  const todo = TodoModel({ value })
-  const items = [...state.items]
-  items.push(todo)
+  const items = [...state.items, TodoModel({ value })]
   return { ...state, items, input: '' }
 }
 function setInputValue(state: TodosST, value: string): TodosST {

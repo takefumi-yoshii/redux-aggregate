@@ -7,4 +7,7 @@ function tick() {
   const second = date.getSeconds()
   return `${month}/${_date} ${hour}:${minute}:${second}`
 }
-export const TimerAC = { tick }
+function notifyMessage({ message }: { message: string }) {
+  return { message }
+}
+export const TimerAC = { tick, notifyMessage }
