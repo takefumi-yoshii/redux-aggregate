@@ -2,7 +2,6 @@ import { createStore, combineReducers, Store } from 'redux'
 import { createAggregate, Modeler, createActions } from '../src/index'
 
 describe('createActions', () => {
-
   // @ Actions
 
   function tick() {
@@ -28,15 +27,15 @@ describe('createActions', () => {
     ...injects
   })
   const mutations = {
-    setName (state: FollowerST, name: string) {
+    setName(state: FollowerST, name: string) {
       return { ...state, name }
     }
   }
   const subscriptions = {
-    tick (state: FollowerST, now: string) {
+    tick(state: FollowerST, now: string) {
       return { ...state, now }
     },
-    setName (state: FollowerST, name: string) {
+    setName(state: FollowerST, name: string) {
       return { ...state, name }
     }
   }
