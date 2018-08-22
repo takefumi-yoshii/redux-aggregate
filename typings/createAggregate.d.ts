@@ -41,4 +41,8 @@ declare function createAggregate<T extends KeyMap & Mutations<T>>(
   namespace: string
 ): Aggregate<T>
 
-export { Mutations, ActionCreators, Aggregate, createAggregate }
+// ______________________________________________________
+
+type Modeler<T> = (injects?: Partial<T>) => T
+
+export { Mutations, ActionCreators, Aggregate, createAggregate, Modeler }
