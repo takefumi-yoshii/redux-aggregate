@@ -8,7 +8,7 @@ import {
 } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware from 'redux-saga'
-import { createAggregate, createActions } from 'redux-aggregate'
+import { createAggregate, createActions, createSubscriber } from '../../../src'
 import { TimerAC } from './actions/timer'
 import { CounterModel, CounterST, CounterMT, CounterSB } from './models/counter'
 import { TodosModel, TodosST, TodosMT, TodosSB } from './models/todos'
@@ -33,7 +33,7 @@ export interface StoreST {
 export const Timer = createActions(TimerAC, 'timer/')
 export const Counter = createAggregate(CounterMT, 'counter/')
 export const Todos = createAggregate(TodosMT, 'todos/')
-export const Summary = createAggregate({}, 'summary/')
+export const Summary = createSubscriber()
 Todos.subscribe(Timer, TodosSB.Timer)
 Counter.subscribe(Timer, CounterSB.Timer)
 Summary.subscribe(Timer, SummarySB.Timer)
