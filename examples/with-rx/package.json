@@ -28,7 +28,7 @@
     "typescript": ">=2.8.0",
     "webpack": "^4.16.1",
     "webpack-cli": "2.0.12",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-server": ">=3.1.11"
   },
   "prettier": {
     "semi": false,
