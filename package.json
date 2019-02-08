@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/takefumi-yoshii/redux-aggregate#readme",
   "dependencies": {
-    "redux": "3.7.2"
+    "redux": "4.0.1"
   },
   "devDependencies": {
     "@types/jest": "^23.1.0",
